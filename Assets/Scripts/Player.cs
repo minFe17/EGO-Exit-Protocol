@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Utils;
 
 public class Player : MonoBehaviour
 {
@@ -9,6 +10,14 @@ public class Player : MonoBehaviour
 
     float _movePos;
     Vector3 _leftDirection = new Vector3(-1, 1, 1);
+
+    InteractObjectManager _interactObjectManager;
+    IInteractable _interactableObject;
+
+    private void Start()
+    {
+        _interactObjectManager = GenericSingleton<InteractObjectManager>.Instance;
+    }
 
     void FixedUpdate()
     {
@@ -28,7 +37,6 @@ public class Player : MonoBehaviour
             transform.localScale = Vector3.one;
     }
 
-
     // InputSystem
     void OnMove(InputValue value)
     {
@@ -40,5 +48,23 @@ public class Player : MonoBehaviour
         }
         else
             _animator.SetBool("isMove", false);
+    }
+
+    void OnInteract()
+    {
+        if (_interactableObject != null)
+            _interactableObject.Interact();
+    }
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("InteractableObject"))
+            _interactObjectManager.GetInteractable(out _interactableObject, collision.gameObject);
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("InteractableObject"))
+            _interactableObject = null;
     }
 }
