@@ -4,11 +4,11 @@ using UnityEngine.InputSystem;
 public class Player : MonoBehaviour
 {
     [SerializeField] Rigidbody2D _rigidbody;
-    [SerializeField] SpriteRenderer _spriteRenderer;
     [SerializeField] Animator _animator;
     [SerializeField] float _speed;
 
     float _movePos;
+    Vector3 _leftDirection = new Vector3(-1, 1, 1);
 
     void FixedUpdate()
     {
@@ -23,9 +23,9 @@ public class Player : MonoBehaviour
     void Turn()
     {
         if (_movePos < 0)
-            _spriteRenderer.flipX = true;
+            transform.localScale = _leftDirection;
         else
-            _spriteRenderer.flipX = false;
+            transform.localScale = Vector3.one;
     }
 
 
