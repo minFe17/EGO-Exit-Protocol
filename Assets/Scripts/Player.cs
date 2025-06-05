@@ -5,6 +5,7 @@ public class Player : MonoBehaviour
 {
     [SerializeField] Rigidbody2D _rigidbody;
     [SerializeField] SpriteRenderer _spriteRenderer;
+    [SerializeField] Animator _animator;
     [SerializeField] float _speed;
 
     float _movePos;
@@ -33,8 +34,11 @@ public class Player : MonoBehaviour
     {
         _movePos = value.Get<Vector2>().x;
         if(_movePos != 0)
+        {
             Turn();
+            _animator.SetBool("isMove", true);
+        }
+        else
+            _animator.SetBool("isMove", false);
     }
-
-    
 }
