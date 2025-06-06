@@ -48,11 +48,14 @@ TagManager:
   - name: World
     uniqueID: 3388407425
     locked: 0
-  - name: Object
+  - name: BackObject
     uniqueID: 1262859627
     locked: 0
   - name: Player
     uniqueID: 3674220397
+    locked: 0
+  - name: FrontObject
+    uniqueID: 743844059
     locked: 0
   m_RenderingLayers:
   - Default
