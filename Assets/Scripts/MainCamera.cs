@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.Tilemaps;
 
-public class Camera : MonoBehaviour
+public class MainCamera : MonoBehaviour
 {
     [SerializeField] PixelPerfectCamera _camera;
     [SerializeField] Transform _target;

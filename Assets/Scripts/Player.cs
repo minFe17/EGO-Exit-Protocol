@@ -13,10 +13,12 @@ public class Player : MonoBehaviour
 
     InteractObjectManager _interactObjectManager;
     IInteractable _interactableObject;
+    MementoManager _mementoManager;
 
-    private void Start()
+    void Start()
     {
         _interactObjectManager = GenericSingleton<InteractObjectManager>.Instance;
+        _mementoManager = GenericSingleton<MementoManager>.Instance;
     }
 
     void FixedUpdate()
@@ -35,6 +37,11 @@ public class Player : MonoBehaviour
             transform.localScale = _leftDirection;
         else
             transform.localScale = Vector3.one;
+    }
+
+    public void Loop()
+    {
+        transform.position = _mementoManager.PlayerMemento.PlayerStartPos;
     }
 
     // InputSystem
@@ -62,7 +69,7 @@ public class Player : MonoBehaviour
             _interactObjectManager.GetInteractable(out _interactableObject, collision.gameObject);
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
+    void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.CompareTag("InteractableObject"))
             _interactableObject = null;
