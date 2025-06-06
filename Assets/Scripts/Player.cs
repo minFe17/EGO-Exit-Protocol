@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using Utils;
 
-public class Player : MonoBehaviour
+public class Player : MonoBehaviour, ILoopObject
 {
     [SerializeField] Rigidbody2D _rigidbody;
     [SerializeField] Animator _animator;
@@ -15,16 +15,20 @@ public class Player : MonoBehaviour
     IInteractable _interactableObject;
     MementoManager _mementoManager;
 
+    #region Unity LifeCycle
     void Start()
     {
         _interactObjectManager = GenericSingleton<InteractObjectManager>.Instance;
         _mementoManager = GenericSingleton<MementoManager>.Instance;
+        GenericSingleton<ObserveManager>.Instance.AddLoopEvent(this);
+        GenericSingleton<TimeManager>.Instance.Init();
     }
 
     void FixedUpdate()
     {
         Move();
     }
+    #endregion
 
     void Move()
     {
@@ -39,12 +43,7 @@ public class Player : MonoBehaviour
             transform.localScale = Vector3.one;
     }
 
-    public void Loop()
-    {
-        transform.position = _mementoManager.PlayerMemento.PlayerStartPos;
-    }
-
-    // InputSystem
+    #region Unity InputSystem
     void OnMove(InputValue value)
     {
         _movePos = value.Get<Vector2>().x;
@@ -62,7 +61,9 @@ public class Player : MonoBehaviour
         if (_interactableObject != null)
             _interactableObject.Interact();
     }
+    #endregion
 
+    #region Unity Collision
     void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("InteractableObject"))
@@ -74,4 +75,12 @@ public class Player : MonoBehaviour
         if (collision.CompareTag("InteractableObject"))
             _interactableObject = null;
     }
+    #endregion
+
+    #region Interface
+    void ILoopObject.OnLoopEvent()
+    {
+        transform.position = _mementoManager.PlayerMemento.PlayerStartPos;
+    }
+    #endregion
 }
