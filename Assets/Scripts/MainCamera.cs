@@ -8,20 +8,49 @@ public class MainCamera : MonoBehaviour
     [SerializeField] Transform _target;
     [SerializeField] Tilemap _tilemap;
 
-    Vector2 _minBounds;
-    Vector2 _maxBounds;
+    Vector3 _minBounds;
+    Vector3 _maxBounds;
     float _halfWidth;
 
     void Start()
     {
-        Bounds bounds = _tilemap.localBounds;
-        _minBounds = bounds.min;
-        _maxBounds = bounds.max;
+        TileBound();
     }
 
     void LateUpdate()
     {
         Move();
+    }
+
+    void TileBound()
+    {
+        BoundsInt bounds = _tilemap.cellBounds;
+        int actualMinX = GetActualMinX(bounds);
+        float cellHalf = _tilemap.cellSize.x / 2f;
+
+        _minBounds = _tilemap.GetCellCenterWorld(new Vector3Int(actualMinX, 0, 0)) - new Vector3(cellHalf, cellHalf);
+        _maxBounds = _tilemap.GetCellCenterWorld(bounds.max) - new Vector3(cellHalf, cellHalf);
+    }
+
+    int GetActualMinX(BoundsInt bounds)
+    {
+        int minX = int.MaxValue;
+        bool found = false;
+
+        foreach (Vector3Int pos in bounds.allPositionsWithin)
+        {
+            if (_tilemap.HasTile(pos))
+            {
+                if (pos.x < minX)
+                    minX = pos.x;
+                found = true;
+            }
+        }
+
+        if (!found)
+            return bounds.min.x;
+
+        return minX;
     }
 
     void Move()
