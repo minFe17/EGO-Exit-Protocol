@@ -4,7 +4,7 @@ using Utils;
 public class PlayerMemento : MonoBehaviour, IMementoBase
 {
     MementoManager _mementoManager;
-    Vector3 _playerStartPos;
+    Vector3 _playerStartPos = new Vector3(-3f, -2.13f);
 
     public Vector3 PlayerStartPos { get => _playerStartPos; }
 
@@ -22,6 +22,5 @@ public class PlayerMemento : MonoBehaviour, IMementoBase
 
     public void Save()
     {
-        _playerStartPos = Vector3.zero;
     }
 }

@@ -6,15 +6,20 @@ public class MainCamera : MonoBehaviour
 {
     [SerializeField] PixelPerfectCamera _camera;
     [SerializeField] Transform _target;
-    [SerializeField] Tilemap _tilemap;
+    [SerializeField] Tilemap _currentTilemap;
+    [SerializeField] Tilemap _nextTileMap;
 
     Vector3 _minBounds;
     Vector3 _maxBounds;
+    Vector3 _cellSize;
     float _halfWidth;
+    float _cellHalf;
 
     void Start()
     {
-        TileBound();
+        _cellHalf = _currentTilemap.cellSize.x / 2f;
+        _cellSize = new Vector3(_cellHalf, _cellHalf);
+        UpdateTileBound();
     }
 
     void LateUpdate()
@@ -22,35 +27,51 @@ public class MainCamera : MonoBehaviour
         Move();
     }
 
-    void TileBound()
+    void UpdateTileBound()
     {
-        BoundsInt bounds = _tilemap.cellBounds;
-        int actualMinX = GetActualMinX(bounds);
-        float cellHalf = _tilemap.cellSize.x / 2f;
+        int currentMin = GetLeftTilePos(_currentTilemap);
+        int currentMax = GetRightTilePos(_currentTilemap);
+        Vector3 currentMinWorld = _currentTilemap.GetCellCenterWorld(new Vector3Int(currentMin, 0, 0));
+        Vector3 currentMaxWorld = _currentTilemap.GetCellCenterWorld(new Vector3Int(currentMax, 0, 0));
 
-        _minBounds = _tilemap.GetCellCenterWorld(new Vector3Int(actualMinX, 0, 0)) - new Vector3(cellHalf, cellHalf);
-        _maxBounds = _tilemap.GetCellCenterWorld(bounds.max) - new Vector3(cellHalf, cellHalf);
+        if (_nextTileMap != null)
+        {
+            int nextMin = GetLeftTilePos(_nextTileMap);
+            int nextMax = GetRightTilePos(_nextTileMap);
+            Vector3 nextMinWorld = _nextTileMap.GetCellCenterWorld(new Vector3Int(nextMin, 0, 0));
+            Vector3 nextMaxWorld = _nextTileMap.GetCellCenterWorld(new Vector3Int(nextMax, 0, 0));
+
+            bool currentIsLeft = currentMin <= nextMin;
+            _minBounds = (currentIsLeft ? currentMinWorld : nextMinWorld) - _cellSize;
+            _maxBounds = (currentIsLeft ? nextMaxWorld : currentMaxWorld) - _cellSize;
+        }
+        else
+        {
+            _minBounds = _currentTilemap.GetCellCenterWorld(new Vector3Int(currentMin, 0, 0)) - _cellSize;
+            _maxBounds = _currentTilemap.GetCellCenterWorld(new Vector3Int(currentMax, 0, 0)) - _cellSize;
+        }
     }
 
-    int GetActualMinX(BoundsInt bounds)
+    int GetLeftTilePos(Tilemap tilemap)
     {
         int minX = int.MaxValue;
-        bool found = false;
-
-        foreach (Vector3Int pos in bounds.allPositionsWithin)
+        foreach(Vector3Int pos in tilemap.cellBounds.allPositionsWithin)
         {
-            if (_tilemap.HasTile(pos))
-            {
-                if (pos.x < minX)
-                    minX = pos.x;
-                found = true;
-            }
+            if(tilemap.HasTile(pos) && pos.x < minX)
+                minX = pos.x;
         }
-
-        if (!found)
-            return bounds.min.x;
-
         return minX;
+    }
+
+    int GetRightTilePos(Tilemap tilemap)
+    {
+        int maxX = int.MinValue;
+        foreach (Vector3Int pos in tilemap.cellBounds.allPositionsWithin)
+        {
+            if (tilemap.HasTile(pos) && pos.x > maxX)
+                maxX = pos.x;
+        }
+        return maxX;
     }
 
     void Move()
