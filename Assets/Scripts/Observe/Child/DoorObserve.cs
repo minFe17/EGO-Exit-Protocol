@@ -12,16 +12,16 @@ public class DoorObserve : MonoBehaviour
         _doorEvent.Add(doorEvent);
     }
 
-    public void OnOpenEvent()
+    public void OnUnlockEvent()
     {
         for (int i = 0; i < _doorEvent.Count; i++)
-            _doorEvent[i].OnOpen();
+            _doorEvent[i].OnUnlock();
     }
 
-    public void OnOpenFailEvent()
+    public void OnUnlockFailEvent()
     {
         for (int i = 0; i < _doorEvent.Count; i++)
-            _doorEvent[i].OnOpenFail();
+            _doorEvent[i].OnUnlockFail();
     }
 
     public void OnInteractEvent()

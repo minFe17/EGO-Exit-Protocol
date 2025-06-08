@@ -1,6 +1,6 @@
 public interface IDoorEvent
 {
-    void OnOpen();
-    void OnOpenFail();
+    void OnUnlock();
+    void OnUnlockFail();
     void OnInteract();
 }

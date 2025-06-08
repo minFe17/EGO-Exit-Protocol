@@ -6,7 +6,7 @@ public class CameraManager : MonoBehaviour, ILoopObject
 {
     // ╫л╠шео
     CameraMemento _cameraMemento = new CameraMemento();
-
+    Tilemap _currentTilemap;
     Vector3 _cellSize = Vector3.zero;
     Vector3 _minBounds;
     Vector3 _maxBounds;
@@ -51,15 +51,24 @@ public class CameraManager : MonoBehaviour, ILoopObject
 
     public void UpdateTileBound(Tilemap tilemap)
     {
-        int min = GetLeftTilePos(tilemap);
-        int max = GetRightTilePos(tilemap);
-        Vector3 currentMinWorld = tilemap.GetCellCenterWorld(new Vector3Int(min, 0, 0));
-        Vector3 currentMaxWorld = tilemap.GetCellCenterWorld(new Vector3Int(max, 0, 0));
+        _currentTilemap = tilemap;
+        int min = GetLeftTilePos(_currentTilemap);
+        int max = GetRightTilePos(_currentTilemap);
+        Vector3 currentMinWorld = _currentTilemap.GetCellCenterWorld(new Vector3Int(min, 0, 0));
+        Vector3 currentMaxWorld = _currentTilemap.GetCellCenterWorld(new Vector3Int(max, 0, 0));
 
         if (_cellSize == Vector3.zero)
-            SetCellSize(tilemap);
+            SetCellSize(_currentTilemap);
         _minBounds = currentMinWorld - _cellSize;
-        _maxBounds = currentMaxWorld - _cellSize;
+        _maxBounds = currentMaxWorld + _cellSize;
+    }
+
+    public void UpdateTileBound(Tilemap leftmap,  Tilemap rightmap)
+    {
+        if(_currentTilemap != leftmap)
+            UpdateTileBound(leftmap);
+        else
+            UpdateTileBound(rightmap);
     }
 
     void ILoopObject.OnLoopEvent()

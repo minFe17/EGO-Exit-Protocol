@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using Utils;
 
-public class Player : MonoBehaviour, ILoopObject
+public class Player : MonoBehaviour
 {
     [SerializeField] Rigidbody2D _rigidbody;
     [SerializeField] Animator _animator;
@@ -11,16 +11,16 @@ public class Player : MonoBehaviour, ILoopObject
     float _movePos;
     Vector3 _leftDirection = new Vector3(-1, 1, 1);
 
+    PlayerManager _playerManager;
     InteractObjectManager _interactObjectManager;
     IInteractable _interactableObject;
-    MementoManager _mementoManager;
 
     #region Unity LifeCycle
     void Start()
     {
         _interactObjectManager = GenericSingleton<InteractObjectManager>.Instance;
-        _mementoManager = GenericSingleton<MementoManager>.Instance;
-        GenericSingleton<ObserveManager>.Instance.LoopObserve.AddLoopEvent(this);
+        _playerManager = GenericSingleton<PlayerManager>.Instance;
+        _playerManager.Init(this);
 
         // 임시로 Player 클래스에서
         GenericSingleton<TimeManager>.Instance.Init();
@@ -67,6 +67,18 @@ public class Player : MonoBehaviour, ILoopObject
     #endregion
 
     #region Unity Collision
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("InteractableObject"))
+            _interactObjectManager.GetInteractable(out _interactableObject, collision.gameObject);
+    }
+
+    void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("InteractableObject"))
+            _interactableObject = null;
+    }
+
     void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("InteractableObject"))
@@ -77,13 +89,6 @@ public class Player : MonoBehaviour, ILoopObject
     {
         if (collision.CompareTag("InteractableObject"))
             _interactableObject = null;
-    }
-    #endregion
-
-    #region Interface
-    void ILoopObject.OnLoopEvent()
-    {
-        transform.position = _mementoManager.PlayerMemento.PlayerStartPos;
     }
     #endregion
 }

@@ -6,28 +6,42 @@ public class DoorBase : MonoBehaviour, IInteractable, ILoopObject, IDoorEvent
 {
     [SerializeField] BoxCollider2D _collider;
     [SerializeField] DoorMemento _doorMemento;
+    
+    protected CameraManager _cameraManager;
 
     List<IDoorEvent> _doorObserve = new List<IDoorEvent>();
     ObserveManager _observerManager;
+    InteractObjectManager _interactObjectManager;
     bool _currentLock;
 
     void Start()
     {
         _doorObserve.Add(this);
+        Init();
+        OnLoopEvent();
+    }
+
+    protected virtual void Init()
+    {
         _observerManager = GenericSingleton<ObserveManager>.Instance;
+        _cameraManager = GenericSingleton<CameraManager>.Instance;
+        _interactObjectManager = GenericSingleton<InteractObjectManager>.Instance;
+        _interactObjectManager.SetInteractable(gameObject, this);
         GenericSingleton<ObserveManager>.Instance.LoopObserve.AddLoopEvent(this);
         GenericSingleton<InteractObjectManager>.Instance.SetInteractable(gameObject, this);
-        OnLoopEvent();
+    }
+
+    void Tryunlock()
+    {
+        // 플레이어한테 키가 있는지 체크
+        //OnOpen();
+        //OnOpenFail();
     }
 
     void IInteractable.Interact()
     {
         if (_currentLock)
-        {
-            // 플레이어한테 키가 있는지 체크
-            //OnOpen();
-            //OnOpenFail();
-        }
+            Tryunlock();
         else
             OnInteract();
     }
@@ -39,16 +53,17 @@ public class DoorBase : MonoBehaviour, IInteractable, ILoopObject, IDoorEvent
     }
 
     #region DoorEvent interface
-    public void OnOpen()
+    public void OnUnlock()
     {
         _currentLock = false;
         _collider.isTrigger = true;
-        _observerManager.DoorObserve.OnOpenEvent();
+        _observerManager.DoorObserve.OnUnlockEvent();
+        OnInteract();
     }
 
-    public void OnOpenFail()
+    public void OnUnlockFail()
     {
-        _observerManager.DoorObserve.OnOpenFailEvent();
+        _observerManager.DoorObserve.OnUnlockFailEvent();
     }
 
     public virtual void OnInteract()
