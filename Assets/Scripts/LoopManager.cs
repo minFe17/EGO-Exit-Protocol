@@ -8,7 +8,7 @@ public class LoopManager : MonoBehaviour, ILoopObject
 
     public void Init()
     {
-        GenericSingleton<ObserveManager>.Instance.AddLoopEvent(this);
+        GenericSingleton<ObserveManager>.Instance.LoopObserve.AddLoopEvent(this);
     }
 
     void ILoopObject.OnLoopEvent()

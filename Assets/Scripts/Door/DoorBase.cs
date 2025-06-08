@@ -15,7 +15,7 @@ public class DoorBase : MonoBehaviour, IInteractable, ILoopObject, IDoorEvent
     {
         _doorObserve.Add(this);
         _observerManager = GenericSingleton<ObserveManager>.Instance;
-        GenericSingleton<ObserveManager>.Instance.AddLoopEvent(this);
+        GenericSingleton<ObserveManager>.Instance.LoopObserve.AddLoopEvent(this);
         GenericSingleton<InteractObjectManager>.Instance.SetInteractable(gameObject, this);
         OnLoopEvent();
     }

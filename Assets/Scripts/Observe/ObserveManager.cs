@@ -7,14 +7,5 @@ public class ObserveManager : MonoBehaviour
     DoorObserve _doorObserve = new DoorObserve();
 
     public DoorObserve DoorObserve { get => _doorObserve; }
-
-    public void AddLoopEvent(ILoopObject loopEvent)
-    {
-        _loopObserve.AddLoopEvent(loopEvent);
-    }
-
-    public void OnLoopEvent()
-    {
-        _loopObserve.OnLoopEvent();
-    }
+    public LoopObserve LoopObserve { get => _loopObserve; }
 }

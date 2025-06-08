@@ -20,7 +20,7 @@ public class Player : MonoBehaviour, ILoopObject
     {
         _interactObjectManager = GenericSingleton<InteractObjectManager>.Instance;
         _mementoManager = GenericSingleton<MementoManager>.Instance;
-        GenericSingleton<ObserveManager>.Instance.AddLoopEvent(this);
+        GenericSingleton<ObserveManager>.Instance.LoopObserve.AddLoopEvent(this);
 
         // 임시로 Player 클래스에서
         GenericSingleton<TimeManager>.Instance.Init();
