@@ -1,21 +1,20 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ObserveManager : MonoBehaviour
 {
     // ╫л╠шео
-    List<ILoopObject> _loopEvents = new List<ILoopObject>();
+    LoopObserve _loopObserve = new LoopObserve();
+    DoorObserve _doorObserve = new DoorObserve();
+
+    public DoorObserve DoorObserve { get => _doorObserve; }
 
     public void AddLoopEvent(ILoopObject loopEvent)
     {
-        if (_loopEvents.Contains(loopEvent))
-            return;
-        _loopEvents.Add(loopEvent);
+        _loopObserve.AddLoopEvent(loopEvent);
     }
 
     public void OnLoopEvent()
     {
-        for (int i = 0; i < _loopEvents.Count; i++)
-            _loopEvents[i].OnLoopEvent();
+        _loopObserve.OnLoopEvent();
     }
 }
