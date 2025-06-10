@@ -81,5 +81,6 @@ public class CameraManager : MonoBehaviour, ILoopObject
     void ILoopObject.OnLoopEvent()
     {
         UpdateTileBound(_cameraMemento.LoopTilemap);
+        SetCameraPosition(0);
     }
 }
