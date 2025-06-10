@@ -4,7 +4,7 @@ using Utils;
 
 public class DoorBase : MonoBehaviour, IInteractable, ILoopObject, IDoorEvent
 {
-    [SerializeField] BoxCollider2D _collider;
+    [SerializeField] protected BoxCollider2D _collider;
     [SerializeField] DoorMemento _doorMemento;
     
     protected CameraManager _cameraManager;
@@ -31,8 +31,14 @@ public class DoorBase : MonoBehaviour, IInteractable, ILoopObject, IDoorEvent
         GenericSingleton<InteractObjectManager>.Instance.SetInteractable(gameObject, this);
     }
 
-    void Tryunlock()
+    protected virtual void Interact()
     {
+        OnInteract();
+    }
+
+    void TryUnlock()
+    {
+        // 문이 잠겼다는 대사 처리
         // 플레이어한테 키가 있는지 체크
         //OnOpen();
         //OnOpenFail();
@@ -41,12 +47,12 @@ public class DoorBase : MonoBehaviour, IInteractable, ILoopObject, IDoorEvent
     void IInteractable.Interact()
     {
         if (_currentLock)
-            Tryunlock();
+            TryUnlock();
         else
-            OnInteract();
+            Interact();
     }
 
-    public void OnLoopEvent()
+    public virtual void OnLoopEvent()
     {
         _currentLock = _doorMemento.IsLock;
         _collider.isTrigger = _doorMemento.IsTrigger;
@@ -56,9 +62,8 @@ public class DoorBase : MonoBehaviour, IInteractable, ILoopObject, IDoorEvent
     public void OnUnlock()
     {
         _currentLock = false;
-        _collider.isTrigger = true;
         _observerManager.DoorObserve.OnUnlockEvent();
-        OnInteract();
+        Interact();
     }
 
     public void OnUnlockFail()

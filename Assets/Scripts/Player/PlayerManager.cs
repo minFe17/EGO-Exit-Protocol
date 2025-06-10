@@ -9,6 +9,7 @@ public class PlayerManager : MonoBehaviour, ILoopObject
 
     public void Init(Player player)
     {
+        _player = player;
         _mementoManager = GenericSingleton<MementoManager>.Instance;
         GenericSingleton<ObserveManager>.Instance.LoopObserve.AddLoopEvent(this);
     }
@@ -21,8 +22,7 @@ public class PlayerManager : MonoBehaviour, ILoopObject
     #region Interface
     void ILoopObject.OnLoopEvent()
     {
-        if(_mementoManager == null)
-            _player.transform.position = _mementoManager.PlayerMemento.PlayerStartPos;
+            SetPlayerPosition(_mementoManager.PlayerMemento.PlayerStartPos);
     }
     #endregion
 }
