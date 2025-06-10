@@ -10,10 +10,12 @@ public class CameraManager : MonoBehaviour, ILoopObject
     Vector3 _cellSize = Vector3.zero;
     Vector3 _minBounds;
     Vector3 _maxBounds;
+    float _cameraYPos;
 
     public CameraMemento CameraMemento { get => _cameraMemento; }
     public Vector3 MinBounds { get => _minBounds; }
     public Vector3 MaxBounds { get => _maxBounds; }
+    public float CameraYPos { get => _cameraYPos; }
 
     public void Init()
     {
@@ -69,6 +71,11 @@ public class CameraManager : MonoBehaviour, ILoopObject
             UpdateTileBound(leftmap);
         else
             UpdateTileBound(rightmap);
+    }
+
+    public void SetCameraPosition(float pos)
+    {
+        _cameraYPos = pos;
     }
 
     void ILoopObject.OnLoopEvent()

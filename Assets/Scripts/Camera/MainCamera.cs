@@ -31,7 +31,7 @@ public class MainCamera : MonoBehaviour
 
         float clamp = Mathf.Clamp(targetPos.x, _cameraManager.MinBounds.x + _halfWidth, _cameraManager.MaxBounds.x - _halfWidth);
 
-        Vector3 movePos = new Vector3(clamp, transform.position.y, transform.position.z);
+        Vector3 movePos = new Vector3(clamp, _cameraManager.CameraYPos, transform.position.z);
 
         movePos = _camera.RoundToPixel(movePos);
         transform.position = movePos;

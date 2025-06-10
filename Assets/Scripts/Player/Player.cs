@@ -82,13 +82,18 @@ public class Player : MonoBehaviour
     void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("InteractableObject"))
+        {
             _interactObjectManager.GetInteractable(out _interactableObject, collision.gameObject);
+        }
     }
 
     void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.CompareTag("InteractableObject"))
-            _interactableObject = null;
+        {
+            if(collision.gameObject == _interactableObject.GetGameObject())
+                _interactableObject = null;
+        }
     }
     #endregion
 }
