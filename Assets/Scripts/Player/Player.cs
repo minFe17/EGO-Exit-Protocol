@@ -21,10 +21,6 @@ public class Player : MonoBehaviour
         _interactObjectManager = GenericSingleton<InteractObjectManager>.Instance;
         _playerManager = GenericSingleton<PlayerManager>.Instance;
         _playerManager.Init(this);
-
-        // 임시로 Player 클래스에서
-        GenericSingleton<TimeManager>.Instance.Init();
-        GenericSingleton<LoopManager>.Instance.Init();
     }
 
     void FixedUpdate()
