@@ -26,6 +26,7 @@ public class PlayerManager : MonoBehaviour, ILoopObject
     void ILoopObject.OnLoopEvent()
     {
         SetPlayerPosition(_mementoManager.PlayerMemento.PlayerStartPos);
+        _itemInventory.ClearItemDict();
     }
     #endregion
 }
