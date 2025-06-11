@@ -7,12 +7,9 @@ public class ZoneDoor : DoorBase
     [SerializeField] Tilemap _targetMap;
     [SerializeField] Transform _targetPos;
 
-    PlayerManager _playerManager;
-
     protected override void Init()
     {
         base.Init();
-        _playerManager = GenericSingleton<PlayerManager>.Instance;
     }
 
     public override void OnInteract()

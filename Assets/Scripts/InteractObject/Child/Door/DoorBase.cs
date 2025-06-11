@@ -8,10 +8,12 @@ public class DoorBase : MonoBehaviour, IInteractable, ILoopObject, IDoorEvent
     [SerializeField] DoorMemento _doorMemento;
     
     protected CameraManager _cameraManager;
+    protected PlayerManager _playerManager;
 
     List<IDoorEvent> _doorObserve = new List<IDoorEvent>();
     ObserveManager _observerManager;
     InteractObjectManager _interactObjectManager;
+    ItemBase _item;
     bool _currentLock;
 
     void Start()
@@ -27,6 +29,7 @@ public class DoorBase : MonoBehaviour, IInteractable, ILoopObject, IDoorEvent
         _cameraManager = GenericSingleton<CameraManager>.Instance;
         _interactObjectManager = GenericSingleton<InteractObjectManager>.Instance;
         _interactObjectManager.SetInteractable(gameObject, this);
+        _playerManager = GenericSingleton<PlayerManager>.Instance;
         GenericSingleton<ObserveManager>.Instance.LoopObserve.AddLoopEvent(this);
         GenericSingleton<InteractObjectManager>.Instance.SetInteractable(gameObject, this);
     }
@@ -39,9 +42,12 @@ public class DoorBase : MonoBehaviour, IInteractable, ILoopObject, IDoorEvent
     void TryUnlock()
     {
         // 문이 잠겼다는 대사 처리
-        // 플레이어한테 키가 있는지 체크
-        //OnOpen();
-        //OnOpenFail();
+        EItemType type = _doorMemento.NeedUnlockItem;
+        _playerManager.ItemInventory.GetItem(out _item, type);
+        if (_item != null)
+            OnUnlock();
+        else
+            OnUnlockFail();
     }
 
     void IInteractable.Interact()
@@ -63,6 +69,7 @@ public class DoorBase : MonoBehaviour, IInteractable, ILoopObject, IDoorEvent
     {
         _currentLock = false;
         _observerManager.DoorObserve.OnUnlockEvent();
+        _item.Use();
         Interact();
     }
 

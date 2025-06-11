@@ -6,6 +6,9 @@ public class PlayerManager : MonoBehaviour, ILoopObject
     // ╫л╠шео
     Player _player;
     MementoManager _mementoManager;
+    ItemInventory _itemInventory = new ItemInventory();
+
+    public ItemInventory ItemInventory { get => _itemInventory; }
 
     public void Init(Player player)
     {
@@ -22,7 +25,7 @@ public class PlayerManager : MonoBehaviour, ILoopObject
     #region Interface
     void ILoopObject.OnLoopEvent()
     {
-            SetPlayerPosition(_mementoManager.PlayerMemento.PlayerStartPos);
+        SetPlayerPosition(_mementoManager.PlayerMemento.PlayerStartPos);
     }
     #endregion
 }

@@ -91,6 +91,8 @@ public class Player : MonoBehaviour
     {
         if (collision.CompareTag("InteractableObject"))
         {
+            if(_interactableObject == null)
+                return;
             if(collision.gameObject == _interactableObject.GetGameObject())
                 _interactableObject = null;
         }
