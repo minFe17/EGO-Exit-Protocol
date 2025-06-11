@@ -18,9 +18,4 @@ public class InteractObjectManager : MonoBehaviour
     {
         _objectDict.TryGetValue(key, out value);
     }
-
-    public void Remove(GameObject key)
-    {
-        _objectDict.Remove(key);
-    }
 }
