@@ -14,14 +14,15 @@ public class TimeManager : MonoBehaviour, ILoopObject
         if (_observeManager == null)
             _observeManager = GenericSingleton<ObserveManager>.Instance;
         _observeManager.LoopObserve.AddLoopEvent(this);
+        OnLoopEvent();
     }
 
     void Update()
     {
         if (_isStop)
             return;
-        _timer += Time.deltaTime;
-        if (_timer > _loopTime)
+        _timer -= Time.deltaTime;
+        if (_timer <= 0)
             _observeManager.LoopObserve.OnLoopEvent();
     }
 
@@ -35,9 +36,9 @@ public class TimeManager : MonoBehaviour, ILoopObject
         _isStop = false;
     }
 
-    void ILoopObject.OnLoopEvent()
+    public void OnLoopEvent()
     {
         //Stop();
-        _timer = 0;
+        _timer = _loopTime;
     }
 }

@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.Tilemaps;
-using Utils;
 
 public class ZoneDoor : DoorBase
 {
