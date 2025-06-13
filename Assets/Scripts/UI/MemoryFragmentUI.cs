@@ -5,25 +5,35 @@ using UnityEngine.UI;
 
 public class MemoryFragmentUI : MonoBehaviour
 {
-    [SerializeField] List<Button> _buttonList;
+    [SerializeField] List<Image> _buttonList;
     [SerializeField] List<GameObject> _boardList;
+    [SerializeField] Color _normalColor;
+    [SerializeField] Color _selectColor;
 
     int _currentIndex;
+
     void OnEnable()
     {
-        _currentIndex = 0;
-        _buttonList[_currentIndex].Select();
+        SelectButton(0);
+    }
+
+    void SelectButton(int index)
+    {
+        _buttonList[_currentIndex].color = _normalColor;
+        _boardList[_currentIndex].SetActive(false);
+        _currentIndex = index;
+        _buttonList[_currentIndex].color = _selectColor;
         _boardList[_currentIndex].SetActive(true);
     }
 
-    public void SelectButton(int index)
+    #region Button OnClick
+    public void ClickButton(int index)
     {
         if (_currentIndex == index)
             return;
-        _boardList[_currentIndex].SetActive(false);
-        _currentIndex = index;
-        _boardList[_currentIndex].SetActive(true);
+        SelectButton(index);
     }
+    #endregion
 
     #region Input System
     void OnClose()
@@ -33,7 +43,13 @@ public class MemoryFragmentUI : MonoBehaviour
 
     void OnChangePage(InputValue value)
     {
+        int index = _currentIndex + (int)value.Get<float>();
+        if (index < 0)
+            index = 0;
+        if (index >= _buttonList.Count)
+            index = _buttonList.Count - 1;
 
+        SelectButton(index);
     }
     #endregion
 }
