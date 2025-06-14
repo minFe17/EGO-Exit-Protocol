@@ -1,24 +1,23 @@
-using System.Collections.Generic;
 using UnityEngine;
 using Utils;
 
-public class DoorBase : MonoBehaviour, IInteractable, ILoopObject, IDoorEvent
+public abstract class DoorBase : MonoBehaviour, IInteractable, ILoopObject
 {
     [SerializeField] protected BoxCollider2D _collider;
     [SerializeField] DoorMemento _doorMemento;
-    
+
     protected CameraManager _cameraManager;
     protected PlayerManager _playerManager;
 
-    List<IDoorEvent> _doorObserve = new List<IDoorEvent>();
     ObserveManager _observerManager;
     InteractObjectManager _interactObjectManager;
     ItemBase _item;
     bool _currentLock;
 
+    public abstract void OnInteract();
+
     void Start()
     {
-        _doorObserve.Add(this);
         Init();
         OnLoopEvent();
     }
@@ -26,17 +25,11 @@ public class DoorBase : MonoBehaviour, IInteractable, ILoopObject, IDoorEvent
     protected virtual void Init()
     {
         _observerManager = GenericSingleton<ObserveManager>.Instance;
+        _observerManager.LoopObserve.AddLoopEvent(this);
         _cameraManager = GenericSingleton<CameraManager>.Instance;
         _interactObjectManager = GenericSingleton<InteractObjectManager>.Instance;
         _interactObjectManager.SetInteractable(gameObject, this);
         _playerManager = GenericSingleton<PlayerManager>.Instance;
-        GenericSingleton<ObserveManager>.Instance.LoopObserve.AddLoopEvent(this);
-        GenericSingleton<InteractObjectManager>.Instance.SetInteractable(gameObject, this);
-    }
-
-    protected virtual void Interact()
-    {
-        OnInteract();
     }
 
     void TryUnlock()
@@ -50,42 +43,42 @@ public class DoorBase : MonoBehaviour, IInteractable, ILoopObject, IDoorEvent
             OnUnlockFail();
     }
 
+    void OnUnlock()
+    {
+        // 열쇠 있을 때 대사 처리
+        _currentLock = false;
+        _item.Use();
+        InteractDoor();
+    }
+
+    void OnUnlockFail()
+    {
+        // 열쇠 없을때 대사
+    }
+
+    protected virtual void InteractDoor()
+    {
+        OnInteract();
+    }
+
+    #region Interface
     void IInteractable.Interact()
     {
         if (_currentLock)
             TryUnlock();
         else
-            Interact();
+            InteractDoor();
+    }
+
+    GameObject IInteractable.GetGameObject()
+    {
+        return gameObject;
     }
 
     public virtual void OnLoopEvent()
     {
         _currentLock = _doorMemento.IsLock;
         _collider.isTrigger = _doorMemento.IsTrigger;
-    }
-
-    #region Interface
-    public void OnUnlock()
-    {
-        _currentLock = false;
-        _observerManager.DoorObserve.OnUnlockEvent();
-        _item.Use();
-        Interact();
-    }
-
-    public void OnUnlockFail()
-    {
-        _observerManager.DoorObserve.OnUnlockFailEvent();
-    }
-
-    public virtual void OnInteract()
-    {
-        _observerManager.DoorObserve.OnInteractEvent();
-    }
-
-    GameObject IInteractable.GetGameObject()
-    {
-        return gameObject;
     }
     #endregion
 }

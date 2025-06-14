@@ -4,41 +4,68 @@ using Utils;
 public class TimeManager : MonoBehaviour, ILoopObject
 {
     // ╫л╠шео
+    MementoManager _mementoManager;
+    MediatorManager _mediatorManager;
     ObserveManager _observeManager;
-    float _loopTime = 30f;
+
+    int _previousTime;
     float _timer;
     bool _isStop;
+    bool _isLoop;
 
     public void Init()
     {
-        if (_observeManager == null)
-            _observeManager = GenericSingleton<ObserveManager>.Instance;
+        SetManager();
         _observeManager.LoopObserve.AddLoopEvent(this);
         OnLoopEvent();
     }
 
     void Update()
     {
-        if (_isStop)
+        UpdateTimer();
+    }
+
+    void SetManager()
+    {
+        if (_mementoManager == null)
+            _mementoManager = GenericSingleton<MementoManager>.Instance;
+        if (_mediatorManager == null)
+            _mediatorManager = GenericSingleton<MediatorManager>.Instance;
+        if (_observeManager == null)
+            _observeManager = GenericSingleton<ObserveManager>.Instance;
+    }
+
+    void UpdateTimer()
+    {
+        if (_isStop || _isLoop)
             return;
+
         _timer -= Time.deltaTime;
+        int currentTime = Mathf.Max(0, (int)_timer);
+
+        if (currentTime != _previousTime)
+        {
+            _previousTime = currentTime;
+            _mediatorManager.Notify(EMediatorEventType.TimeTick, currentTime);
+        }
+
         if (_timer <= 0)
-            _observeManager.LoopObserve.OnLoopEvent();
+        {
+            _mediatorManager.Notify(EMediatorEventType.LoopEvent);
+            _isLoop = true;
+        }
     }
 
-    public void Stop()
-    {
-        _isStop = true;
-    }
+    public void Stop() => _isStop = true;
+    public void Resume() => _isStop = false;
 
-    public void Resume()
-    {
-        _isStop = false;
-    }
-
+    #region Interface
     public void OnLoopEvent()
     {
-        //Stop();
-        _timer = _loopTime;
+        _timer = _mementoManager.TimeMemento.LoopTime;
+        _isStop = _mementoManager.TimeMemento.IsStop;
+        _isLoop = _mementoManager.TimeMemento.IsLoop;
+        _previousTime = (int)_timer;
     }
+    #endregion
 }

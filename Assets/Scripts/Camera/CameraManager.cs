@@ -5,22 +5,23 @@ using Utils;
 public class CameraManager : MonoBehaviour, ILoopObject
 {
     // ╫л╠шео
-    CameraMemento _cameraMemento = new CameraMemento();
+    MementoManager _mementoManager;
     Tilemap _currentTilemap;
     Vector3 _cellSize = Vector3.zero;
     Vector3 _minBounds;
     Vector3 _maxBounds;
     float _cameraYPos;
 
-    public CameraMemento CameraMemento { get => _cameraMemento; }
     public Vector3 MinBounds { get => _minBounds; }
     public Vector3 MaxBounds { get => _maxBounds; }
     public float CameraYPos { get => _cameraYPos; }
 
     public void Init()
     {
+        if(_mementoManager == null)
+            _mementoManager = GenericSingleton<MementoManager>.Instance;
         GenericSingleton<ObserveManager>.Instance.LoopObserve.AddLoopEvent(this);
-        UpdateTileBound(_cameraMemento.LoopTilemap);
+        UpdateTileBound(_mementoManager.CameraMemento.LoopTilemap);
     }
 
     void SetCellSize(Tilemap tilemap)
@@ -80,7 +81,7 @@ public class CameraManager : MonoBehaviour, ILoopObject
 
     void ILoopObject.OnLoopEvent()
     {
-        UpdateTileBound(_cameraMemento.LoopTilemap);
+        UpdateTileBound(_mementoManager.CameraMemento.LoopTilemap);
         SetCameraPosition(0);
     }
 }

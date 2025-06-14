@@ -2,8 +2,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using Utils;
 
-public class MemoryFragmentUI : MonoBehaviour
+public class MemoryFragmentUI : MonoBehaviour, ILoopObject
 {
     [SerializeField] List<Image> _buttonList;
     [SerializeField] List<GameObject> _boardList;
@@ -11,6 +12,11 @@ public class MemoryFragmentUI : MonoBehaviour
     [SerializeField] Color _selectColor;
 
     int _currentIndex;
+
+    void Start()
+    {
+        GenericSingleton<ObserveManager>.Instance.LoopObserve.AddLoopEvent(this);
+    }
 
     void OnEnable()
     {
@@ -50,6 +56,13 @@ public class MemoryFragmentUI : MonoBehaviour
             index = _buttonList.Count - 1;
 
         SelectButton(index);
+    }
+    #endregion
+
+    #region Interface
+    void ILoopObject.OnLoopEvent()
+    {
+        this.gameObject.SetActive(false);
     }
     #endregion
 }

@@ -13,7 +13,7 @@ public class ZoneDoor : DoorBase
 
     public override void OnInteract()
     {
-        base.OnInteract();
+        // 문 사용(들어감) 대사 처리
         _playerManager.SetPlayerPosition(_targetPos.position);
         _cameraManager.UpdateTileBound(_targetMap);
     }

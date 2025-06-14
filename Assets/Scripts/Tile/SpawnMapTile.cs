@@ -8,6 +8,6 @@ public class SpawnMapTile : MonoBehaviour
 
     private void Awake()
     {
-        GenericSingleton<CameraManager>.Instance.CameraMemento.LoopTilemap = _spawnTile;
+        GenericSingleton<MementoManager>.Instance.CameraMemento.LoopTilemap = _spawnTile;
     }
 }

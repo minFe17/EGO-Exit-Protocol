@@ -5,9 +5,14 @@ public class MementoManager : MonoBehaviour
 {
     // ╫л╠шео
     Dictionary<EItemType, ItemMemento> _itemMemento = new Dictionary<EItemType, ItemMemento>();
-    PlayerMemento _playerMemen;
-    public PlayerMemento PlayerMemento { get => _playerMemen; set => _playerMemen = value;  }
+    PlayerMemento _playerMemento;
+    CameraMemento _cameraMemento = new CameraMemento();
+    TimeMemento _timeMemento = new TimeMemento();
+
     public Dictionary<EItemType, ItemMemento> ItemMemento { get => _itemMemento; }
+    public PlayerMemento PlayerMemento { get => _playerMemento; set => _playerMemento = value;  }
+    public CameraMemento CameraMemento { get => _cameraMemento; }
+    public TimeMemento TimeMemento { get => _timeMemento; }
 
     private void Awake()
     {
