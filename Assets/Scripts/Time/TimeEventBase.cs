@@ -1,12 +1,13 @@
-using UnityEngine;
 using Utils;
 
-public class TimeEventBase : MonoBehaviour
+public class TimeEventBase
 {
     protected TimeManager _timeManager;
+    protected MediatorManager _mediatorManager;
 
-    void Start()
+    public virtual void Init()
     {
         _timeManager = GenericSingleton<TimeManager>.Instance;
+        _mediatorManager = GenericSingleton<MediatorManager>.Instance;
     }
 }

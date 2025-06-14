@@ -8,6 +8,9 @@ public class TimeManager : MonoBehaviour, ILoopObject
     MediatorManager _mediatorManager;
     ObserveManager _observeManager;
 
+    TimePause _timePause = new TimePause();
+    TimeResume _timeResume = new TimeResume();
+
     int _previousTime;
     float _timer;
     bool _isStop;
@@ -18,6 +21,8 @@ public class TimeManager : MonoBehaviour, ILoopObject
         SetManager();
         _observeManager.LoopObserve.AddLoopEvent(this);
         OnLoopEvent();
+        _timePause.Init();
+        _timeResume.Init();
     }
 
     void Update()
@@ -56,15 +61,27 @@ public class TimeManager : MonoBehaviour, ILoopObject
         }
     }
 
-    public void Stop() => _isStop = true;
-    public void Resume() => _isStop = false;
+    public void Stop()
+    {
+        if (_isStop)
+            return;
+        _isStop = true;
+    } 
+
+    public void Resume()
+    {
+        if (!_isStop)
+            return;
+        _isStop = false;
+    }
 
     #region Interface
     public void OnLoopEvent()
     {
         _timer = _mementoManager.TimeMemento.LoopTime;
-        _isStop = _mementoManager.TimeMemento.IsStop;
-        _isLoop = _mementoManager.TimeMemento.IsLoop;
+        // fade 효과 제작 후 주석 해제
+        //_isStop = _mementoManager.TimeMemento.IsStop;
+        //_isLoop = _mementoManager.TimeMemento.IsLoop;
         _previousTime = (int)_timer;
     }
     #endregion

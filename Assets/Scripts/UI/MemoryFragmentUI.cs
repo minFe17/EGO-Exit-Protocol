@@ -4,23 +4,22 @@ using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using Utils;
 
-public class MemoryFragmentUI : MonoBehaviour, ILoopObject
+public class MemoryFragmentUI : MonoBehaviour
 {
     [SerializeField] List<Image> _buttonList;
     [SerializeField] List<GameObject> _boardList;
     [SerializeField] Color _normalColor;
     [SerializeField] Color _selectColor;
 
+    MediatorManager _mediatorManager;
     int _currentIndex;
-
-    void Start()
-    {
-        GenericSingleton<ObserveManager>.Instance.LoopObserve.AddLoopEvent(this);
-    }
 
     void OnEnable()
     {
         SelectButton(0);
+        if (_mediatorManager == null)
+            _mediatorManager = GenericSingleton<MediatorManager>.Instance;
+        _mediatorManager.Notify(EMediatorEventType.TimePause);
     }
 
     void SelectButton(int index)
@@ -45,6 +44,7 @@ public class MemoryFragmentUI : MonoBehaviour, ILoopObject
     void OnClose()
     {
         this.gameObject.SetActive(false);
+        _mediatorManager.Notify(EMediatorEventType.TimeResume);
     }
 
     void OnChangePage(InputValue value)
@@ -56,13 +56,6 @@ public class MemoryFragmentUI : MonoBehaviour, ILoopObject
             index = _buttonList.Count - 1;
 
         SelectButton(index);
-    }
-    #endregion
-
-    #region Interface
-    void ILoopObject.OnLoopEvent()
-    {
-        this.gameObject.SetActive(false);
     }
     #endregion
 }
