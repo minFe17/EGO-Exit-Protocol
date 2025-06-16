@@ -1,7 +1,10 @@
+using UnityEngine;
 using Utils;
 
 public class GiveKeyDeadBody : DeadBody, IItemHolder
 {
+    [SerializeField] MemoryObject _memoryObject;
+
     MementoManager _mementoManager;
     ItemBase _key = new ItemBase();
 
@@ -23,5 +26,6 @@ public class GiveKeyDeadBody : DeadBody, IItemHolder
     void IItemHolder.SetItem(ItemBase item)
     {
         _key = item;
+        _memoryObject.AddMemory();
     }
 }

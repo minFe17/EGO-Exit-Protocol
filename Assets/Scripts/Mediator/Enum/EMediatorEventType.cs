@@ -5,5 +5,6 @@ public enum EMediatorEventType
     TimeResume,
     TimeTick,
     ChangeLoopCount,
+    AddMemory,
     Max,
 }
