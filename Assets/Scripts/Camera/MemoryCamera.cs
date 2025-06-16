@@ -1,17 +1,20 @@
 using System.IO;
 using UnityEngine;
 using UnityEngine.Rendering;
+using Utils;
 
-public class MemoryCamera : MonoBehaviour
+public class MemoryCamera : MonoBehaviour, IMediatorEvent
 {
     [SerializeField] Camera _captureCamera;
     [SerializeField] RenderTexture _captureTexture;
 
     Texture2D _texture;
+    MediatorManager _mediatorManager;
 
     void Start()
     {
         _texture = new Texture2D(_captureTexture.width, _captureTexture.height, TextureFormat.RGBA32, false);
+        _mediatorManager = GenericSingleton<MediatorManager>.Instance;
     }
 
     void OnCaptureComplete(AsyncGPUReadbackRequest request)
@@ -35,5 +38,10 @@ public class MemoryCamera : MonoBehaviour
         _captureCamera.Render();
 
         AsyncGPUReadback.Request(_captureTexture, 0, TextureFormat.RGBA32, OnCaptureComplete);
+    }
+
+    void IMediatorEvent.HandleEvent(object data)
+    {
+        MemoryData memoryData = (MemoryData)data;
     }
 }

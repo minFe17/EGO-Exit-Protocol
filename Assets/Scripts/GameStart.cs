@@ -7,5 +7,6 @@ public class GameStart : MonoBehaviour
     {
         GenericSingleton<TimeManager>.Instance.Init();
         GenericSingleton<LoopManager>.Instance.Init();
+        GenericSingleton<MemoryManager>.Instance.Init();
     }
 }
