@@ -11,5 +11,4 @@ public enum EMediatorEventType
     PlayerEnterAssistantRoom,
     PlayerExitAssistantRoom,
     RopeReleased,
-    Max
 }
