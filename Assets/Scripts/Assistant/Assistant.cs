@@ -16,6 +16,7 @@ public class Assistant : MonoBehaviour, IMediatorEvent, ILoopObject
     MementoManager _mementoManager;
     ObserveManager _observeManager;
 
+    #region Unity LifeCycle
     void Start()
     {
         SetManager();
@@ -27,6 +28,7 @@ public class Assistant : MonoBehaviour, IMediatorEvent, ILoopObject
     {
         Loop();
     }
+    #endregion
 
     void SetManager()
     {
@@ -57,6 +59,7 @@ public class Assistant : MonoBehaviour, IMediatorEvent, ILoopObject
         ChangeState(EAssistantStateType.TiedUp);
     }
 
+    #region FSM
     void Loop()
     {
         if (_currentState == null)
@@ -74,6 +77,7 @@ public class Assistant : MonoBehaviour, IMediatorEvent, ILoopObject
         _currentState = _assistantState[_currentType];
         _currentState.Enter();
     }
+    #endregion
 
     public void ChangeAnimation(string name, bool value)
     {
@@ -102,12 +106,7 @@ public class Assistant : MonoBehaviour, IMediatorEvent, ILoopObject
         transform.localScale = scale;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("EndingRoom"))
-            ChangeState(EAssistantStateType.Kill);
-    }
-
+    #region Interface
     void IMediatorEvent.HandleEvent(object data)
     {
         Vector3 pos = (Vector3)data;
@@ -120,4 +119,13 @@ public class Assistant : MonoBehaviour, IMediatorEvent, ILoopObject
         transform.localScale = _mementoManager.AssistantMemento.AssistantScale;
         ChangeState(_mementoManager.AssistantMemento.AssistantType);
     }
+    #endregion
+
+    #region Unity Collision
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("EndingRoom"))
+            ChangeState(EAssistantStateType.Kill);
+    }
+    #endregion
 }
