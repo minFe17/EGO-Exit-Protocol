@@ -6,5 +6,8 @@ public enum EMediatorEventType
     TimeTick,
     ChangeLoopCount,
     AddMemory,
-    Max,
+    PlayerEnterAssistantRoom,
+    PlayerExitAssistantRoom,
+    RopeReleased,
+    Max
 }

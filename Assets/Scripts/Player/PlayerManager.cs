@@ -8,6 +8,7 @@ public class PlayerManager : MonoBehaviour, ILoopObject
     MementoManager _mementoManager;
     ItemInventory _itemInventory = new ItemInventory();
 
+    public Player Player { get => _player; }
     public ItemInventory ItemInventory { get => _itemInventory; }
 
     public void Init(Player player)
