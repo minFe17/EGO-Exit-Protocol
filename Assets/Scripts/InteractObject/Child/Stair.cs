@@ -11,6 +11,7 @@ public class Stair : MonoBehaviour, IInteractable
     InteractObjectManager _interactObjectManager;
     PlayerManager _playerManager;
     CameraManager _cameraManager;
+    MediatorManager _mediatorManager;
 
     void Start()
     {
@@ -18,6 +19,7 @@ public class Stair : MonoBehaviour, IInteractable
         _interactObjectManager.SetInteractable(gameObject, this);
         _playerManager = GenericSingleton<PlayerManager>.Instance;
         _cameraManager = GenericSingleton<CameraManager>.Instance;
+        _mediatorManager = GenericSingleton<MediatorManager>.Instance;
     }
 
     void IInteractable.Interact()
@@ -25,6 +27,7 @@ public class Stair : MonoBehaviour, IInteractable
         _playerManager.SetPlayerPosition(_targetPos.position);
         _cameraManager.UpdateTileBound(_targetTilemap);
         _cameraManager.SetCameraPosition(_cameraPosY);
+        _mediatorManager.Notify(EMediatorEventType.PlayerLocationChanged, _targetPos.position);
     }
 
     GameObject IInteractable.GetGameObject()

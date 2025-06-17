@@ -20,10 +20,10 @@ public class Player : MonoBehaviour
     #region Unity LifeCycle
     void Start()
     {
-        _interactObjectManager = GenericSingleton<InteractObjectManager>.Instance;
-        _mediatorManager = GenericSingleton<MediatorManager>.Instance;
         _playerManager = GenericSingleton<PlayerManager>.Instance;
         _playerManager.Init(this);
+        _interactObjectManager = GenericSingleton<InteractObjectManager>.Instance;
+        _mediatorManager = GenericSingleton<MediatorManager>.Instance;
     }
 
     void FixedUpdate()

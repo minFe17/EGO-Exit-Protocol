@@ -2,25 +2,47 @@ using System.Collections.Generic;
 using UnityEngine;
 using Utils;
 
-public class Assistant : MonoBehaviour
+public class Assistant : MonoBehaviour, IMediatorEvent, ILoopObject
 {
     [SerializeField] Animator _animator;
     [SerializeField] Rigidbody2D _rigidbody;
+
     Dictionary<EAssistantStateType, IAssistantState> _assistantState;
     IAssistantState _currentState;
     EAssistantStateType _currentType;
 
     Player _player;
+    MediatorManager _mediatorManager;
+    MementoManager _mementoManager;
+    ObserveManager _observeManager;
 
     void Start()
     {
-        _player = GenericSingleton<PlayerManager>.Instance.Player;
+        SetManager();
+        SetMemento();
         SetState();
     }
 
     void Update()
     {
         Loop();
+    }
+
+    void SetManager()
+    {
+        _player = GenericSingleton<PlayerManager>.Instance.Player;
+        _mediatorManager = GenericSingleton<MediatorManager>.Instance;
+        _mediatorManager.Register(EMediatorEventType.PlayerLocationChanged, this);
+        _mementoManager = GenericSingleton<MementoManager>.Instance;
+        _observeManager = GenericSingleton<ObserveManager>.Instance;
+        _observeManager.LoopObserve.AddLoopEvent(this);
+    }
+
+    void SetMemento()
+    {
+        _mementoManager.AssistantMemento.AssistantPositon = transform.position;
+        _mementoManager.AssistantMemento.AssistantScale = transform.localScale;
+        _mementoManager.AssistantMemento.AssistantType = _currentType;
     }
 
     void SetState()
@@ -84,5 +106,18 @@ public class Assistant : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("EndingRoom"))
             ChangeState(EAssistantStateType.Kill);
+    }
+
+    void IMediatorEvent.HandleEvent(object data)
+    {
+        Vector3 pos = (Vector3)data;
+        transform.position += pos;
+    }
+
+    void ILoopObject.OnLoopEvent()
+    {
+        transform.position = _mementoManager.AssistantMemento.AssistantPositon;
+        transform.localScale = _mementoManager.AssistantMemento.AssistantScale;
+        ChangeState(_mementoManager.AssistantMemento.AssistantType);
     }
 }

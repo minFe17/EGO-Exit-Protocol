@@ -1,16 +1,8 @@
 using UnityEngine;
-using Utils;
 
 public class PlayerMemento : MonoBehaviour
 {
-    [SerializeField] Vector3 _playerStartPos;
-    MementoManager _mementoManager;
+    Vector3 _playerStartPos;
 
-    public Vector3 PlayerStartPos { get => _playerStartPos; }
-
-    void Start()
-    {
-        _mementoManager = GenericSingleton<MementoManager>.Instance;
-        _mementoManager.PlayerMemento = this;
-    }
+    public Vector3 PlayerStartPos { get => _playerStartPos; set => value = _playerStartPos; }
 }
