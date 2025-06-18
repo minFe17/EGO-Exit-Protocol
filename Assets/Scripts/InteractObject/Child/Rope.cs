@@ -23,7 +23,6 @@ public class Rope : MonoBehaviour, IInteractable
         _mediatorManager = GenericSingleton<MediatorManager>.Instance;
         _memoryManager = GenericSingleton<MemoryManager>.Instance;
         _memoryData = _memoryManager.MemoryRepository.GetMemoryData(_memoryType);
-        Debug.Log(2);
     }
 
     GameObject IInteractable.GetGameObject()

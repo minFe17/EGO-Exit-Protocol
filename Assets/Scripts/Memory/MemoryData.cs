@@ -25,6 +25,7 @@ public class MemoryData
         _spritePath = Path.Combine(Application.persistentDataPath, $"{_typeText}.png");
         if (!File.Exists(_spritePath))
             return;
+        _texture = new Texture2D(2, 2);
         byte[] imageData = File.ReadAllBytes(_spritePath);
         _texture.LoadImage(imageData);
         _texture.filterMode = FilterMode.Point;

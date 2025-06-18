@@ -22,7 +22,6 @@ public class MemoryRepository : MonoBehaviour
         {
             _readDataList[i].Init();
             _allMemoryData.Add(_readDataList[i].Type, _readDataList[i]);
-            Debug.Log(_readDataList[i].Type);
         }
     }
 
