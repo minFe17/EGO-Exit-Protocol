@@ -122,7 +122,7 @@ public class Assistant : MonoBehaviour, IMediatorEvent, ILoopObject
     #endregion
 
     #region Unity Collision
-    private void OnCollisionEnter2D(Collision2D collision)
+    void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("EndingRoom"))
             ChangeState(EAssistantStateType.Kill);

@@ -1,18 +1,30 @@
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 
 public class PrefabManager : MonoBehaviour
 {
     // ╫л╠шео
-    PlayerPrefabLoad _playerPrefabLoad = new PlayerPrefabLoad();
-    CameraPrefabLoad _cameraPrefabLoad = new CameraPrefabLoad();
+    Dictionary<EPrefabType, PrefabLoadBase> _prefabDict;
 
-    public PlayerPrefabLoad PlayerPrefabLoad { get => _playerPrefabLoad; }
-    public CameraPrefabLoad CameraPrefabLoad { get => _cameraPrefabLoad; }
+    void SetDictionary()
+    {
+        _prefabDict = new Dictionary<EPrefabType, PrefabLoadBase>
+        { {EPrefabType.Player, new PlayerPrefabLoad() },
+            {EPrefabType.Camera, new CameraPrefabLoad() },
+            {EPrefabType.Map, new MapPrefabLoad() },
+        };
+    }
 
     public async Task LoadPrefab()
     {
-        await _playerPrefabLoad.LoadPrefab();
-        await _cameraPrefabLoad.LoadPrefab();
+        SetDictionary();
+        foreach (PrefabLoadBase prefabLoad in _prefabDict.Values)
+            await prefabLoad.LoadPrefab();
+    }
+
+    public PrefabLoadBase GetPrefabLoad(EPrefabType key)
+    {
+        return _prefabDict[key];
     }
 }

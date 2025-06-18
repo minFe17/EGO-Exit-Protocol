@@ -5,10 +5,10 @@ using UnityEngine;
 [System.Serializable]
 public class MemoryData
 {
-    [SerializeField] private string _typeText;
-    [SerializeField] private string _description;
+    [SerializeField] string _typeText;
+    [SerializeField] string _description;
 
-    private EMemoryType _memoryType;
+    EMemoryType _memoryType;
     string _spritePath;
     Sprite _sprite;
     Texture2D _texture;

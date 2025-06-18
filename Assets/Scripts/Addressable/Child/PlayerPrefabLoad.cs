@@ -16,6 +16,8 @@ public class PlayerPrefabLoad : PrefabLoadBase
 
     public override async Task LoadPrefab()
     {
+        if (_addressableManager == null)
+            Init();
         _playerPrefab = await _addressableManager.GetAddressableAsset<GameObject>(_name);
     }
 }

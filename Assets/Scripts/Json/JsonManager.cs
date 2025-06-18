@@ -17,7 +17,7 @@ public class JsonManager : MonoBehaviour
     public WriteData WriteData { get => _writeData; }
     public string MemoryDataPath { get => _memoryDataPath; }
 
-    private void Awake()
+    void Awake()
     {
         Init();
     }

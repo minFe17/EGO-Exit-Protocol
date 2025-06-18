@@ -16,7 +16,6 @@ public class PlayerManager : MonoBehaviour, ILoopObject
     public void Init()
     {
         _mementoManager = GenericSingleton<MementoManager>.Instance;
-        _mementoManager.PlayerMemento.PlayerStartPos = _player.transform.position;
         _prefabManager = GenericSingleton<PrefabManager>.Instance;
         GenericSingleton<ObserveManager>.Instance.LoopObserve.AddLoopEvent(this);
         SpawnPlayer();

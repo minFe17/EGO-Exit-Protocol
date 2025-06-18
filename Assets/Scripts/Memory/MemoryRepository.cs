@@ -7,10 +7,10 @@ using Utils;
 public class MemoryRepository : MonoBehaviour
 {
     // 읽기 전용
-    [SerializeField] private List<MemoryData> _readDataList = new List<MemoryData>();
-    [SerializeField] private HashSet<EMemoryType> _currentMemoryData = new HashSet<EMemoryType>();
+    [SerializeField] List<MemoryData> _readDataList = new List<MemoryData>();
+    [SerializeField] HashSet<EMemoryType> _currentMemoryData = new HashSet<EMemoryType>();
 
-    private Dictionary<EMemoryType, MemoryData> _allMemoryData = new Dictionary<EMemoryType, MemoryData>();
+    Dictionary<EMemoryType, MemoryData> _allMemoryData = new Dictionary<EMemoryType, MemoryData>();
 
     public List<MemoryData> ReadDataList { get => _readDataList; }
     public HashSet<EMemoryType> CurrentMemoryData { get => _currentMemoryData; }

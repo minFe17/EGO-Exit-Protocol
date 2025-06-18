@@ -18,7 +18,7 @@ public class MementoManager : MonoBehaviour
     public AssistantMemento AssistantMemento { get => _assistantMemento; }
     public RopeMemento RopeMemento { get => _ropeMemento; }
 
-    private void Awake()
+    void Awake()
     {
         SetItemMemento();
     }

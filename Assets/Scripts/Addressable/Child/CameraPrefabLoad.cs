@@ -16,6 +16,8 @@ public class CameraPrefabLoad : PrefabLoadBase
 
     public override async Task LoadPrefab()
     {
+        if (_addressableManager == null)
+            Init();
         _cameraPrefab = await _addressableManager.GetAddressableAsset<GameObject>(_name);
     }
 }
