@@ -6,8 +6,6 @@ public class PlayerPrefabLoad : PrefabLoadBase
     GameObject _playerPrefab;
     string _name;
 
-    public GameObject PlayerPrefab { get => _playerPrefab; }
-
     public override void Init()
     {
         base.Init();
@@ -19,5 +17,10 @@ public class PlayerPrefabLoad : PrefabLoadBase
         if (_addressableManager == null)
             Init();
         _playerPrefab = await _addressableManager.GetAddressableAsset<GameObject>(_name);
+    }
+
+    public override GameObject GetPrefab()
+    {
+        return _playerPrefab;
     }
 }

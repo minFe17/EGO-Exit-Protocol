@@ -29,7 +29,7 @@ public class PlayerManager : MonoBehaviour, ILoopObject
 
     public void SpawnPlayer()
     {
-        GameObject temp = Instantiate(_prefabManager.PlayerPrefabLoad.PlayerPrefab);
+        GameObject temp = Instantiate(_prefabManager.GetPrefabLoad(EPrefabType.Player).GetPrefab());
         _player = temp.GetComponent<Player>();
     }
 

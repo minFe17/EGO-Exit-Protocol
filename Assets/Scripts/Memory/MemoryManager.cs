@@ -12,11 +12,11 @@ public class MemoryManager : MonoBehaviour, IMediatorEvent, ILoopObject
     MediatorManager _mediatorManager;
     public MemoryRepository MemoryRepository { get => _memoryRepository; }
 
-    public async Task Init()
+    public void Init()
     {
         _mediatorManager = GenericSingleton<MediatorManager>.Instance;
         _mediatorManager.Register(EMediatorEventType.AddMemory, this);
-        await _memoryRepository.Init();
+        _memoryRepository.Init();
     }
 
     void LoadNewMemory()

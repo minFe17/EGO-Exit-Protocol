@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using UnityEngine;
 using Utils;
 
@@ -15,9 +14,9 @@ public class MemoryRepository : MonoBehaviour
     public List<MemoryData> ReadDataList { get => _readDataList; }
     public HashSet<EMemoryType> CurrentMemoryData { get => _currentMemoryData; }
 
-    public async Task Init()
+    public void Init()
     {
-        await GenericSingleton<JsonManager>.Instance.ReadData.ReadMemoryData(this);
+        GenericSingleton<JsonManager>.Instance.ReadData.ReadMemoryData(this);
         for (int i = 0; i < _readDataList.Count; i++)
         {
             _readDataList[i].Init();

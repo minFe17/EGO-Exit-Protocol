@@ -30,7 +30,7 @@ public class CameraManager : MonoBehaviour, ILoopObject
 
     void CreateCamera()
     {
-        GameObject temp = Instantiate(_prefabManager.CameraPrefabLoad.CameraPrefab);
+        GameObject temp = Instantiate(_prefabManager.GetPrefabLoad(EPrefabType.Camera).GetPrefab());
         temp.GetComponent<MainCamera>().Init();
     }
 

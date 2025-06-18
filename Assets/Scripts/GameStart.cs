@@ -12,14 +12,23 @@ public class GameStart : MonoBehaviour
         GenericSingleton<TimeManager>.Instance.Init();
         GenericSingleton<LoopManager>.Instance.Init();
         GenericSingleton<JsonManager>.Instance.Init();
-        await GenericSingleton<MemoryManager>.Instance.Init();
+        GenericSingleton<MemoryManager>.Instance.Init();
         CreatePrefab();
     }
 
     void CreatePrefab()
     {
-        Instantiate(_prefabManager.MapPrefabLoad.MapPrefab);
+        Instantiate(_prefabManager.GetPrefabLoad(EPrefabType.Map).GetPrefab());
+        Instantiate(_prefabManager.GetPrefabLoad(EPrefabType.UI).GetPrefab(EUIPrefabType.UI));
+        CreateAssistant();
         GenericSingleton<PlayerManager>.Instance.Init();
         GenericSingleton<CameraManager>.Instance.Init();
+    }
+
+    void CreateAssistant()
+    {
+        PrefabLoadBase assistantPrefabLoad = _prefabManager.GetPrefabLoad(EPrefabType.Assistant);
+        Instantiate(assistantPrefabLoad.GetPrefab(EAssistantPrefabType.Assistant));
+        Instantiate(assistantPrefabLoad.GetPrefab(EAssistantPrefabType.Rope));
     }
 }

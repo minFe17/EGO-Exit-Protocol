@@ -13,6 +13,9 @@ public class PrefabManager : MonoBehaviour
         { {EPrefabType.Player, new PlayerPrefabLoad() },
             {EPrefabType.Camera, new CameraPrefabLoad() },
             {EPrefabType.Map, new MapPrefabLoad() },
+            {EPrefabType.UI, new UIPrefabLoad() },
+            {EPrefabType.Assistant, new AssistantPrefabLoad() },
+            {EPrefabType.Data, new DataPrefabLoad() },
         };
     }
 

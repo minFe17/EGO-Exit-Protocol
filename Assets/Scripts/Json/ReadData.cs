@@ -1,17 +1,13 @@
 using System.IO;
-using System.Threading.Tasks;
 using UnityEngine;
 using Utils;
 
 public class ReadData : MonoBehaviour
 {
-    AddressableManager _addressableManager;
     JsonManager _jsonManager;
-    string _allMemoryData;
 
     public void Init(JsonManager jsonManager)
     {
-        _allMemoryData = "MemoryData.json";
         _jsonManager = jsonManager;
     }
 
@@ -28,19 +24,18 @@ public class ReadData : MonoBehaviour
         ReadJsonData(_jsonManager.MemoryDataPath, memoryRepository);
     }
 
-    async Task ReadAllMemoryData(MemoryRepository memoryRepository)
+    void ReadAllMemoryData(MemoryRepository memoryRepository)
     {
-        if (_addressableManager == null)
-            _addressableManager = GenericSingleton<AddressableManager>.Instance;
+        PrefabLoadBase dataPrefabLoad = GenericSingleton<PrefabManager>.Instance.GetPrefabLoad(EPrefabType.Data);
 
-        TextAsset temp = await _addressableManager.GetAddressableAsset<TextAsset>(_allMemoryData);
-        string data = temp.text;
+        TextAsset textAsset = dataPrefabLoad.GetPrefab<TextAsset>();
+        string data = textAsset.text;
         JsonUtility.FromJsonOverwrite(data, memoryRepository);
     }
 
-    public async Task ReadMemoryData(MemoryRepository memoryRepository)
+    public void ReadMemoryData(MemoryRepository memoryRepository)
     {
-        await ReadAllMemoryData(memoryRepository);
+        ReadAllMemoryData(memoryRepository);
         ReadCurrentMemoryData(memoryRepository);
     }
 }

@@ -6,8 +6,6 @@ public class CameraPrefabLoad : PrefabLoadBase
     GameObject _cameraPrefab;
     string _name;
 
-    public GameObject CameraPrefab { get => _cameraPrefab; }
-
     public override void Init()
     {
         base.Init();
@@ -19,5 +17,10 @@ public class CameraPrefabLoad : PrefabLoadBase
         if (_addressableManager == null)
             Init();
         _cameraPrefab = await _addressableManager.GetAddressableAsset<GameObject>(_name);
+    }
+
+    public override GameObject GetPrefab()
+    {
+        return _cameraPrefab;
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using UnityEngine;
 using Utils;
@@ -13,4 +14,7 @@ public abstract class PrefabLoadBase : MonoBehaviour
     }
 
     public abstract Task LoadPrefab();
+    public virtual GameObject GetPrefab() => null;
+    public virtual T GetPrefab<T>() => default(T);
+    public virtual GameObject GetPrefab<TEnum>(TEnum type) where TEnum : Enum => null;
 }
