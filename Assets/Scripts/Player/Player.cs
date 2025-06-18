@@ -12,7 +12,6 @@ public class Player : MonoBehaviour
     float _movePos;
     Quaternion _leftDirection = Quaternion.Euler(0, 180, 0);
 
-    PlayerManager _playerManager;
     MediatorManager _mediatorManager;
     InteractObjectManager _interactObjectManager;
     IInteractable _interactableObject;
@@ -20,8 +19,6 @@ public class Player : MonoBehaviour
     #region Unity LifeCycle
     void Start()
     {
-        _playerManager = GenericSingleton<PlayerManager>.Instance;
-        _playerManager.Init(this);
         _interactObjectManager = GenericSingleton<InteractObjectManager>.Instance;
         _mediatorManager = GenericSingleton<MediatorManager>.Instance;
     }

@@ -4,16 +4,17 @@ using Utils;
 
 public class MainCamera : MonoBehaviour
 {
-    [SerializeField] PixelPerfectCamera _camera;
-    [SerializeField] Transform _target;
-
+    PixelPerfectCamera _camera;
+    Transform _target;
     CameraManager _cameraManager;
+
     float _halfWidth;
 
-    void Start()
+    public void Init()
     {
+        _camera = GetComponent<PixelPerfectCamera>();
+        _target = GenericSingleton<PlayerManager>.Instance.Player.transform;
         _cameraManager = GenericSingleton<CameraManager>.Instance;
-        _cameraManager.Init();
     }
 
     void LateUpdate()

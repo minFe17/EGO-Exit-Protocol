@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using Utils;
@@ -6,6 +7,7 @@ public class CameraManager : MonoBehaviour, ILoopObject
 {
     // ╫л╠шео
     MementoManager _mementoManager;
+    PrefabManager _prefabManager;
     Tilemap _currentTilemap;
     Vector3 _cellSize = Vector3.zero;
     Vector3 _minBounds;
@@ -18,10 +20,18 @@ public class CameraManager : MonoBehaviour, ILoopObject
 
     public void Init()
     {
-        if(_mementoManager == null)
+        _prefabManager = GenericSingleton<PrefabManager>.Instance;
+        if (_mementoManager == null)
             _mementoManager = GenericSingleton<MementoManager>.Instance;
         GenericSingleton<ObserveManager>.Instance.LoopObserve.AddLoopEvent(this);
+        CreateCamera();
         UpdateTileBound(_mementoManager.CameraMemento.LoopTilemap);
+    }
+
+    void CreateCamera()
+    {
+        GameObject temp = Instantiate(_prefabManager.CameraPrefabLoad.CameraPrefab);
+        temp.GetComponent<MainCamera>().Init();
     }
 
     void SetCellSize(Tilemap tilemap)
@@ -66,9 +76,9 @@ public class CameraManager : MonoBehaviour, ILoopObject
         _maxBounds = currentMaxWorld + _cellSize;
     }
 
-    public void UpdateTileBound(Tilemap leftmap,  Tilemap rightmap)
+    public void UpdateTileBound(Tilemap leftmap, Tilemap rightmap)
     {
-        if(_currentTilemap != leftmap)
+        if (_currentTilemap != leftmap)
             UpdateTileBound(leftmap);
         else
             UpdateTileBound(rightmap);

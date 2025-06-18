@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using UnityEngine;
 using Utils;
 
@@ -9,5 +10,12 @@ public class GameStart : MonoBehaviour
         GenericSingleton<LoopManager>.Instance.Init();
         GenericSingleton<JsonManager>.Instance.Init();
         await GenericSingleton<MemoryManager>.Instance.Init();
+        CreatePrefab();
+    }
+
+    void CreatePrefab()
+    {
+        GenericSingleton<PlayerManager>.Instance.Init();
+        GenericSingleton<CameraManager>.Instance.Init();
     }
 }

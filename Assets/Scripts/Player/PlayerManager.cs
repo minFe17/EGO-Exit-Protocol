@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using UnityEngine;
 using Utils;
 
@@ -6,17 +7,20 @@ public class PlayerManager : MonoBehaviour, ILoopObject
     // ╫л╠шео
     Player _player;
     MementoManager _mementoManager;
+    PrefabManager _prefabManager;
     ItemInventory _itemInventory = new ItemInventory();
 
     public Player Player { get => _player; }
     public ItemInventory ItemInventory { get => _itemInventory; }
 
-    public void Init(Player player)
+    public void Init()
     {
-        _player = player;
         _mementoManager = GenericSingleton<MementoManager>.Instance;
         _mementoManager.PlayerMemento.PlayerStartPos = _player.transform.position;
+        _prefabManager = GenericSingleton<PrefabManager>.Instance;
         GenericSingleton<ObserveManager>.Instance.LoopObserve.AddLoopEvent(this);
+        SpawnPlayer();
+        OnLoopEvent();
     }
 
     public void SetPlayerPosition(Vector3 pos)
@@ -24,8 +28,14 @@ public class PlayerManager : MonoBehaviour, ILoopObject
         _player.transform.position = pos;
     }
 
+    public void SpawnPlayer()
+    {
+        GameObject temp = Instantiate(_prefabManager.PlayerPrefabLoad.PlayerPrefab);
+        _player = temp.GetComponent<Player>();
+    }
+
     #region Interface
-    void ILoopObject.OnLoopEvent()
+    public void OnLoopEvent()
     {
         SetPlayerPosition(_mementoManager.PlayerMemento.PlayerStartPos);
         _itemInventory.ClearItemDict();

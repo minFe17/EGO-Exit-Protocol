@@ -22,6 +22,7 @@ public class Assistant : MonoBehaviour, IMediatorEvent, ILoopObject
         SetManager();
         SetMemento();
         SetState();
+        OnLoopEvent();
     }
 
     void Update()
@@ -42,7 +43,6 @@ public class Assistant : MonoBehaviour, IMediatorEvent, ILoopObject
 
     void SetMemento()
     {
-        _mementoManager.AssistantMemento.AssistantPositon = transform.position;
         _mementoManager.AssistantMemento.AssistantScale = transform.localScale;
         _mementoManager.AssistantMemento.AssistantType = _currentType;
     }
@@ -113,7 +113,7 @@ public class Assistant : MonoBehaviour, IMediatorEvent, ILoopObject
         transform.position = pos;
     }
 
-    void ILoopObject.OnLoopEvent()
+    public void OnLoopEvent()
     {
         transform.position = _mementoManager.AssistantMemento.AssistantPositon;
         transform.localScale = _mementoManager.AssistantMemento.AssistantScale;
