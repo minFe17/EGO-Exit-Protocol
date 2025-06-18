@@ -20,12 +20,12 @@ public class GiveKeyDeadBody : DeadBody, IItemHolder
         if (_key == null)
             return;
         _key.Set();
+        _memoryObject.AddMemory();
         _key = null;
     }
 
     void IItemHolder.SetItem(ItemBase item)
     {
         _key = item;
-        _memoryObject.AddMemory();
     }
 }

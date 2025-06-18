@@ -7,7 +7,6 @@ public enum EMediatorEventType
     ChangeLoopCount,
     AddMemory,
     NeedCapture,       
-    CompleteCapture,
     PlayerEnterAssistantRoom,
     PlayerExitAssistantRoom,
     RopeReleased,

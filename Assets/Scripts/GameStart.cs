@@ -3,10 +3,11 @@ using Utils;
 
 public class GameStart : MonoBehaviour
 {
-    void Start()
+    async void Start()
     {
         GenericSingleton<TimeManager>.Instance.Init();
         GenericSingleton<LoopManager>.Instance.Init();
-        GenericSingleton<MemoryManager>.Instance.Init();
+        GenericSingleton<JsonManager>.Instance.Init();
+        await GenericSingleton<MemoryManager>.Instance.Init();
     }
 }

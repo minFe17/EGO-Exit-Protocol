@@ -110,7 +110,7 @@ public class Assistant : MonoBehaviour, IMediatorEvent, ILoopObject
     void IMediatorEvent.HandleEvent(object data)
     {
         Vector3 pos = (Vector3)data;
-        transform.position += pos;
+        transform.position = pos;
     }
 
     void ILoopObject.OnLoopEvent()
