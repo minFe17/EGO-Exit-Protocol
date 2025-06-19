@@ -32,8 +32,9 @@ public class Stair : MonoBehaviour, IInteractable
     {
         if(_isRooftopStair)
         {
-            // 루프 이벤트 실행
             // 기억 추가
+            _mediatorManager.Notify(EMediatorEventType.AddMemory, EMemoryType.DontGoRooftop);
+            // 대사 후 적 소환?
             return;
         }
         _playerManager.SetPlayerPosition(_stairSetting.TargetPos.position);

@@ -7,6 +7,10 @@
     {
       "_typeText": "Assistant_Rope",
       "_description": "풀어주지 마"
+    },
+    {
+      "_typeText": "DontGoRooftop",
+      "_description": "옥상은 못 가"
     }
   ]
 }
