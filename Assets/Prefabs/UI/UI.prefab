@@ -1356,7 +1356,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rectTransform: {fileID: 2641346481269132964}
   _borderBoundary: 500
-  _yBoundary: 80
+  _xOffset: 100
+  _yBoundary: 90
 --- !u!114 &420974116272478065
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1768,6 +1769,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rectTransform: {fileID: 2510693331611035868}
   _borderBoundary: 500
+  _xOffset: 0
   _yBoundary: 80
 --- !u!114 &887652073877242544
 MonoBehaviour:

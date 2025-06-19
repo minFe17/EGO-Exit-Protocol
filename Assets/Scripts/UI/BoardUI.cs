@@ -6,11 +6,12 @@ public class BoardUI : MonoBehaviour, IMediatorEvent
 {
     [SerializeField] RectTransform rectTransform;
     [SerializeField] float _borderBoundary;
-    [SerializeField] float _yBoundary = 80f;
+    [SerializeField] float _xOffset;
+    [SerializeField] float _yBoundary;
 
     MediatorManager _mediatorManager;
     PrefabLoadBase _uIPrefabLoad;
-    Vector2 lastMousePosition;
+    Vector2 _lastMousePosition;
 
     public void Init(EMediatorEventType eventType)
     {
@@ -19,31 +20,44 @@ public class BoardUI : MonoBehaviour, IMediatorEvent
         _uIPrefabLoad = GenericSingleton<PrefabManager>.Instance.GetPrefabLoad(EPrefabType.UI);
     }
 
-    Vector3 RandomPosition()
+    Vector2 RandomPosition()
     {
-        float visibleLeft = rectTransform.offsetMin.x;
-        float visibleRight = rectTransform.offsetMax.x;
+        float screenWidth = Screen.width;
+       
+        Vector3[] corners = new Vector3[4];
+        rectTransform.GetWorldCorners(corners);
 
-        float min = Mathf.Min(visibleLeft, visibleRight);
-        float max = Mathf.Max(visibleLeft, visibleRight);
+       
+        Vector2 minScreenPosOfRect = RectTransformUtility.WorldToScreenPoint(null, corners[0]); // 좌하단
+        Vector2 maxScreenPosOfRect = RectTransformUtility.WorldToScreenPoint(null, corners[2]); // 우상단
 
-        float randomX = Random.Range(min, max);
+        
+        float effectiveMinX = Mathf.Max(minScreenPosOfRect.x, 0);
+        float effectiveMaxX = Mathf.Min(maxScreenPosOfRect.x, screenWidth);
+
+        effectiveMinX += _xOffset;
+        effectiveMaxX -= _xOffset;
+
+        float randomX = Random.Range(effectiveMinX, effectiveMaxX);
         float randomY = Random.Range(-_yBoundary, _yBoundary);
 
-        return new Vector3(randomX, randomY);
+        Vector2 randomPos = new Vector2(randomX, randomY);
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(rectTransform, randomPos, null, out Vector2 position);
+
+        return position;
     }
 
     #region Event Trigger
     public void BeginDrag(BaseEventData data)
     {
         PointerEventData eventData = (PointerEventData)data;
-        lastMousePosition = eventData.position;
+        _lastMousePosition = eventData.position;
     }
 
     public void Drag(BaseEventData data)
     {
         PointerEventData eventData = (PointerEventData)data;
-        Vector2 movePos = eventData.position - lastMousePosition;
+        Vector2 movePos = eventData.position - _lastMousePosition;
 
         Vector2 newPos = rectTransform.anchoredPosition + new Vector2(movePos.x, 0);
 
@@ -53,18 +67,17 @@ public class BoardUI : MonoBehaviour, IMediatorEvent
             newPos.x = -_borderBoundary;
 
         rectTransform.anchoredPosition = newPos;
-        lastMousePosition = eventData.position;
+        _lastMousePosition = eventData.position;
     }
     #endregion
 
     void IMediatorEvent.HandleEvent(object data)
     {
-        Debug.Log(2);
         MemoryPanelData memoryPanelData = (MemoryPanelData)data;
         if (memoryPanelData.Position == null)
             memoryPanelData.Position = RandomPosition();
 
         GameObject temp = Instantiate(_uIPrefabLoad.GetPrefab(EUIPrefabType.MemoryPanel), this.gameObject.transform);
-        temp.GetComponent<MemoryPanel>().Init(memoryPanelData);
+        temp.GetComponent<MemoryPanel>().Init(memoryPanelData, rectTransform, _yBoundary);
     }
 }
