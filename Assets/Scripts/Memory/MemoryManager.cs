@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using UnityEngine;
 using Utils;
 
@@ -16,6 +15,7 @@ public class MemoryManager : MonoBehaviour, IMediatorEvent, ILoopObject
     {
         _mediatorManager = GenericSingleton<MediatorManager>.Instance;
         _mediatorManager.Register(EMediatorEventType.AddMemory, this);
+        GenericSingleton<ObserveManager>.Instance.LoopObserve.AddLoopEvent(this);
         _memoryRepository.Init();
     }
 
@@ -23,15 +23,16 @@ public class MemoryManager : MonoBehaviour, IMediatorEvent, ILoopObject
     {
         foreach(EMemoryType memoryType in _newMemoryData)
         {
-            _memoryRepository.CurrentMemoryData.Add(memoryType);
-            // UI에도 표시
+            MemoryPanelData newMemory = new MemoryPanelData(memoryType);
+            _memoryRepository.CurrentMemoryData.Add(newMemory);
+            _mediatorManager.Notify(EMediatorEventType.CreateMemoryPanel, newMemory);
         }
     }
 
     void IMediatorEvent.HandleEvent(object data)
     {
         EMemoryType memoryType = (EMemoryType)data;
-        if (_memoryRepository.CurrentMemoryData.Contains(memoryType))
+        if (_memoryRepository.ContainsMemoryType(memoryType))
             return;
         MemoryData memoryData = _memoryRepository.GetMemoryData(memoryType);
         _mediatorManager.Notify(EMediatorEventType.NeedCapture, memoryData);

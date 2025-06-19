@@ -36,6 +36,7 @@ public class TiedUpState : IAssistantState, IMediatorEvent
         _exitPlayer = new ExitPlayer();
         _enterPlayer.Init(this);
         _exitPlayer.Init(this);
+        _assistant.ChangeAnimation("isIdle", false);
     }
 
     void IAssistantState.Loop()

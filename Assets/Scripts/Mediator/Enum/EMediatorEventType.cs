@@ -11,5 +11,6 @@ public enum EMediatorEventType
     PlayerExitAssistantRoom,
     RopeReleased,
     PlayerLocationChanged,
+    CreateMemoryPanel,
     Max,
 }

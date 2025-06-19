@@ -109,6 +109,8 @@ public class Assistant : MonoBehaviour, IMediatorEvent, ILoopObject
     #region Interface
     void IMediatorEvent.HandleEvent(object data)
     {
+        if (_currentType == EAssistantStateType.TiedUp)
+            return;
         Vector3 pos = (Vector3)data;
         transform.position = pos;
     }
