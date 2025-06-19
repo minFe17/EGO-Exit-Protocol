@@ -10,7 +10,7 @@ public class MainCamera : MonoBehaviour
 
     float _halfWidth;
 
-    public void Init()
+    void Start()
     {
         _camera = GetComponent<PixelPerfectCamera>();
         _target = GenericSingleton<PlayerManager>.Instance.Player.transform;

@@ -30,8 +30,8 @@ public class CameraManager : MonoBehaviour, ILoopObject
 
     void CreateCamera()
     {
-        GameObject temp = Instantiate(_prefabManager.GetPrefabLoad(EPrefabType.Camera).GetPrefab());
-        temp.GetComponent<MainCamera>().Init();
+        Instantiate(_prefabManager.GetPrefabLoad(EPrefabType.Camera).GetPrefab(ECameraPrefabType.MainCamera));
+        Instantiate(_prefabManager.GetPrefabLoad(EPrefabType.Camera).GetPrefab(ECameraPrefabType.MemoryCamera));
     }
 
     void SetCellSize(Tilemap tilemap)

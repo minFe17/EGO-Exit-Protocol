@@ -1,26 +1,36 @@
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 
 public class CameraPrefabLoad : PrefabLoadBase
 {
-    GameObject _cameraPrefab;
-    string _name;
+    Dictionary<ECameraPrefabType, string> _cameraPrefabNameDict;
+    Dictionary<ECameraPrefabType, GameObject> _cameraPrefabDict;
 
     public override void Init()
     {
         base.Init();
-        _name = "MainCamera";
+        _cameraPrefabNameDict = new Dictionary<ECameraPrefabType, string>
+        {
+            {ECameraPrefabType.MainCamera, "MainCamera" },
+            {ECameraPrefabType.MemoryCamera, "MemoryCamera" }
+        };
     }
 
     public override async Task LoadPrefab()
     {
         if (_addressableManager == null)
             Init();
-        _cameraPrefab = await _addressableManager.GetAddressableAsset<GameObject>(_name);
+        _cameraPrefabDict = new Dictionary<ECameraPrefabType, GameObject>
+        {
+            {ECameraPrefabType.MainCamera, await _addressableManager.GetAddressableAsset<GameObject>(_cameraPrefabNameDict[ECameraPrefabType.MainCamera])},
+            {ECameraPrefabType.MemoryCamera, await _addressableManager.GetAddressableAsset<GameObject>(_cameraPrefabNameDict[ECameraPrefabType.MemoryCamera]) }
+        };
     }
 
-    public override GameObject GetPrefab()
+    public override GameObject GetPrefab<TEnum>(TEnum type)
     {
-        return _cameraPrefab;
+        ECameraPrefabType key = (ECameraPrefabType)(object)type;
+        return _cameraPrefabDict[key];
     }
 }

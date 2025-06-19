@@ -7,6 +7,7 @@ public class LoopUI : TextUI, IMediatorEvent
 
     void IMediatorEvent.HandleEvent(object data)
     {
-        _text.text = data.ToString();
+        int loopCount = (int)data;
+        _text.text = loopCount.ToString();
     }
 }

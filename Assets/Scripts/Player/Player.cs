@@ -4,21 +4,23 @@ using Utils;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] Rigidbody2D _rigidbody;
-    [SerializeField] Animator _animator;
     [SerializeField] float _speed;
     [SerializeField] RectTransform _keyInfoUI;
 
-    float _movePos;
-    Quaternion _leftDirection = Quaternion.Euler(0, 180, 0);
-
+    Rigidbody2D _rigidbody;
+    Animator _animator;
     MediatorManager _mediatorManager;
     InteractObjectManager _interactObjectManager;
     IInteractable _interactableObject;
 
+    float _movePos;
+    Quaternion _leftDirection = Quaternion.Euler(0, 180, 0);
+
     #region Unity LifeCycle
     void Start()
     {
+        _rigidbody = GetComponent<Rigidbody2D>();
+        _animator = GetComponent<Animator>();
         _interactObjectManager = GenericSingleton<InteractObjectManager>.Instance;
         _mediatorManager = GenericSingleton<MediatorManager>.Instance;
     }

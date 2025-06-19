@@ -7,7 +7,9 @@ public class MemoryCamera : MonoBehaviour, IMediatorEvent
 {
     [SerializeField] Camera _captureCamera;
     [SerializeField] RenderTexture _captureTexture;
+    [SerializeField] Vector3 _startPos;
 
+    Transform _target;
     Texture2D _texture;
     MediatorManager _mediatorManager;
 
@@ -23,6 +25,12 @@ public class MemoryCamera : MonoBehaviour, IMediatorEvent
         _mediatorManager.Register(EMediatorEventType.NeedCapture, this);
         _rect = new Rect(0, 0, _texture.width, _texture.height);
         _pivot = new Vector2(0.5f, 0.5f);
+        _target = GenericSingleton<PlayerManager>.Instance.Player.transform;
+    }
+
+    private void LateUpdate()
+    {
+        transform.position = _target.position + _startPos;
     }
 
     void Capture()

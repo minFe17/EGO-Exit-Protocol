@@ -451,10 +451,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc0326959df3711429a330ef22d7c4a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rigidbody: {fileID: 5426393024973219566}
-  _animator: {fileID: 9042503400265349698}
   _speed: 3
   _keyInfoUI: {fileID: 8731000057037793687}
+  _memoryCamera: {fileID: 7684955436285079852}
 --- !u!95 &9042503400265349698
 Animator:
   serializedVersion: 7

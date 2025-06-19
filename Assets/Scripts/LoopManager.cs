@@ -6,7 +6,7 @@ public class LoopManager : MonoBehaviour, IMediatorEvent
     // ╫л╠шео
     ObserveManager _observeManager;
     MediatorManager _mediatorManager;
-    int _loopCount;
+    int _loopCount = 1;
 
     public void Init()
     {

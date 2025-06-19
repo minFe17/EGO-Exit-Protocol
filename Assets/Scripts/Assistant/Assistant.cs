@@ -117,9 +117,9 @@ public class Assistant : MonoBehaviour, IMediatorEvent, ILoopObject
 
     public void OnLoopEvent()
     {
+        ChangeState(_mementoManager.AssistantMemento.AssistantType);
         transform.position = _mementoManager.AssistantMemento.AssistantPositon;
         transform.localScale = _mementoManager.AssistantMemento.AssistantScale;
-        ChangeState(_mementoManager.AssistantMemento.AssistantType);
     }
     #endregion
 
