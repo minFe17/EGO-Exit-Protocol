@@ -1232,8 +1232,8 @@ MonoBehaviour:
   - {fileID: 7692019335713945081}
   - {fileID: 1523877142436997283}
   _boardList:
-  - {fileID: 6447276031659974457}
-  - {fileID: 8359810149139274496}
+  - {fileID: 5781941168427426287}
+  - {fileID: 6606904422232103451}
   _normalColor: {r: 1, g: 1, b: 1, a: 1}
   _selectColor: {r: 0.67058825, g: 0.654902, b: 0.654902, a: 1}
 --- !u!114 &1343067470179182603
@@ -1798,7 +1798,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6214975296165935928}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2015074691886289077}
+        m_TargetAssemblyTypeName: MemoryFragmentUI, Assembly-CSharp
+        m_MethodName: ClickUndoButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &8359810149139274496
 GameObject:
   m_ObjectHideFlags: 0

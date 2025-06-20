@@ -7,7 +7,7 @@ using Utils;
 public class MemoryFragmentUI : MonoBehaviour
 {
     [SerializeField] List<Image> _buttonList;
-    [SerializeField] List<GameObject> _boardList;
+    [SerializeField] List<BoardUI> _boardList;
     [SerializeField] Color _normalColor;
     [SerializeField] Color _selectColor;
 
@@ -25,10 +25,10 @@ public class MemoryFragmentUI : MonoBehaviour
     void SelectButton(int index)
     {
         _buttonList[_currentIndex].color = _normalColor;
-        _boardList[_currentIndex].SetActive(false);
+        _boardList[_currentIndex].gameObject.SetActive(false);
         _currentIndex = index;
         _buttonList[_currentIndex].color = _selectColor;
-        _boardList[_currentIndex].SetActive(true);
+        _boardList[_currentIndex].gameObject.SetActive(true);
     }
 
     #region Button OnClick
@@ -37,6 +37,11 @@ public class MemoryFragmentUI : MonoBehaviour
         if (_currentIndex == index)
             return;
         SelectButton(index);
+    }
+
+    public void ClickUndoButton()
+    {
+        _boardList[_currentIndex].Restore();
     }
     #endregion
 

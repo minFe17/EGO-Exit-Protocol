@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using Utils;
@@ -9,6 +10,7 @@ public class BoardUI : MonoBehaviour, IMediatorEvent
     [SerializeField] float _xOffset;
     [SerializeField] float _yBoundary;
 
+    Stack<IMemoryMemento> _memoryPanelStack = new Stack<IMemoryMemento>();
     MediatorManager _mediatorManager;
     PrefabLoadBase _uIPrefabLoad;
     Vector2 _lastMousePosition;
@@ -71,6 +73,7 @@ public class BoardUI : MonoBehaviour, IMediatorEvent
     }
     #endregion
 
+    #region Interface
     void IMediatorEvent.HandleEvent(object data)
     {
         MemoryPanelData memoryPanelData = (MemoryPanelData)data;
@@ -78,6 +81,21 @@ public class BoardUI : MonoBehaviour, IMediatorEvent
             memoryPanelData.Position = RandomPosition();
 
         GameObject temp = Instantiate(_uIPrefabLoad.GetPrefab(EUIPrefabType.MemoryPanel), this.gameObject.transform);
-        temp.GetComponent<MemoryPanel>().Init(memoryPanelData, rectTransform, _yBoundary);
+        temp.GetComponent<MemoryPanel>().Init(memoryPanelData, this, _yBoundary);
     }
+
+    public void Save(IMemoryMemento memoryMemento)
+    {
+        _memoryPanelStack.Push(memoryMemento);
+    }
+
+    public void Restore()
+    {
+        if (_memoryPanelStack.Count > 0)
+        {
+            IMemoryMemento memory = _memoryPanelStack.Pop();
+            memory.Restore();
+        }
+    }
+    #endregion;
 }
