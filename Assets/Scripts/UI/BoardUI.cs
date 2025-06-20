@@ -87,6 +87,7 @@ public class BoardUI : MonoBehaviour, IMediatorEvent
     public void Save(IMemoryMemento memoryMemento)
     {
         _memoryPanelStack.Push(memoryMemento);
+        // 파일 쓰기
     }
 
     public void Restore()
@@ -95,6 +96,7 @@ public class BoardUI : MonoBehaviour, IMediatorEvent
         {
             IMemoryMemento memory = _memoryPanelStack.Pop();
             memory.Restore();
+            // 파일쓰기?
         }
     }
     #endregion;
