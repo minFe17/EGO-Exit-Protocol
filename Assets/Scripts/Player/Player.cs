@@ -80,6 +80,8 @@ public class Player : MonoBehaviour
         }
         if (collision.gameObject.CompareTag("AssistantRoom"))
             _mediatorManager.Notify(EMediatorEventType.PlayerEnterAssistantRoom);
+        if (collision.gameObject.TryGetComponent<Zone>(out Zone zone))
+            zone.SetCurrentZone();
     }
 
     void OnCollisionExit2D(Collision2D collision)
