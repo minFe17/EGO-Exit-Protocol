@@ -243,6 +243,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _captureCamera: {fileID: 133917266020047758}
   _captureTexture: {fileID: 8400000, guid: 563fbefe111efa84cbfd8dd32c941523, type: 2}
+  _startPos: {x: 0, y: 0, z: 0}
 --- !u!1 &5479282387781274554
 GameObject:
   m_ObjectHideFlags: 0
@@ -362,7 +363,7 @@ GameObject:
   - component: {fileID: 5426393024973219566}
   m_Layer: 6
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -453,7 +454,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 3
   _keyInfoUI: {fileID: 8731000057037793687}
-  _memoryCamera: {fileID: 7684955436285079852}
 --- !u!95 &9042503400265349698
 Animator:
   serializedVersion: 7

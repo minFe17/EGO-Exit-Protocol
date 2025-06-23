@@ -1,9 +1,11 @@
+using System.Collections.Generic;
 using UnityEngine;
 using Utils;
 
-public class ResearcherManager : MonoBehaviour, IMediatorEvent
+public class ResearcherManager : MonoBehaviour, IMediatorEvent, ILoopObject
 {
     // ╫л╠шео
+    List<GameObject> _researcherList = new List<GameObject>();
     GameObject _researcherPrefab;
     GameObject _bulletPrefab;
 
@@ -22,6 +24,15 @@ public class ResearcherManager : MonoBehaviour, IMediatorEvent
         Vector3 position = Vector3.zero;
         if (data != null)
             position = (Vector3)(object)data;
-        Instantiate(_researcherPrefab, position, Quaternion.identity);
+        _researcherList.Add(Instantiate(_researcherPrefab, position, Quaternion.identity));
+    }
+
+    void ILoopObject.OnLoopEvent()
+    {
+        for (int i = 0; i < _researcherList.Count; i++)
+        {
+            Destroy(_researcherList[i]);
+        }
+        _researcherList.Clear();
     }
 }

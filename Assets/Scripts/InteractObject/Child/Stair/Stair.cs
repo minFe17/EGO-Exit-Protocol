@@ -9,6 +9,9 @@ public class Stair : MonoBehaviour, IInteractable
     [ShowIf("IsNotRooftop")]
     [SerializeField] StairSetting _stairSetting;
 
+    [ShowIf("_isRooftopStair")]
+    [SerializeField] Vector3 _researcherSpawnPosition;
+
     InteractObjectManager _interactObjectManager;
     PlayerManager _playerManager;
     CameraManager _cameraManager;
@@ -32,9 +35,9 @@ public class Stair : MonoBehaviour, IInteractable
     {
         if(_isRooftopStair)
         {
-            // 기억 추가
-            _mediatorManager.Notify(EMediatorEventType.AddMemory, EMemoryType.DontGoRooftop);
-            // 대사 후 적 소환?
+            // 대사
+            _mediatorManager.Notify(EMediatorEventType.AddMemory, EMemoryType.DontGo_Rooftop);
+            _mediatorManager.Notify(EMediatorEventType.SpawnResearcher, _researcherSpawnPosition);
             return;
         }
         _playerManager.SetPlayerPosition(_stairSetting.TargetPos.position);

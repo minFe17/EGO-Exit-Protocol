@@ -2,6 +2,7 @@ public enum EMemoryType
 {
     Deadbody_Key,
     Assistant_Rope,
-    DontGoRooftop,
+    DontGo_Rooftop,
+    DontGo_Room201,
     Max
 }
