@@ -13,5 +13,6 @@ public enum EMediatorEventType
     PlayerLocationChanged,
     CreateMemoryPanel,
     PlayeMoveOtherZone,
+    SpawnResearcher,
     Max,
 }

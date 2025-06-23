@@ -4,68 +4,69 @@ using Utils;
 
 public class Researcher : MonoBehaviour, IMediatorEvent
 {
-    [SerializeField] float _speed;
+    Dictionary<EResearcherStateType, IResearcherState> _researcherStateDict;
+    IResearcherState _currentState;
+    EResearcherStateType _currentType;
 
-    List<EZoneType> _currentPath;
-    EZoneType _currentZone;
-    Transform _player;
     Animator _animator;
     Rigidbody2D _rigidbody;
     SpriteRenderer _spriteRenderer;
     ZoneManager _zoneManager;
+    List<EZoneType> _currentPath;
+    EZoneType _currentZone;
 
     int _pathIndex = 1;
 
+    public List<EZoneType> CurrentPath { get => _currentPath; }
+    public EZoneType CurrentZone { get => _currentZone; }
+    public int PathIndex { get=> _pathIndex; }  
+
     private void Start()
     {
-        _player = GenericSingleton<PlayerManager>.Instance.Player.transform;
         _animator = GetComponent<Animator>();
         _rigidbody = GetComponent<Rigidbody2D>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _zoneManager = GenericSingleton<ZoneManager>.Instance;
         GenericSingleton<MediatorManager>.Instance.Register(EMediatorEventType.PlayeMoveOtherZone, this);
+        SetState();
     }
 
     private void Update()
     {
-        Move();
+        Loop();
     }
 
-    void Move()
+    void SetState()
     {
-        Zone playerZone = _zoneManager.PlayerZone;
-        if (_currentZone == playerZone.ZoneID)
-            MoveToTarget(_player.position);
-        else
+        _researcherStateDict = new Dictionary<EResearcherStateType, IResearcherState>
         {
-            if (_currentPath == null || _currentPath.Count == 0 || _pathIndex >= _currentPath.Count)
-            {
-                _currentPath = _zoneManager.FindPath(_currentZone);
-                _pathIndex = 1;
-            }
-
-            if (_currentPath != null && _pathIndex < _currentPath.Count)
-            {
-                EZoneType nextZone = _currentPath[_pathIndex];
-                ZoneLink link = _zoneManager.GetZoneLink(_currentZone, nextZone);
-                if (link != null)
-                {
-                    MoveToTarget(link.transform.position);
-                    Debug.Log(3);
-                }
-            }
-        }
+            {EResearcherStateType.Move, new MoveState(this, _rigidbody, _spriteRenderer) },
+            {EResearcherStateType.Attack, new AttackState(this) }
+        };
+        ChangeState(EResearcherStateType.Move);
     }
 
-    void MoveToTarget(Vector3 target)
+    void Loop()
     {
-        Vector3 direction = (target - transform.position).normalized;
-        _rigidbody.linearVelocityX = direction.x * _speed;
+        if (_currentState == null)
+            return;
+        _currentState.Loop();
+    }
 
-        if (direction.x > 0)
-            _spriteRenderer.flipX = false;
-        else if (direction.x < 0)
-            _spriteRenderer.flipX = true;
+    public void ChangeState(EResearcherStateType type)
+    {
+        if (_currentState == _researcherStateDict[type])
+            return;
+        if(_currentState != null)
+            _currentState.Exit();
+        _currentType = type;
+        _currentState = _researcherStateDict[_currentType];
+        _currentState.Enter();
+    }
+
+    public void ChangeAnimation(string name, bool value)
+    {
+        _animator.SetBool(name, value);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -90,7 +91,7 @@ public class Researcher : MonoBehaviour, IMediatorEvent
         }
     }
 
-    void IMediatorEvent.HandleEvent(object data)
+    public void HandleEvent(object data)
     {
         _currentPath = _zoneManager.FindPath(_currentZone);
         _pathIndex = 1;

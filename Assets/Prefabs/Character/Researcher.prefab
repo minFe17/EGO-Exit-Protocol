@@ -10,10 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 7963223465668466002}
   - component: {fileID: 8135052728240604978}
+  - component: {fileID: 6265414150449526455}
   - component: {fileID: 3009273311055594894}
   - component: {fileID: 3254967519559226934}
   - component: {fileID: 1693475304432463258}
-  - component: {fileID: 6265414150449526455}
   m_Layer: 0
   m_Name: Researcher
   m_TagString: Untagged
@@ -91,6 +91,20 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &6265414150449526455
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1778713106944879342}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29a2f7b70c7f45e4b89b9ff2dffbdaa8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _attackRange: 4
+  _speed: 4
 --- !u!95 &3009273311055594894
 Animator:
   serializedVersion: 7
@@ -186,16 +200,3 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &6265414150449526455
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1778713106944879342}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 29a2f7b70c7f45e4b89b9ff2dffbdaa8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _speed: 5

@@ -79,10 +79,8 @@ public class ZoneManager : MonoBehaviour
         {
             foreach(ZoneLink zoneLink in link)
             {
-                Debug.Log($"{from}, {zoneLink.FromZone}, {to}, {zoneLink.ToZone}");
                 if (zoneLink.ToZone == to)
                 {
-                    Debug.Log(zoneLink);
                     return zoneLink;
                 }
             }
