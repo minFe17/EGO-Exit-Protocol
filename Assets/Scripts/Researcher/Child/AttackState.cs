@@ -2,25 +2,28 @@ using UnityEngine;
 
 public class AttackState : MonoBehaviour, IResearcherState
 {
-    Researcher _Researcher;
+    Researcher _researcher;
+
+    float _moveDistance = 6f;
 
     public AttackState(Researcher researcher)
     {
-        _Researcher = researcher;
+        _researcher = researcher;
     }
 
     void IResearcherState.Enter()
     {
-        _Researcher.ChangeAnimation("isAttack", true);
+        _researcher.ChangeAnimation("isAttack", true);
     }
 
     void IResearcherState.Loop()
     {
-
+        if (!_researcher.CheckAttackArea(_moveDistance))
+            _researcher.ChangeState(EResearcherStateType.Move);
     }
 
     void IResearcherState.Exit()
     {
-        _Researcher.ChangeAnimation("isAttack", false);
+        _researcher.ChangeAnimation("isAttack", false);
     }
 }

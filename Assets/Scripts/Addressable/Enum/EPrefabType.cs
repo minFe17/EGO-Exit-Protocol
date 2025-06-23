@@ -6,5 +6,6 @@ public enum EPrefabType
     UI,
     Data,
     Assistant,
+    Researcher,
     Max,
 }

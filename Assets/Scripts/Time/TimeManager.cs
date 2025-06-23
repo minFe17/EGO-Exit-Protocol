@@ -56,8 +56,9 @@ public class TimeManager : MonoBehaviour, ILoopObject
 
         if (_timer <= 0)
         {
-            _mediatorManager.Notify(EMediatorEventType.LoopEvent);
-            //_isLoop = true;
+            _mediatorManager.Notify(EMediatorEventType.SpawnResearcher);
+            //_mediatorManager.Notify(EMediatorEventType.LoopEvent);
+            _isLoop = true;
         }
     }
 

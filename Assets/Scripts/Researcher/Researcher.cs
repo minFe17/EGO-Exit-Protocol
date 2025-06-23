@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Utils;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class Researcher : MonoBehaviour, IMediatorEvent
 {
@@ -12,6 +13,7 @@ public class Researcher : MonoBehaviour, IMediatorEvent
     Rigidbody2D _rigidbody;
     SpriteRenderer _spriteRenderer;
     ZoneManager _zoneManager;
+    Transform _player;
     List<EZoneType> _currentPath;
     EZoneType _currentZone;
 
@@ -27,6 +29,7 @@ public class Researcher : MonoBehaviour, IMediatorEvent
         _rigidbody = GetComponent<Rigidbody2D>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _zoneManager = GenericSingleton<ZoneManager>.Instance;
+        _player = GenericSingleton<PlayerManager>.Instance.Player.transform;
         GenericSingleton<MediatorManager>.Instance.Register(EMediatorEventType.PlayeMoveOtherZone, this);
         SetState();
     }
@@ -67,6 +70,12 @@ public class Researcher : MonoBehaviour, IMediatorEvent
     public void ChangeAnimation(string name, bool value)
     {
         _animator.SetBool(name, value);
+    }
+
+    public bool CheckAttackArea(float targetDistance)
+    {
+        float distance = (transform.position - _player.position).sqrMagnitude;
+        return distance <= targetDistance * targetDistance;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

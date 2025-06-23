@@ -9,8 +9,8 @@ public class MoveState : MonoBehaviour, IResearcherState
     Rigidbody2D _rigidbody;
     SpriteRenderer _spriteRenderer;
 
-    float _attackRange = 4f;
-    float _speed = 4f;
+    float _speed = 3.5f;
+    float _attackDistance = 4f;
 
     public MoveState(Researcher researcher, Rigidbody2D rigidbody, SpriteRenderer spriteRenderer)
     {
@@ -57,13 +57,6 @@ public class MoveState : MonoBehaviour, IResearcherState
             _spriteRenderer.flipX = true;
     }
 
-    bool CheckAttackArea()
-    {
-        float distance = (_researcher.transform.position - _player.position).sqrMagnitude;
-        return distance <= _attackRange * _attackRange;
-    }
-
-
     void IResearcherState.Enter()
     {
         _researcher.ChangeAnimation("isMove", true);
@@ -72,7 +65,7 @@ public class MoveState : MonoBehaviour, IResearcherState
     void IResearcherState.Loop()
     {
         Move();
-        if(CheckAttackArea())
+        if(_researcher.CheckAttackArea(_attackDistance))
             _researcher.ChangeState(EResearcherStateType.Attack);
     }
 

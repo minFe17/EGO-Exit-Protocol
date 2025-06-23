@@ -16,6 +16,7 @@ public class PrefabManager : MonoBehaviour
             {EPrefabType.UI, new UIPrefabLoad() },
             {EPrefabType.Assistant, new AssistantPrefabLoad() },
             {EPrefabType.Data, new DataPrefabLoad() },
+            {EPrefabType.Researcher, new ResearcherPrefabLoad() },
         };
     }
 
