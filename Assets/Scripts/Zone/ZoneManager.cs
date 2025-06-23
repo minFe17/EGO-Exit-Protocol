@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using Utils;
 
 public class ZoneManager : MonoBehaviour
 {
@@ -7,6 +8,8 @@ public class ZoneManager : MonoBehaviour
     Dictionary<EZoneType, Zone> _zoneDict = new();
     Dictionary<EZoneType, List<ZoneLink>> _zoneLinkDict = new();
     Zone _playerZone;
+
+    public Zone PlayerZone { get => _playerZone; }
 
     Dictionary<EZoneType, EZoneType> BFS(EZoneType start)
     {
@@ -53,7 +56,6 @@ public class ZoneManager : MonoBehaviour
         return path;
     }
 
-    public void SetPlayerZone(Zone playerZone) => _playerZone = playerZone;
     public void SetZoneDict(Zone zone) => _zoneDict[zone.ZoneID] = zone;
 
     public void SetZoneLinkDict(ZoneLink link)
@@ -63,17 +65,28 @@ public class ZoneManager : MonoBehaviour
         _zoneLinkDict[link.FromZone].Add(link);
     }
 
-    public Zone GetZone(EZoneType zoneID)
+    public void SetPlayerZone(Zone playerZone)
     {
-        if (_zoneDict.TryGetValue(zoneID, out Zone zone))
-            return zone;
-        return null;
+        if (_playerZone == playerZone)
+            return;
+        _playerZone = playerZone;
+        GenericSingleton<MediatorManager>.Instance.Notify(EMediatorEventType.PlayeMoveOtherZone);
     }
 
-    public List<ZoneLink> GetLinksFrom(EZoneType fromZone)
+    public ZoneLink GetZoneLink(EZoneType from, EZoneType to)
     {
-        if (_zoneLinkDict.TryGetValue(fromZone, out List<ZoneLink> link))
-            return link;
+        if(_zoneLinkDict.TryGetValue(from, out List<ZoneLink> link))
+        {
+            foreach(ZoneLink zoneLink in link)
+            {
+                Debug.Log($"{from}, {zoneLink.FromZone}, {to}, {zoneLink.ToZone}");
+                if (zoneLink.ToZone == to)
+                {
+                    Debug.Log(zoneLink);
+                    return zoneLink;
+                }
+            }
+        }
         return null;
     }
 

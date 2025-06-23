@@ -12,5 +12,6 @@ public enum EMediatorEventType
     RopeReleased,
     PlayerLocationChanged,
     CreateMemoryPanel,
+    PlayeMoveOtherZone,
     Max,
 }
