@@ -24,7 +24,7 @@ public class ResearcherPrefabLoad : PrefabLoadBase
         _researcherPrefabDict = new Dictionary<EResearcherPrefabType, GameObject>
         {
             {EResearcherPrefabType.Researcher, await _addressableManager.GetAddressableAsset<GameObject>(_researcherPrefabNameDict[EResearcherPrefabType.Researcher])},
-            //{EResearcherPrefabType.Bullet, await _addressableManager.GetAddressableAsset<GameObject>(_researcherPrefabNameDict[EResearcherPrefabType.Bullet]) }
+            {EResearcherPrefabType.Bullet, await _addressableManager.GetAddressableAsset<GameObject>(_researcherPrefabNameDict[EResearcherPrefabType.Bullet]) }
         };
     }
 

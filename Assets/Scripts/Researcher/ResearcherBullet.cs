@@ -8,10 +8,11 @@ public class ResearcherBullet : MonoBehaviour
 
     SpriteRenderer _spriteRenderer;
 
-    void Start()
+    Vector3 _direction;
+
+    void Awake()
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
-        Invoke("Remove", _lifeTime);
     }
 
     void Update()
@@ -19,14 +20,20 @@ public class ResearcherBullet : MonoBehaviour
         Move();
     }
 
-    public void Init()
+    public void Init(Vector3 direction)
     {
+        _direction = direction;
+        if (_direction.x > 0)
+            _spriteRenderer.flipX = false;
+        else if(_direction.x < 0)
+            _spriteRenderer.flipX = true;
 
+        Invoke("Remove", _lifeTime);
     }
 
     void Move()
     {
-
+        transform.Translate(_direction * _moveSpeed * Time.deltaTime);
     }
 
     void Remove()

@@ -7,6 +7,8 @@ TagManager:
   - InteractableObject
   - AssistantRoom
   - EndingRoom
+  - Researcher
+  - ResearcherBullet
   layers:
   - Default
   - TransparentFX
@@ -16,8 +18,8 @@ TagManager:
   - UI
   - Player
   - Assistant
-  - 
-  - 
+  - Researcher
+  - ResearcherBullet
   - 
   - 
   - 

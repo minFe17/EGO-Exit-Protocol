@@ -1,10 +1,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Utils;
-using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class Researcher : MonoBehaviour, IMediatorEvent
 {
+    [SerializeField] Transform _bulletPos;
+
     Dictionary<EResearcherStateType, IResearcherState> _researcherStateDict;
     IResearcherState _currentState;
     EResearcherStateType _currentType;
@@ -78,10 +79,19 @@ public class Researcher : MonoBehaviour, IMediatorEvent
         return distance <= targetDistance * targetDistance;
     }
 
+    #region Animation Event
+    public void MakeBullet()
+    {
+        GenericSingleton<ResearcherManager>.Instance.MakeBullet(_bulletPos, _player.position);
+    }
+    #endregion
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.TryGetComponent<Zone>(out Zone zone))
             _currentZone = zone.ZoneID;
+        if (collision.gameObject.CompareTag("Player"))
+            GenericSingleton<MediatorManager>.Instance.Notify(EMediatorEventType.LoopEvent);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

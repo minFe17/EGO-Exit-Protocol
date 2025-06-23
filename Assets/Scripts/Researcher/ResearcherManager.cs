@@ -16,7 +16,14 @@ public class ResearcherManager : MonoBehaviour, IMediatorEvent, ILoopObject
             return;
         PrefabLoadBase ResearcherLoadbase = GenericSingleton<PrefabManager>.Instance.GetPrefabLoad(EPrefabType.Researcher);
         _researcherPrefab = ResearcherLoadbase.GetPrefab(EResearcherPrefabType.Researcher);
-        //_bulletPrefab = ResearcherLoadbase.GetPrefab(EResearcherPrefabType.Bullet);
+        _bulletPrefab = ResearcherLoadbase.GetPrefab(EResearcherPrefabType.Bullet);
+    }
+
+    public void MakeBullet(Transform bulletPos, Vector3 targetPos)
+    {
+        GameObject bullet = Instantiate(_bulletPrefab, bulletPos.position, Quaternion.identity);
+        Vector3 direction = (targetPos - bulletPos.position).normalized;
+        bullet.GetComponent<ResearcherBullet>().Init(direction);
     }
 
     void IMediatorEvent.HandleEvent(object data)
@@ -30,9 +37,7 @@ public class ResearcherManager : MonoBehaviour, IMediatorEvent, ILoopObject
     void ILoopObject.OnLoopEvent()
     {
         for (int i = 0; i < _researcherList.Count; i++)
-        {
             Destroy(_researcherList[i]);
-        }
         _researcherList.Clear();
     }
 }
