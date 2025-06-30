@@ -1,9 +1,14 @@
+using UnityEngine;
+using UnityEngine.U2D;
 using Utils;
 
 public class ItemBase : ILoopObject
 {
     ItemInventory _inventory;
     MementoManager _mementoManager;
+    SpriteAtlas _itemIconAtlas;
+    Sprite _sprite;
+
 
     protected EItemType _itemType;
 
@@ -13,11 +18,14 @@ public class ItemBase : ILoopObject
         _inventory = playerManager.ItemInventory;
         _mementoManager = GenericSingleton<MementoManager>.Instance;
         GenericSingleton<ObserveManager>.Instance.LoopObserve.AddLoopEvent(this);
+        _itemIconAtlas = GenericSingleton<PrefabManager>.Instance.GetPrefabLoad(EPrefabType.ItemIcon).GetPrefab<SpriteAtlas>();
+        _sprite = _itemIconAtlas.GetSprite($"{_itemType}");
     }
 
     public virtual void Use()
     {
         Remove();
+        GenericSingleton<MediatorManager>.Instance.Notify(EMediatorEventType.UseItem, _sprite);
     }
 
     public void Set()
@@ -25,6 +33,7 @@ public class ItemBase : ILoopObject
         if (_inventory == null)
             Init();
         _inventory.SetItem(_itemType, this);
+        GenericSingleton<MediatorManager>.Instance.Notify(EMediatorEventType.GetItem, _sprite);
     }
 
     public void Remove()

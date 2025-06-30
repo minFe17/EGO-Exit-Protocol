@@ -7,5 +7,6 @@ public enum EPrefabType
     Data,
     Assistant,
     Researcher,
+    ItemIcon,
     Max,
 }

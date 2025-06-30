@@ -6,6 +6,8 @@ public enum EMediatorEventType
     TimeTick,
     ChangeLoopCount,
     AddMemory,
+    GetItem,
+    UseItem,
     NeedCapture,       
     PlayerEnterAssistantRoom,
     PlayerExitAssistantRoom,

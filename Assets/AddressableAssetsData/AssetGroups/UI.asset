@@ -20,6 +20,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3e5a16c564bd45c4d992d8625ee28217
+    m_Address: ItemIcon
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: d9fc29f3596ebf14b8fdbae5dff2f812
     m_Address: MemoryPanel
     m_ReadOnly: 0
