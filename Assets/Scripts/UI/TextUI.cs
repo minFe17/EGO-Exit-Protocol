@@ -8,7 +8,7 @@ public abstract class TextUI : MonoBehaviour
 
     protected MediatorManager _mediatorManager;
 
-    void Start()
+    void Awake()
     {
         _mediatorManager = GenericSingleton<MediatorManager>.Instance;
         SetMediatorEvent();

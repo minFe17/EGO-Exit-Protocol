@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using Utils;
@@ -22,5 +21,11 @@ public class WriteData : MonoBehaviour
     {
         CurrentMemoryList data = DataSingleton<CurrentMemoryList>.Instance;
         WriteJsonDataBase(data, _jsonManager.MemoryDataPath);
+    }
+
+    public void WriteLoopData()
+    {
+        LoopData data = DataSingleton<LoopData>.Instance;
+        WriteJsonDataBase(data, _jsonManager.LoopDataPath);
     }
 }

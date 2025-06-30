@@ -1,3 +1,5 @@
+using Utils;
+
 public class LoopUI : TextUI, IMediatorEvent
 {
     protected override void SetMediatorEvent()
@@ -7,7 +9,7 @@ public class LoopUI : TextUI, IMediatorEvent
 
     void IMediatorEvent.HandleEvent(object data)
     {
-        int loopCount = (int)data;
+        int loopCount = DataSingleton<LoopData>.Instance.LoopCount;
         _text.text = loopCount.ToString();
     }
 }

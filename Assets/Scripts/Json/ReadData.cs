@@ -39,4 +39,12 @@ public class ReadData : MonoBehaviour
         ReadAllMemoryData(memoryRepository);
         ReadCurrentMemoryData();
     }
+
+    public void ReadLoopData()
+    {
+        if (!_jsonManager.CheckDataFile(_jsonManager.LoopDataPath))
+            return;
+        LoopData data = DataSingleton<LoopData>.Instance;
+        ReadJsonData(_jsonManager.LoopDataPath, data);
+    }
 }

@@ -6,19 +6,21 @@ public class LoopManager : MonoBehaviour, IMediatorEvent
     // ╫л╠шео
     ObserveManager _observeManager;
     MediatorManager _mediatorManager;
-    int _loopCount = 1;
 
     public void Init()
     {
         _observeManager = GenericSingleton<ObserveManager>.Instance;
         _mediatorManager = GenericSingleton<MediatorManager>.Instance;
         _mediatorManager.Register(EMediatorEventType.LoopEvent, this);
+        GenericSingleton<JsonManager>.Instance.ReadData.ReadLoopData();
+        _mediatorManager.Notify(EMediatorEventType.ChangeLoopCount);
     }
 
     void IMediatorEvent.HandleEvent(object data)
     {
-        _loopCount++;
+        DataSingleton<LoopData>.Instance.AddLoopCount();
         _observeManager.LoopObserve.OnLoopEvent();
-        _mediatorManager.Notify(EMediatorEventType.ChangeLoopCount, _loopCount);
+        _mediatorManager.Notify(EMediatorEventType.ChangeLoopCount);
+        GenericSingleton<JsonManager>.Instance.WriteData.WriteLoopData();
     }
 }
