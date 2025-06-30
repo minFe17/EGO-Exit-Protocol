@@ -12,9 +12,10 @@ public class GameStart : MonoBehaviour
         GenericSingleton<TimeManager>.Instance.Init();
         GenericSingleton<LoopManager>.Instance.Init();
         GenericSingleton<JsonManager>.Instance.Init();
-        GenericSingleton<MemoryManager>.Instance.Init();
         GenericSingleton<ResearcherManager>.Instance.Init();
+        GenericSingleton<MemoryManager>.Instance.Init();
         CreatePrefab();
+        CreateCurrentMomoryData();
     }
 
     void CreatePrefab()
@@ -31,5 +32,10 @@ public class GameStart : MonoBehaviour
         PrefabLoadBase assistantPrefabLoad = _prefabManager.GetPrefabLoad(EPrefabType.Assistant);
         Instantiate(assistantPrefabLoad.GetPrefab(EAssistantPrefabType.Assistant));
         Instantiate(assistantPrefabLoad.GetPrefab(EAssistantPrefabType.Rope));
+    }
+
+    void CreateCurrentMomoryData()
+    {
+        GenericSingleton<MemoryManager>.Instance.MemoryRepository.CreateCurrentMemory();
     }
 }

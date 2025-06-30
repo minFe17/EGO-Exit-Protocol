@@ -7,17 +7,15 @@ public class MemoryRepository : MonoBehaviour
 {
     // 읽기 전용
     [SerializeField] List<MemoryData> _readDataList = new List<MemoryData>();
-    [SerializeField] HashSet<MemoryPanelData> _currentMemoryData = new HashSet<MemoryPanelData>();
 
     Dictionary<EMemoryType, MemoryData> _allMemoryData = new Dictionary<EMemoryType, MemoryData>();
-
+    CurrentMemoryList _currentMemoryList;
     public List<MemoryData> ReadDataList { get => _readDataList; }
-    public HashSet<MemoryPanelData> CurrentMemoryData { get => _currentMemoryData; }
 
     public void Init()
     {
+        _currentMemoryList = DataSingleton<CurrentMemoryList>.Instance;
         GenericSingleton<JsonManager>.Instance.ReadData.ReadMemoryData(this);
-        CreateCurrentMemory();
         for (int i = 0; i < _readDataList.Count; i++)
         {
             _readDataList[i].Init();
@@ -25,11 +23,11 @@ public class MemoryRepository : MonoBehaviour
         }
     }
 
-    void CreateCurrentMemory()
+    public void CreateCurrentMemory()
     {
-        foreach (MemoryPanelData data in _currentMemoryData)
+        foreach (MemoryPanelData data in _currentMemoryList.CurrtenMemoryData)
         {
-            // 판넬 생성
+            GenericSingleton<MediatorManager>.Instance.Notify(EMediatorEventType.CreateMemoryPanel, data);
         }
     }
 
@@ -40,7 +38,7 @@ public class MemoryRepository : MonoBehaviour
 
     public bool ContainsMemoryType(EMemoryType type)
     {
-        foreach(MemoryPanelData data in _currentMemoryData)
+        foreach(MemoryPanelData data in _currentMemoryList.CurrtenMemoryData)
         {
             if (data.MemoryType == type)
                 return true;

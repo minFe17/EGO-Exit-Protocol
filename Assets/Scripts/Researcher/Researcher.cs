@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Utils;
 
-public class Researcher : MonoBehaviour, IMediatorEvent
+public class Researcher : MonoBehaviour, IMediatorEvent, ILoopObject
 {
     [SerializeField] Transform _bulletPos;
 
@@ -22,7 +22,7 @@ public class Researcher : MonoBehaviour, IMediatorEvent
 
     public List<EZoneType> CurrentPath { get => _currentPath; }
     public EZoneType CurrentZone { get => _currentZone; }
-    public int PathIndex { get=> _pathIndex; }  
+    public int PathIndex { get => _pathIndex; }
 
     private void Start()
     {
@@ -32,6 +32,7 @@ public class Researcher : MonoBehaviour, IMediatorEvent
         _zoneManager = GenericSingleton<ZoneManager>.Instance;
         _player = GenericSingleton<PlayerManager>.Instance.Player.transform;
         GenericSingleton<MediatorManager>.Instance.Register(EMediatorEventType.PlayeMoveOtherZone, this);
+        GenericSingleton<ObserveManager>.Instance.LoopObserve.AddLoopEvent(this);
         SetState();
     }
 
@@ -61,7 +62,7 @@ public class Researcher : MonoBehaviour, IMediatorEvent
     {
         if (_currentState == _researcherStateDict[type])
             return;
-        if(_currentState != null)
+        if (_currentState != null)
             _currentState.Exit();
         _currentType = type;
         _currentState = _researcherStateDict[_currentType];
@@ -114,5 +115,11 @@ public class Researcher : MonoBehaviour, IMediatorEvent
     {
         _currentPath = _zoneManager.FindPath(_currentZone);
         _pathIndex = 1;
+    }
+
+    void ILoopObject.OnLoopEvent()
+    {
+        GenericSingleton<ObserveManager>.Instance.LoopObserve.RemoveLoopEvent(this);
+        Destroy(this.gameObject);
     }
 }

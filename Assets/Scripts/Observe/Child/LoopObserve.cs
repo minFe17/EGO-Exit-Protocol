@@ -17,4 +17,11 @@ public class LoopObserve : MonoBehaviour
         for (int i = 0; i < _loopEvents.Count; i++)
             _loopEvents[i].OnLoopEvent();
     }
+
+    public void RemoveLoopEvent(ILoopObject loopEvent)
+    {
+        if (!_loopEvents.Contains(loopEvent))
+            return;
+        _loopEvents.Remove(loopEvent);
+    }
 }

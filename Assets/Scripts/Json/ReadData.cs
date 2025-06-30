@@ -17,11 +17,12 @@ public class ReadData : MonoBehaviour
         JsonUtility.FromJsonOverwrite(json, dataClass);
     }
 
-    void ReadCurrentMemoryData(MemoryRepository memoryRepository)
+    void ReadCurrentMemoryData()
     {
         if (!_jsonManager.CheckDataFile(_jsonManager.MemoryDataPath))
             return;
-        ReadJsonData(_jsonManager.MemoryDataPath, memoryRepository);
+        CurrentMemoryList data = DataSingleton<CurrentMemoryList>.Instance;
+        ReadJsonData(_jsonManager.MemoryDataPath, data);
     }
 
     void ReadAllMemoryData(MemoryRepository memoryRepository)
@@ -36,6 +37,6 @@ public class ReadData : MonoBehaviour
     public void ReadMemoryData(MemoryRepository memoryRepository)
     {
         ReadAllMemoryData(memoryRepository);
-        ReadCurrentMemoryData(memoryRepository);
+        ReadCurrentMemoryData();
     }
 }

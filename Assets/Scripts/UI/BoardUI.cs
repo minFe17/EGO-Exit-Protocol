@@ -82,6 +82,7 @@ public class BoardUI : MonoBehaviour, IMediatorEvent
 
         GameObject temp = Instantiate(_uIPrefabLoad.GetPrefab(EUIPrefabType.MemoryPanel), this.gameObject.transform);
         temp.GetComponent<MemoryPanel>().Init(memoryPanelData, this, _yBoundary);
+        GenericSingleton<JsonManager>.Instance.WriteData.WriteCurrentMemoryData();
     }
 
     public void Save(IMemoryMemento memoryMemento)

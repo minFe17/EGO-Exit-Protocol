@@ -70,6 +70,11 @@ public class MemoryPanel : MonoBehaviour, IMemoryMemento
         _memoryPanelData.Position = newPos; 
         _lastMousePosition = eventData.position;
     }
+
+    public void EndDrag(BaseEventData data)
+    {
+        GenericSingleton<JsonManager>.Instance.WriteData.WriteCurrentMemoryData();
+    }
     #endregion
 
     #region Interface

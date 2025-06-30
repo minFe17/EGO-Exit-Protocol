@@ -24,7 +24,7 @@ public class MemoryManager : MonoBehaviour, IMediatorEvent, ILoopObject
         foreach(EMemoryType memoryType in _newMemoryData)
         {
             MemoryPanelData newMemory = new MemoryPanelData(memoryType);
-            _memoryRepository.CurrentMemoryData.Add(newMemory);
+            DataSingleton<CurrentMemoryList>.Instance.CurrtenMemoryData.Add(newMemory);
             _mediatorManager.Notify(EMediatorEventType.CreateMemoryPanel, newMemory);
         }
     }

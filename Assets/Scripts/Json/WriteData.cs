@@ -20,7 +20,7 @@ public class WriteData : MonoBehaviour
 
     public void WriteCurrentMemoryData()
     {
-        HashSet<MemoryPanelData> data = GenericSingleton<MemoryManager>.Instance.MemoryRepository.CurrentMemoryData;
+        CurrentMemoryList data = DataSingleton<CurrentMemoryList>.Instance;
         WriteJsonDataBase(data, _jsonManager.MemoryDataPath);
     }
 }

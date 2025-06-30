@@ -1,17 +1,18 @@
 using UnityEngine;
 
 [System.Serializable]
-public class MemoryPanelData : MonoBehaviour
+public class MemoryPanelData
 {
-    [SerializeField] EMemoryType _memoryType;
-    [SerializeField] Vector3? _position;
+    [SerializeField] int _memoryType;
+    [SerializeField] NullableVector3 _position;
 
     public MemoryPanelData(EMemoryType memoryType)
     {
-        _memoryType = memoryType;
+        _memoryType = (int)memoryType;
+        _position = new NullableVector3(null);
         // 포지션은 랜덤?
     }
 
-    public EMemoryType MemoryType { get => _memoryType; }
-    public Vector3? Position { get => _position; set => _position = value; }
+    public EMemoryType MemoryType { get => (EMemoryType)_memoryType; }
+    public Vector3? Position { get => _position.ToNullable(); set => _position = new NullableVector3(value); }
 }
