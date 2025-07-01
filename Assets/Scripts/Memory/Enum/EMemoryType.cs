@@ -4,5 +4,6 @@ public enum EMemoryType
     Assistant_Rope,
     DontGo_Rooftop,
     DontGo_Room201,
+    DontOpen_Cabinet,
     Max
 }

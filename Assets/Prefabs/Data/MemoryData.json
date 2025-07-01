@@ -15,6 +15,10 @@
     {
         "_typeText": "DontGo_Room201",
         "_description": "이 방은 가지 마"
+    },
+    {
+        "_typeText": "DontOpen_Cabinet",
+        "_description": "이 캐비넷은 열지 마"
     }
   ]
 }

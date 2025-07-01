@@ -8,6 +8,7 @@ public enum EMediatorEventType
     AddMemory,
     GetItem,
     UseItem,
+    UseDial,
     NeedCapture,       
     PlayerEnterAssistantRoom,
     PlayerExitAssistantRoom,
