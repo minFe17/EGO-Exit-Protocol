@@ -68,6 +68,14 @@ public class Player : MonoBehaviour
         if (_interactableObject != null)
             _interactableObject.Interact();
     }
+
+    void OnNumber()
+    {
+        if (Keyboard.current.digit1Key.wasPressedThisFrame)
+            GenericSingleton<PlayerManager>.Instance.UsePhone(1);
+        else if (Keyboard.current.digit2Key.wasPressedThisFrame)
+            GenericSingleton<PlayerManager>.Instance.UsePhone(2);
+    }
     #endregion
 
     #region Unity Collision

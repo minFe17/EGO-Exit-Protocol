@@ -33,6 +33,11 @@ public class PlayerManager : MonoBehaviour, ILoopObject
         _player = temp.GetComponent<Player>();
     }
 
+    public void UsePhone(int number)
+    {
+        _itemInventory.UsePhone(number-1);
+    }
+
     #region Interface
     public void OnLoopEvent()
     {

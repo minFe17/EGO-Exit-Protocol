@@ -4,6 +4,7 @@ using UnityEngine;
 public class ItemInventory : MonoBehaviour
 {
     Dictionary<EItemType, ItemBase> _itemDict = new Dictionary<EItemType, ItemBase>();
+    List<EItemType> _keys = new List<EItemType>();
 
     bool CheckItem()
     {
@@ -23,7 +24,10 @@ public class ItemInventory : MonoBehaviour
         if (!CheckItem())
             ChangeItem(itemType, itemBase);
         else
+        {
             _itemDict.Add(itemType, itemBase);
+            _keys.Add(itemType);
+        }
     }
 
     public void GetItem(out ItemBase item, EItemType type)
@@ -34,11 +38,22 @@ public class ItemInventory : MonoBehaviour
     public void RemoveItem(EItemType type)
     {
         if (_itemDict.ContainsKey(type))
+        {
             _itemDict.Remove(type);
+            _keys.Remove(type);
+        }
+    }
+
+    public void UsePhone(int number)
+    {
+        if (_keys[number] != EItemType.Phone)
+            return;
+        _itemDict[EItemType.Phone].Use();
     }
 
     public void ClearItemDict()
     {
         _itemDict.Clear();
+        _keys.Clear();
     }
 }

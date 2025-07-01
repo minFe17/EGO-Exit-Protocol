@@ -4,6 +4,7 @@ using Utils;
 public class DialEvent : IMediatorEvent
 {
     GameObject _dialPanel;
+
     public void Init(GameObject dialPanel)
     {
         _dialPanel = dialPanel;

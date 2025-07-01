@@ -8,6 +8,7 @@ public enum EMediatorEventType
     AddMemory,
     GetItem,
     UseItem,
+    UsePhone,
     UseDial,
     CompleteDial,
     NeedCapture,       

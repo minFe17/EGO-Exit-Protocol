@@ -17,4 +17,12 @@ public class Dial : MonoBehaviour
         GenericSingleton<MediatorManager>.Instance.Notify(EMediatorEventType.CompleteDial);
         gameObject.SetActive(false);
     }
+
+    #region Input System
+    void OnClose()
+    {
+        gameObject.SetActive(false);
+        GenericSingleton<MediatorManager>.Instance.Notify(EMediatorEventType.TimeResume);
+    }
+    #endregion
 }
