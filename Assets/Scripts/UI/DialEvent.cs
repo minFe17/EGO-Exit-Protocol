@@ -13,6 +13,6 @@ public class DialEvent : IMediatorEvent
     void IMediatorEvent.HandleEvent(object data)
     {
         _dialPanel.SetActive(true);
-        Time.timeScale = 0;
+        GenericSingleton<MediatorManager>.Instance.Notify(EMediatorEventType.TimePause);
     }
 }

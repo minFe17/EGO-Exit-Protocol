@@ -19,6 +19,10 @@
     {
         "_typeText": "DontOpen_Cabinet",
         "_description": "이 캐비넷은 열지 마"
+    },
+    {
+        "_typeText": "Found_PhoneOnDesk",
+        "_description": "휴대폰?"
     }
   ]
 }

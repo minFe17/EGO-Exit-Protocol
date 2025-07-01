@@ -19,10 +19,6 @@ public class Cabinet : MonoBehaviour, IInteractable
         GenericSingleton<InteractObjectManager>.Instance.SetInteractable(gameObject, this);
     }
 
-    #region NaughtyAttributes
-    bool IsNotTrap() => !_isTrap;
-    #endregion
-
     #region Interface
     public GameObject GetGameObject()
     {
@@ -33,8 +29,6 @@ public class Cabinet : MonoBehaviour, IInteractable
     {
         if (_isTrap)
             GenericSingleton<MediatorManager>.Instance.Notify(EMediatorEventType.SpawnResearcher, _researcherSpawnPosition);
-        else
-            GenericSingleton<MediatorManager>.Instance.Notify(EMediatorEventType.UseDial);
         if (_memoryObject != null)
             _memoryObject.AddMemory();
     }

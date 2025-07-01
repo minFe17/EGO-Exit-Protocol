@@ -6,7 +6,7 @@ public class GiveKeyDeadBody : DeadBody, IItemHolder
     [SerializeField] MemoryObject _memoryObject;
 
     MementoManager _mementoManager;
-    ItemBase _key = new ItemBase();
+    ItemBase _key = new Key();
 
     protected override void Init()
     {

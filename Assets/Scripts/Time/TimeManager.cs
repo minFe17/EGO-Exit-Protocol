@@ -66,7 +66,7 @@ public class TimeManager : MonoBehaviour, ILoopObject
         if (_isStop)
             return;
         _isStop = true;
-    } 
+    }
 
     public void Resume()
     {

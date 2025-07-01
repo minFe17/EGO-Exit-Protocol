@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using Utils;
 
 public class Dial : MonoBehaviour
 {
@@ -12,7 +13,8 @@ public class Dial : MonoBehaviour
             if (!_dialNumberList[i].IsEqualTargetNumber)
                 return;
         }
-        Time.timeScale = 1;
+        GenericSingleton<MediatorManager>.Instance.Notify(EMediatorEventType.TimeResume);
+        GenericSingleton<MediatorManager>.Instance.Notify(EMediatorEventType.CompleteDial);
         gameObject.SetActive(false);
     }
 }

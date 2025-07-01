@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Utils;
 
-public class ItemPanel : MonoBehaviour, IMediatorEvent
+public class ItemPanel : MonoBehaviour, IMediatorEvent, ILoopObject
 {
     [SerializeField] List<Image> _iconList = new List<Image>();
 
@@ -12,6 +12,7 @@ public class ItemPanel : MonoBehaviour, IMediatorEvent
     void Start()
     {
         GenericSingleton<MediatorManager>.Instance.Register(EMediatorEventType.GetItem, this);
+        GenericSingleton<ObserveManager>.Instance.LoopObserve.AddLoopEvent(this);
         _useItem.Init(this);
     }
 
@@ -19,12 +20,18 @@ public class ItemPanel : MonoBehaviour, IMediatorEvent
     {
         for (int i = 0; i < _iconList.Count; i++)
         {
-            if(_iconList[i].sprite == sprite)
+            if (_iconList[i].sprite == sprite)
             {
                 _iconList[i].sprite = null;
                 break;
             }
         }
+    }
+
+    public void RemoveAll()
+    {
+        for (int i = 0; i < _iconList.Count; i++)
+            _iconList[i].sprite = null;
     }
 
     void IMediatorEvent.HandleEvent(object data)
@@ -38,5 +45,10 @@ public class ItemPanel : MonoBehaviour, IMediatorEvent
                 break;
             }
         }
+    }
+
+    void ILoopObject.OnLoopEvent()
+    {
+        RemoveAll();
     }
 }
