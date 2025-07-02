@@ -1,4 +1,4 @@
-public interface IMemoryMemento
+public interface IMemento
 {
     void Save();
     void Restore();

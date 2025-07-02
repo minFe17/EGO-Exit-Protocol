@@ -4,7 +4,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using Utils;
 
-public class MemoryPanel : MonoBehaviour, IMemoryMemento
+public class MemoryPanel : MonoBehaviour, IMemento
 {
     [SerializeField] RectTransform rectTransform;
     [SerializeField] Image _image;
@@ -84,7 +84,7 @@ public class MemoryPanel : MonoBehaviour, IMemoryMemento
         _board.Save(this);
     }
 
-    void IMemoryMemento.Restore()
+    void IMemento.Restore()
     {
         if(_mementoStack.Count > 0 )
         {

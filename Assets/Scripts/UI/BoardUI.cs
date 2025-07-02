@@ -10,7 +10,7 @@ public class BoardUI : MonoBehaviour, IMediatorEvent
     [SerializeField] float _xOffset;
     [SerializeField] float _yBoundary;
 
-    Stack<IMemoryMemento> _memoryPanelStack = new Stack<IMemoryMemento>();
+    Stack<IMemento> _memoryPanelStack = new Stack<IMemento>();
     MediatorManager _mediatorManager;
     PrefabLoadBase _uIPrefabLoad;
     Vector2 _lastMousePosition;
@@ -85,7 +85,7 @@ public class BoardUI : MonoBehaviour, IMediatorEvent
         GenericSingleton<JsonManager>.Instance.WriteData.WriteCurrentMemoryData();
     }
 
-    public void Save(IMemoryMemento memoryMemento)
+    public void Save(IMemento memoryMemento)
     {
         _memoryPanelStack.Push(memoryMemento);
         // 파일 쓰기
@@ -95,7 +95,7 @@ public class BoardUI : MonoBehaviour, IMediatorEvent
     {
         if (_memoryPanelStack.Count > 0)
         {
-            IMemoryMemento memory = _memoryPanelStack.Pop();
+            IMemento memory = _memoryPanelStack.Pop();
             memory.Restore();
             // 파일쓰기?
         }
