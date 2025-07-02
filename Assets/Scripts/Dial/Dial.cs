@@ -2,9 +2,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using Utils;
 
-public class Dial : MonoBehaviour
+public class Dial : MonoBehaviour, ILoopObject
 {
     [SerializeField] List<DialNumber> _dialNumberList = new List<DialNumber>();
+
+    void Start()
+    {
+        GenericSingleton<ObserveManager>.Instance.LoopObserve.AddLoopEvent(this);
+    }
 
     public void CheckTargetNumber()
     {
@@ -25,4 +30,9 @@ public class Dial : MonoBehaviour
         GenericSingleton<MediatorManager>.Instance.Notify(EMediatorEventType.TimeResume);
     }
     #endregion
+
+    void ILoopObject.OnLoopEvent()
+    {
+        gameObject.SetActive(false);
+    }
 }

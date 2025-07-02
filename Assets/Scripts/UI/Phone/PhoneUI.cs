@@ -2,11 +2,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using Utils;
 
-public class PhoneUI : MonoBehaviour
+public class PhoneUI : MonoBehaviour, ILoopObject
 {
     [SerializeField] List<GameObject> _panelList = new List<GameObject>();
 
     GameObject _activePanel;
+
+    void Start()
+    {
+        GenericSingleton<ObserveManager>.Instance.LoopObserve.AddLoopEvent(this);
+    }
 
     #region Button Event
     public void OnClickApplication(int index)
@@ -31,4 +36,10 @@ public class PhoneUI : MonoBehaviour
         }
     }
     #endregion
+
+    void ILoopObject.OnLoopEvent()
+    {
+        _activePanel.SetActive(false);
+        gameObject.SetActive(false);
+    }
 }
