@@ -1,7 +1,7 @@
 using UnityEngine;
 using Utils;
 
-public class TimeManager : MonoBehaviour, ILoopObject
+public class TimeManager : MonoBehaviour, IMediatorEvent, ILoopObject
 {
     // 싱글턴
     MementoManager _mementoManager;
@@ -18,11 +18,15 @@ public class TimeManager : MonoBehaviour, ILoopObject
 
     public void Init()
     {
+        GenericSingleton<MediatorManager>.Instance.Register(EMediatorEventType.EndFade, this);
         SetManager();
         _observeManager.LoopObserve.AddLoopEvent(this);
-        OnLoopEvent();
         _timePause.Init();
         _timeResume.Init();
+
+        _timer = _mementoManager.TimeMemento.LoopTime;
+        _isStop = _mementoManager.TimeMemento.IsStop;
+        _isLoop = _mementoManager.TimeMemento.IsLoop;
     }
 
     void Update()
@@ -76,13 +80,19 @@ public class TimeManager : MonoBehaviour, ILoopObject
     }
 
     #region Interface
-    public void OnLoopEvent()
+    public void HandleEvent(object data = null)
+    {
+        Resume();
+        _isLoop = false;
+    }
+
+    void ILoopObject.OnLoopEvent()
     {
         _timer = _mementoManager.TimeMemento.LoopTime;
-        // fade 효과 제작 후 주석 해제
-        //_isStop = _mementoManager.TimeMemento.IsStop;
-        //_isLoop = _mementoManager.TimeMemento.IsLoop;
+        _isStop = _mementoManager.TimeMemento.IsStop;
+        _isLoop = _mementoManager.TimeMemento.IsLoop;
         _previousTime = (int)_timer;
+        _mediatorManager.Notify(EMediatorEventType.TimeTick, (int)_timer);
     }
     #endregion
 }

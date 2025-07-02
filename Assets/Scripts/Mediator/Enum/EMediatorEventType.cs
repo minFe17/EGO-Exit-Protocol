@@ -4,6 +4,8 @@ public enum EMediatorEventType
     TimePause,
     TimeResume,
     TimeTick,
+    StartFade,
+    EndFade,
     ChangeLoopCount,
     AddMemory,
     GetItem,

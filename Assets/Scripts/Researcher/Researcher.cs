@@ -92,7 +92,7 @@ public class Researcher : MonoBehaviour, IMediatorEvent, ILoopObject
         if (collision.gameObject.TryGetComponent<Zone>(out Zone zone))
             _currentZone = zone.ZoneID;
         if (collision.gameObject.CompareTag("Player"))
-            GenericSingleton<MediatorManager>.Instance.Notify(EMediatorEventType.LoopEvent);
+            GenericSingleton<MediatorManager>.Instance.Notify(EMediatorEventType.StartFade);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

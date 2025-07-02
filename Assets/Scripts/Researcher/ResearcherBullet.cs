@@ -44,7 +44,7 @@ public class ResearcherBullet : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
-            GenericSingleton<MediatorManager>.Instance.Notify(EMediatorEventType.LoopEvent);
+            GenericSingleton<MediatorManager>.Instance.Notify(EMediatorEventType.StartFade);
         Remove();
     }
 }
