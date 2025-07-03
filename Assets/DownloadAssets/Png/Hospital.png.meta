@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 47bb6435494638843b89c9a7dc9aff67
+guid: 69aa1db3056b723498480863576463c9
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -5958164816154932144
-    second: a2ea61e8-80f1-4c3a-8afd-580268369244_0
+      213: -8326081848753677084
+    second: 7eec6e67-9207-4241-aa90-c7c796e9f1e9_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -37,7 +37,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -46,17 +46,17 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
-  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteBorder: {x: 57, y: 78, z: 52, w: 41}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
-  spriteTessellationDetail: -1
+  spriteTessellationDetail: 0
   textureType: 8
   textureShape: 1
   singleChannelComponent: 0
@@ -100,33 +100,46 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: a2ea61e8-80f1-4c3a-8afd-580268369244_0
+      name: 7eec6e67-9207-4241-aa90-c7c796e9f1e9_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 1024
-        height: 1024
+        x: 55
+        y: 48
+        width: 919
+        height: 971
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 05ccadbdaa8505da0800000000000000
-      internalID: -5958164816154932144
+      spriteID: 4ec953a0ca0d37c80800000000000000
+      internalID: -8326081848753677084
       vertices: []
       indices: 
       edges: []
       weights: []
-    outline: []
+    outline:
+    - - {x: 463, y: 469}
+      - {x: 420, y: 476}
+      - {x: -409, y: 476}
+      - {x: -458, y: 372}
+      - {x: -458, y: -23}
+      - {x: -449, y: -180}
+      - {x: -444, y: -225}
+      - {x: -436, y: -212}
+      - {x: -436, y: -227}
+      - {x: -440, y: -225}
+      - {x: -445, y: -268}
+      - {x: -452, y: -438}
+      - {x: 463, y: -438}
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
-    internalID: 0
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 1537655665
     vertices: []
     indices: 
     edges: []
@@ -135,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      a2ea61e8-80f1-4c3a-8afd-580268369244_0: -5958164816154932144
+      7eec6e67-9207-4241-aa90-c7c796e9f1e9_0: -8326081848753677084
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
