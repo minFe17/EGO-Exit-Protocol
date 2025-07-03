@@ -1,10 +1,16 @@
+using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
 public class RoomDoor : DoorBase
 {
+    [ShowIf("IsNotTrapDoor")]
     [SerializeField] Tilemap _leftMap;
+
+    [ShowIf("IsNotTrapDoor")]
     [SerializeField] Tilemap _rightMap;
+
+    [ShowIf("IsNotTrapDoor")]
     [SerializeField] Animator _animator;
 
     #region DoorBase
@@ -47,7 +53,8 @@ public class RoomDoor : DoorBase
     public override void OnLoopEvent()
     {
         base.OnLoopEvent();
-        _animator.SetBool("isOpen", false);
+        if (_animator != null)
+            _animator.SetBool("isOpen", false);
     }
     #endregion
 }

@@ -23,6 +23,14 @@
     {
         "_typeText": "Found_PhoneOnDesk",
         "_description": "휴대폰?"
+    },
+    {
+        "_typeText": "LockMainGate",
+        "_description": "정문이 잠김?"
+    },
+    {
+        "_typeText": "IsNotExit",
+        "_description": "여긴 탈출구가 아니야"
     }
   ]
 }

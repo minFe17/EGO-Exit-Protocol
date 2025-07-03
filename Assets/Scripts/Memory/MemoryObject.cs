@@ -1,9 +1,10 @@
+using System.Collections.Generic;
 using UnityEngine;
 using Utils;
 
 public class MemoryObject : MonoBehaviour
 {
-    [SerializeField] EMemoryType _memoryType;
+    [SerializeField] List<EMemoryType> _memoryType;
 
     MediatorManager _mediatorManager;
 
@@ -14,6 +15,7 @@ public class MemoryObject : MonoBehaviour
 
     public void AddMemory()
     {
-        _mediatorManager.Notify(EMediatorEventType.AddMemory, _memoryType);
+        for (int i = 0; i < _memoryType.Count; i++)
+            _mediatorManager.Notify(EMediatorEventType.AddMemory, _memoryType[i]);
     }
 }

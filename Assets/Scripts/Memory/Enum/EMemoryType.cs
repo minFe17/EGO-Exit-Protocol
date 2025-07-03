@@ -6,5 +6,7 @@ public enum EMemoryType
     DontGo_Room201,
     DontOpen_Cabinet,
     Found_PhoneOnDesk,
+    LockMainGate,
+    IsNotExit,
     Max
 }

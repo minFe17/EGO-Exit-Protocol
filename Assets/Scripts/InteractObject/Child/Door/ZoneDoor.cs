@@ -22,7 +22,6 @@ public class ZoneDoor : DoorBase
     {
         base.Init();
         _mediatorManager = GenericSingleton<MediatorManager>.Instance;
-
     }
 
     public override void OnInteract()

@@ -1,3 +1,5 @@
+using System;
+using NaughtyAttributes;
 using UnityEngine;
 using Utils;
 
@@ -5,6 +7,11 @@ public abstract class DoorBase : MonoBehaviour, IInteractable, ILoopObject
 {
     [SerializeField] protected BoxCollider2D _collider;
     [SerializeField] DoorMemento _doorMemento;
+    [SerializeField] MemoryObject _memory;
+    [SerializeField] bool _isTrap;
+
+    [ShowIf("_isTrap")]
+    [SerializeField] Vector3 _researcherSpawnPos;
 
     protected CameraManager _cameraManager;
     protected PlayerManager _playerManager;
@@ -32,11 +39,20 @@ public abstract class DoorBase : MonoBehaviour, IInteractable, ILoopObject
         _playerManager = GenericSingleton<PlayerManager>.Instance;
     }
 
+    #region NaughtyAttributes
+    protected bool IsNotTrapDoor() => !_isTrap;
+    #endregion
+
     void TryUnlock()
     {
         // 문이 잠겼다는 대사 처리
         EItemType type = _doorMemento.NeedUnlockItem;
-        _playerManager.ItemInventory.GetItem(out _item, type);
+        if (type != EItemType.Max)
+            _playerManager.ItemInventory.GetItem(out _item, type);
+
+        if (_isTrap)
+            TrapDoor();
+
         if (_item != null)
             OnUnlock();
         else
@@ -54,6 +70,13 @@ public abstract class DoorBase : MonoBehaviour, IInteractable, ILoopObject
     void OnUnlockFail()
     {
         // 열쇠 없을때 대사
+    }
+
+    void TrapDoor()
+    {
+        GenericSingleton<MediatorManager>.Instance.Notify(EMediatorEventType.SpawnResearcher, _researcherSpawnPos);
+        if (_memory != null)
+            _memory.AddMemory();
     }
 
     protected virtual void InteractDoor()
