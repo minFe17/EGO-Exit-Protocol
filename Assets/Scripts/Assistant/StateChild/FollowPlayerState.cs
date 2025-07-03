@@ -2,26 +2,25 @@ using UnityEngine;
 
 public class FollowPlayerState : IAssistantState
 {
-    Rigidbody2D _rigidbody;
     Assistant _assistant;
     Player _player;
 
     float _stopDistance = 1.5f;
     float _speed = 2f;
 
-    public FollowPlayerState(Assistant assistant, Player player, Rigidbody2D rigidbody)
+    public FollowPlayerState(Assistant assistant, Player player)
     {
         _assistant = assistant;
         _player = player;
-        _rigidbody = rigidbody;
     }
 
     void Move()
     {
         if(_assistant.CheckDistance(_stopDistance))
         {
-            float movePos = _player.transform.position.x - _assistant.transform.position.x;
-            _rigidbody.linearVelocityX = movePos * _speed;
+            float movePosX = _player.transform.position.x - _assistant.transform.position.x;
+            Vector3 movePos = new Vector3(movePosX, 0, 0);
+            _assistant.transform.Translate(movePos * _speed * Time.deltaTime);
         }
         else
             _assistant.ChangeState(EAssistantStateType.Idle);

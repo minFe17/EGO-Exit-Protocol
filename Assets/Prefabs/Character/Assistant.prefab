@@ -49,7 +49,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animator: {fileID: 4737366279464539631}
-  _rigidbody: {fileID: 6774819362830451410}
+  _dagger: {fileID: 5173817177199878655}
 --- !u!95 &4737366279464539631
 Animator:
   serializedVersion: 7

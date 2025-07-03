@@ -5,7 +5,7 @@ using Utils;
 public class Assistant : MonoBehaviour, IMediatorEvent, ILoopObject
 {
     [SerializeField] Animator _animator;
-    [SerializeField] Rigidbody2D _rigidbody;
+    [SerializeField] GameObject _dagger;
 
     Dictionary<EAssistantStateType, IAssistantState> _assistantState;
     IAssistantState _currentState;
@@ -53,8 +53,8 @@ public class Assistant : MonoBehaviour, IMediatorEvent, ILoopObject
         {
             {EAssistantStateType.TiedUp, new TiedUpState(this) },
             {EAssistantStateType.Idle, new IdleState(this) },
-            {EAssistantStateType.FollowPlayer, new FollowPlayerState(this, _player, _rigidbody) },
-            {EAssistantStateType.Kill, new KillState() }
+            {EAssistantStateType.FollowPlayer, new FollowPlayerState(this, _player) },
+            {EAssistantStateType.Kill, new KillState(this, _player) }
         };
         ChangeState(EAssistantStateType.TiedUp);
     }
@@ -106,6 +106,14 @@ public class Assistant : MonoBehaviour, IMediatorEvent, ILoopObject
         transform.localScale = scale;
     }
 
+    #region Animation Event
+    public void KillPlayer()
+    {
+        GenericSingleton<MediatorManager>.Instance.Notify(EMediatorEventType.AddMemory, EMemoryType.Assistant_Rope);
+        GenericSingleton<MediatorManager>.Instance.Notify(EMediatorEventType.StartFade);
+    }
+    #endregion
+
     #region Interface
     void IMediatorEvent.HandleEvent(object data)
     {
@@ -120,6 +128,7 @@ public class Assistant : MonoBehaviour, IMediatorEvent, ILoopObject
         ChangeState(_mementoManager.AssistantMemento.AssistantType);
         transform.position = _mementoManager.AssistantMemento.AssistantPositon;
         transform.localScale = _mementoManager.AssistantMemento.AssistantScale;
+        _dagger.SetActive(false);
     }
     #endregion
 
@@ -127,7 +136,10 @@ public class Assistant : MonoBehaviour, IMediatorEvent, ILoopObject
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("EndingRoom"))
+        {
+            _dagger.SetActive(true);
             ChangeState(EAssistantStateType.Kill);
+        }
     }
     #endregion
 }
