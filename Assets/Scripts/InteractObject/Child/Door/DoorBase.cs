@@ -61,7 +61,7 @@ public abstract class DoorBase : MonoBehaviour, IInteractable, ILoopObject
 
     void OnUnlock()
     {
-        // 열쇠 있을 때 대사 처리
+        // 열 수 있는 아이템 있을 때 대사 처리
         _currentLock = false;
         _item.Use();
         InteractDoor();
@@ -69,7 +69,7 @@ public abstract class DoorBase : MonoBehaviour, IInteractable, ILoopObject
 
     void OnUnlockFail()
     {
-        // 열쇠 없을때 대사
+        // 열 수 있는 아이템 없을때 대사
     }
 
     void TrapDoor()
