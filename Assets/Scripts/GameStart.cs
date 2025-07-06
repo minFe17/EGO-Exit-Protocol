@@ -13,6 +13,7 @@ public class GameStart : MonoBehaviour
         GenericSingleton<JsonManager>.Instance.Init();
         GenericSingleton<ResearcherManager>.Instance.Init();
         GenericSingleton<MemoryManager>.Instance.Init();
+        GenericSingleton<EndingManager>.Instance.Init();
         CreatePrefab();
         ReadData();
     }

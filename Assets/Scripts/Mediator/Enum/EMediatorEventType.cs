@@ -21,5 +21,7 @@ public enum EMediatorEventType
     CreateMemoryPanel,
     PlayeMoveOtherZone,
     SpawnResearcher,
+    StartEndingFade,
+    Ending,
     Max,
 }

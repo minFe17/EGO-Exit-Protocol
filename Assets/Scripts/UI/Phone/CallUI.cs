@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using Utils;
 
 public class CallUI : MonoBehaviour
 {
@@ -38,6 +39,7 @@ public class CallUI : MonoBehaviour
         _callPanel.SetActive(true);
         // 증거를 일정갯수? or 다? 찾았다면 엔딩으로
         // 위 조건이 만족하지 못하면 루프?
+        GenericSingleton<MediatorManager>.Instance.Notify(EMediatorEventType.StartEndingFade, EEndingType.Phone);
     }
 
     public void OnClickEndCall()

@@ -1,5 +1,5 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using Utils;
 
 public class EndingDoor : DoorBase
 {
@@ -29,12 +29,7 @@ public class EndingDoor : DoorBase
 
     public override void OnInteract()
     {
-        // 페이드 연출?
-        // 엔딩처리
-        // 씬 이동이랑 판넬 뭐 띄울지
-        // 적 소환 멈추기(시간 정지)
-        // 중재자 이벤트 다 삭제
-        SceneManager.LoadScene("EndingScene");
+        GenericSingleton<MediatorManager>.Instance.Notify(EMediatorEventType.StartEndingFade, EEndingType.Door);
     }
 
     #region Animation Event
