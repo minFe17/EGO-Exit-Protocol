@@ -2,7 +2,7 @@ using System.IO;
 using UnityEngine;
 using Utils;
 
-public class WriteData : MonoBehaviour
+public class WriteData
 {
     JsonManager _jsonManager;
 

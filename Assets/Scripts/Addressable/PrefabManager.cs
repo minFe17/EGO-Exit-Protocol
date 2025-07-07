@@ -32,4 +32,13 @@ public class PrefabManager : MonoBehaviour
     {
         return _prefabDict[key];
     }
+
+    public bool CheckLoadPrefab()
+    {
+        if (_prefabDict == null)
+            return false;
+        if (_prefabDict[EPrefabType.Player].GetPrefab() != null)
+            return true;
+        return false;
+    }
 }

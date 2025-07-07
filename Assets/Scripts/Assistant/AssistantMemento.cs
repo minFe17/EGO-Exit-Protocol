@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class AssistantMemento : MonoBehaviour
+public class AssistantMemento
 {
     Vector3 _assistantPosition = new Vector3(-69.3f, -2.4f, 0);
     Vector3 _assistantScale;

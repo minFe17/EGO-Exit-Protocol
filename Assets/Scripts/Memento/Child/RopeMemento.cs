@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class RopeMemento : MonoBehaviour
+public class RopeMemento
 {
     Vector3 _position = new Vector3(-69.4f, -2.15f, 0);
 

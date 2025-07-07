@@ -38,4 +38,9 @@ public class MediatorManager : MonoBehaviour
             }
         }
     }
+
+    public void ClearMediatorEvent()
+    {
+        _eventDict.Clear();
+    }
 }

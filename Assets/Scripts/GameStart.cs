@@ -5,10 +5,9 @@ public class GameStart : MonoBehaviour
 {
     PrefabManager _prefabManager;
 
-    async void Start()
+    void Start()
     {
         _prefabManager = GenericSingleton<PrefabManager>.Instance;
-        await _prefabManager.LoadPrefab();
         GenericSingleton<TimeManager>.Instance.Init();
         GenericSingleton<JsonManager>.Instance.Init();
         GenericSingleton<ResearcherManager>.Instance.Init();

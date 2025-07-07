@@ -1,7 +1,6 @@
 using System.Collections.Generic;
-using UnityEngine;
 
-public class LoopObserve : MonoBehaviour
+public class LoopObserve
 {
     List<ILoopObject> _loopEvents = new List<ILoopObject>();
 

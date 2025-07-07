@@ -3,7 +3,7 @@ using UnityEngine;
 using Utils;
 
 [System.Serializable]
-public class MemoryRepository : MonoBehaviour
+public class MemoryRepository
 {
     // 읽기 전용
     [SerializeField] List<MemoryData> _readDataList = new List<MemoryData>();

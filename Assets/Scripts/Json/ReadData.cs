@@ -2,7 +2,7 @@ using System.IO;
 using UnityEngine;
 using Utils;
 
-public class ReadData : MonoBehaviour
+public class ReadData
 {
     JsonManager _jsonManager;
 

@@ -1,6 +1,4 @@
-using UnityEngine;
-
-public class TimeMemento : MonoBehaviour
+public class TimeMemento
 {
     float _loopTime = 50f;
     bool _isStop = true;

@@ -10,7 +10,8 @@ public class LobbyUI : MonoBehaviour
     {
         _animator = GetComponent<Animator>();
         _animator.SetTrigger("doCredit");
-        await GenericSingleton<PrefabManager>.Instance.LoadPrefab();
+        if (!GenericSingleton<PrefabManager>.Instance.CheckLoadPrefab())
+            await GenericSingleton<PrefabManager>.Instance.LoadPrefab();
         _animator.SetBool("isShow", true);
     }
 

@@ -1,7 +1,6 @@
-using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class CameraMemento : MonoBehaviour
+public class CameraMemento
 {
     Tilemap _loopTilemap;
 

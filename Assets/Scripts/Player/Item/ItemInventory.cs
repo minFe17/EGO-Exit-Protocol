@@ -1,7 +1,6 @@
 using System.Collections.Generic;
-using UnityEngine;
 
-public class ItemInventory : MonoBehaviour
+public class ItemInventory
 {
     Dictionary<EItemType, ItemBase> _itemDict = new Dictionary<EItemType, ItemBase>();
     List<EItemType> _keys = new List<EItemType>();

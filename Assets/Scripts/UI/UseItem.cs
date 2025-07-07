@@ -1,7 +1,7 @@
 using UnityEngine;
 using Utils;
 
-public class UseItem : MonoBehaviour, IMediatorEvent
+public class UseItem : IMediatorEvent
 {
     ItemPanel _itemPanel;
 

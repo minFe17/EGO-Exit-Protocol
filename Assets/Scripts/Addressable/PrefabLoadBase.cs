@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using UnityEngine;
 using Utils;
 
-public abstract class PrefabLoadBase : MonoBehaviour
+public abstract class PrefabLoadBase
 {
     protected AddressableManager _addressableManager;
 
