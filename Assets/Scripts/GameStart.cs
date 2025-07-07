@@ -8,6 +8,7 @@ public class GameStart : MonoBehaviour
     void Start()
     {
         _prefabManager = GenericSingleton<PrefabManager>.Instance;
+        GenericSingleton<InteractObjectManager>.Instance.Init();
         GenericSingleton<TimeManager>.Instance.Init();
         GenericSingleton<JsonManager>.Instance.Init();
         GenericSingleton<ResearcherManager>.Instance.Init();
