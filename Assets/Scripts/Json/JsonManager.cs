@@ -12,11 +12,13 @@ public class JsonManager : MonoBehaviour
 
     string _memoryDataPath;
     string _loopDataPath;
+    string _evidenceDataPath;
 
     public ReadData ReadData { get => _readData; }
     public WriteData WriteData { get => _writeData; }
     public string MemoryDataPath { get => _memoryDataPath; }
     public string LoopDataPath { get => _loopDataPath; }
+    public string EvidenceDataPath { get => _evidenceDataPath; }
 
     void Awake()
     {
@@ -36,6 +38,7 @@ public class JsonManager : MonoBehaviour
             _stringBuilder = new StringBuilder();
         CreateDataPath(out _memoryDataPath, "SaveMemoryData.json");
         CreateDataPath(out _loopDataPath, "SaveLoopData.json");
+        CreateDataPath(out _evidenceDataPath, "SaveEvidenceData.json");
     }
 
     void CreateDataPath(out string path, string dataName)

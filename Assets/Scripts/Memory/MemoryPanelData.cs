@@ -10,7 +10,6 @@ public class MemoryPanelData
     {
         _memoryType = (int)memoryType;
         _position = new NullableVector3(null);
-        // 포지션은 랜덤?
     }
 
     public EMemoryType MemoryType { get => (EMemoryType)_memoryType; }

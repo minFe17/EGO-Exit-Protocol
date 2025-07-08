@@ -8,5 +8,6 @@ public enum EPrefabType
     Assistant,
     Researcher,
     ItemIcon,
+    Evidence,
     Max,
 }

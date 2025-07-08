@@ -4,5 +4,6 @@ public enum EEvidenceType
     HumanCloneAgree,
     HumanCloneDisagree,
     HumanCloneDisagree_Work,
+    ResearchJournal,
     Max
 }

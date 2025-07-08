@@ -28,4 +28,10 @@ public class WriteData
         LoopData data = DataSingleton<LoopData>.Instance;
         WriteJsonDataBase(data, _jsonManager.LoopDataPath);
     }
+
+    public void WriteEvidenceData()
+    {
+        CurrentEvidenceList data = DataSingleton<CurrentEvidenceList>.Instance;
+        WriteJsonDataBase(data, _jsonManager.EvidenceDataPath);
+    }
 }

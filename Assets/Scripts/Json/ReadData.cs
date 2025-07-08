@@ -47,4 +47,12 @@ public class ReadData
         LoopData data = DataSingleton<LoopData>.Instance;
         ReadJsonData(_jsonManager.LoopDataPath, data);
     }
+
+    public void ReadEvidenceData()
+    {
+        if(!_jsonManager.CheckDataFile(_jsonManager.EvidenceDataPath))
+            return;
+        CurrentEvidenceList data = DataSingleton<CurrentEvidenceList>.Instance;
+        ReadJsonData(_jsonManager.EvidenceDataPath, data);
+    }
 }

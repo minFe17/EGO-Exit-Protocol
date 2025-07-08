@@ -6,7 +6,7 @@ using Utils;
 
 public class MemoryPanel : MonoBehaviour, IMemento
 {
-    [SerializeField] RectTransform rectTransform;
+    [SerializeField] RectTransform _rectTransform;
     [SerializeField] Image _image;
     [SerializeField] Text _description;
 
@@ -35,14 +35,14 @@ public class MemoryPanel : MonoBehaviour, IMemento
 
     void ShowMemory()
     {
-        rectTransform.anchoredPosition = _memoryPanelData.Position.Value;
+        _rectTransform.anchoredPosition = _memoryPanelData.Position.Value;
         _image.sprite = _memoryData.Sprite;
         _description.text = _memoryData.Description;
     }
 
     void CalculateBound(float yBound)
     {
-        _halfSize = rectTransform.rect.size * rectTransform.pivot;
+        _halfSize = _rectTransform.rect.size * _rectTransform.pivot;
         _minBoundSize = new Vector2(_rect.min.x + _halfSize.x, -yBound);
         _maxBoundSize = new Vector2(_rect.max.x - _halfSize.x, yBound);
     }
@@ -60,13 +60,13 @@ public class MemoryPanel : MonoBehaviour, IMemento
         PointerEventData eventData = (PointerEventData)data;
         Vector2 movePos = eventData.position - _lastMousePosition;
 
-        Vector2 pos = rectTransform.anchoredPosition + movePos;
+        Vector2 pos = _rectTransform.anchoredPosition + movePos;
         float clampX = Mathf.Clamp(pos.x, _minBoundSize.x, _maxBoundSize.x);
         float clampY = Mathf.Clamp(pos.y, _minBoundSize.y, _maxBoundSize.y);
 
         Vector2 newPos = new Vector2(clampX, clampY);
 
-        rectTransform.anchoredPosition = newPos;
+        _rectTransform.anchoredPosition = newPos;
         _memoryPanelData.Position = newPos; 
         _lastMousePosition = eventData.position;
     }
@@ -80,7 +80,7 @@ public class MemoryPanel : MonoBehaviour, IMemento
     #region Interface
     public void Save()
     {
-        _mementoStack.Push(new MemoryMemento(rectTransform.anchoredPosition));
+        _mementoStack.Push(new MemoryMemento(_rectTransform.anchoredPosition));
         _board.Save(this);
     }
 
@@ -89,7 +89,7 @@ public class MemoryPanel : MonoBehaviour, IMemento
         if(_mementoStack.Count > 0 )
         {
             MemoryMemento memento = _mementoStack.Pop();
-            rectTransform.anchoredPosition = memento.Position;
+            _rectTransform.anchoredPosition = memento.Position;
         }
     }
     #endregion

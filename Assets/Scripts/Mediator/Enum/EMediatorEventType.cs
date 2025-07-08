@@ -19,6 +19,7 @@ public enum EMediatorEventType
     RopeReleased,
     PlayerLocationChanged,
     CreateMemoryPanel,
+    CreateEvidencePanel,
     PlayeMoveOtherZone,
     SpawnResearcher,
     StartEndingFade,

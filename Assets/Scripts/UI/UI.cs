@@ -12,8 +12,8 @@ public class UI : MonoBehaviour
 
     void Awake()
     {
-        _memoryBoard.Init(EMediatorEventType.CreateMemoryPanel);
-        //_evidenceBoard.Init();
+        _memoryBoard.Init();
+        _evidenceBoard.Init();
         _dialEvent.Init(_dialPanel);
         _phoneEvent.Init(_phonePanel);
     }

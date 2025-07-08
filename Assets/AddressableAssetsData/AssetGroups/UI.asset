@@ -46,7 +46,8 @@ MonoBehaviour:
   - m_GUID: c75d3d9b0b5c2d64ba7518cd1d56465e
     m_Address: ResearchJournal
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - Evidence
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: d50c3f5fe2b52934cabc7b8abf7beb5e
     m_Address: HumanCloneDisagree_Work
