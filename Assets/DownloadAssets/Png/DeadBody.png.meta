@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 79f6a29888f5bdb4e94c964a4c1c0510
+guid: 61762a2c433020c4aa0ba57c08812aed
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -2595278777343576980
-    second: Diploma 1_0
+      213: -5085069926900001194
+    second: DeadBody_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,7 +46,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Diploma 1_0
+      name: DeadBody_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 1024
-        height: 1536
+        x: 27
+        y: 67
+        width: 234
+        height: 41
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: c64735fc3b7bbfbd0800000000000000
-      internalID: -2595278777343576980
+      spriteID: 6569a15e7d33e69b0800000000000000
+      internalID: -5085069926900001194
       vertices: []
       indices: 
       edges: []
@@ -125,7 +125,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Diploma 1_0: -2595278777343576980
+      DeadBody_0: -5085069926900001194
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

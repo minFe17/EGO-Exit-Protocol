@@ -20,10 +20,39 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1b10e5cdfc7d8074ebd4899ac363eb4e
+    m_Address: Diploma
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Evidence
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 3e5a16c564bd45c4d992d8625ee28217
     m_Address: ItemIcon
     m_ReadOnly: 0
     m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6494f7d4165e4c74d917d6a7d0f8638d
+    m_Address: HumanCloneAgree
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Evidence
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8c89781ec965a72499c5173f90ed9959
+    m_Address: HumanCloneDisagree
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Evidence
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c75d3d9b0b5c2d64ba7518cd1d56465e
+    m_Address: ResearchJournal
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d50c3f5fe2b52934cabc7b8abf7beb5e
+    m_Address: HumanCloneDisagree_Work
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Evidence
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: d9fc29f3596ebf14b8fdbae5dff2f812
     m_Address: MemoryPanel

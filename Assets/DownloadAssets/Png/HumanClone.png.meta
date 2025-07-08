@@ -1,10 +1,22 @@
 fileFormatVersion: 2
-guid: 79f6a29888f5bdb4e94c964a4c1c0510
+guid: 827aa5d5da4686d4b8d90cd2ffb1c644
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -2595278777343576980
-    second: Diploma 1_0
+      213: -6821120752855387759
+    second: HumanClone_0
+  - first:
+      213: -2333459344325318135
+    second: HumanClone_1
+  - first:
+      213: 5605779632945882484
+    second: HumanClone_2
+  - first:
+      213: -8362391742271038861
+    second: HumanClone_3
+  - first:
+      213: -6944286903191690803
+    second: HumanClone_4
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,7 +58,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -100,13 +112,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Diploma 1_0
+      name: HumanClone_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 1024
-        height: 1536
+        x: 75
+        y: 128
+        width: 44
+        height: 41
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +127,96 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: c64735fc3b7bbfbd0800000000000000
-      internalID: -2595278777343576980
+      spriteID: 191720ca0d28651a0800000000000000
+      internalID: -6821120752855387759
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HumanClone_1
+      rect:
+        serializedVersion: 2
+        x: 180
+        y: 128
+        width: 43
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 90a6cabe613ed9fd0800000000000000
+      internalID: -2333459344325318135
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HumanClone_2
+      rect:
+        serializedVersion: 2
+        x: 61
+        y: 0
+        width: 71
+        height: 125
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 475ebde10eabbcd40800000000000000
+      internalID: 5605779632945882484
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HumanClone_3
+      rect:
+        serializedVersion: 2
+        x: 116
+        y: 57
+        width: 62
+        height: 55
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 37a56492401d2fb80800000000000000
+      internalID: -8362391742271038861
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HumanClone_4
+      rect:
+        serializedVersion: 2
+        x: 166
+        y: 0
+        width: 71
+        height: 125
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dc1acdc9adfe0af90800000000000000
+      internalID: -6944286903191690803
       vertices: []
       indices: 
       edges: []
@@ -125,7 +225,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -135,7 +235,11 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Diploma 1_0: -2595278777343576980
+      HumanClone_0: -6821120752855387759
+      HumanClone_1: -2333459344325318135
+      HumanClone_2: 5605779632945882484
+      HumanClone_3: -8362391742271038861
+      HumanClone_4: -6944286903191690803
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
