@@ -5232,7 +5232,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _text: {fileID: 6883834818712740320}
   _dial: {fileID: 7949561827596096515}
-  _targetNumber: 5
+  _targetNumber: 9
 --- !u!1 &6318054625104638930
 GameObject:
   m_ObjectHideFlags: 0
@@ -6600,7 +6600,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _text: {fileID: 2243191061460123817}
   _dial: {fileID: 7949561827596096515}
-  _targetNumber: 7
+  _targetNumber: 1
 --- !u!1 &8033779948876388986
 GameObject:
   m_ObjectHideFlags: 0
@@ -7859,7 +7859,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _text: {fileID: 8745960292297358113}
   _dial: {fileID: 7949561827596096515}
-  _targetNumber: 5
+  _targetNumber: 2
 --- !u!1 &8708332016695144751
 GameObject:
   m_ObjectHideFlags: 0
