@@ -8,9 +8,16 @@ public class PhoneUI : MonoBehaviour, ILoopObject
 
     GameObject _activePanel;
 
+    bool _isUseApplication;
+
     void Start()
     {
         GenericSingleton<ObserveManager>.Instance.LoopObserve.AddLoopEvent(this);
+    }
+
+    public void SetIsUseApplication(bool value)
+    {
+        _isUseApplication = value;
     }
 
     #region Button Event
@@ -24,6 +31,8 @@ public class PhoneUI : MonoBehaviour, ILoopObject
     #region Input System
     void OnClose()
     {
+        if (_isUseApplication)
+            return;
         if (_activePanel != null)
         {
             _activePanel.SetActive(false);

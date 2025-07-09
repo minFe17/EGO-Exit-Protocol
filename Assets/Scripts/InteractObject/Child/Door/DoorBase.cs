@@ -74,8 +74,6 @@ public abstract class DoorBase : MonoBehaviour, IInteractable, ILoopObject
     void TrapDoor()
     {
         GenericSingleton<MediatorManager>.Instance.Notify(EMediatorEventType.SpawnResearcher, _researcherSpawnPos);
-        if (_memory != null)
-            _memory.AddMemory();
     }
 
     protected virtual void InteractDoor()
@@ -86,6 +84,9 @@ public abstract class DoorBase : MonoBehaviour, IInteractable, ILoopObject
     #region Interface
     void IInteractable.Interact()
     {
+        if (_memory != null)
+            _memory.AddMemory();
+
         if (_currentLock)
             TryUnlock();
         else

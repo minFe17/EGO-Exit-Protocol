@@ -8,5 +8,10 @@ public enum EMemoryType
     Found_PhoneOnDesk,
     LockMainGate,
     IsNotExit,
+    DontInteract_Deadbody,
+    OnlyExit,
+    NotNeedKey,
+    Obsession_Escape,
+    DontBring_Phone,
     Max
 }

@@ -32,6 +32,11 @@ public class PlayerManager : MonoBehaviour, ILoopObject
         _player = temp.GetComponent<Player>();
     }
 
+    public bool HavePhone()
+    {
+        return _itemInventory.HavePhone();
+    }
+
     public void UsePhone(int number)
     {
         _itemInventory.UsePhone(number-1);

@@ -12,16 +12,10 @@ public class ItemInventory
         return true;
     }
 
-    void ChangeItem(EItemType itemType, ItemBase itemBse)
-    {
-        // UI에서 3개 보여주기?
-        // 한개는 버려야 함
-    }
-
     public void SetItem(EItemType itemType, ItemBase itemBase)
     {
         if (!CheckItem())
-            ChangeItem(itemType, itemBase);
+            return;
         else
         {
             _itemDict.Add(itemType, itemBase);
@@ -41,6 +35,13 @@ public class ItemInventory
             _itemDict.Remove(type);
             _keys.Remove(type);
         }
+    }
+
+    public bool HavePhone()
+    {
+        if (_itemDict.ContainsKey(EItemType.Phone))
+            return true;
+        return false;
     }
 
     public void UsePhone(int number)

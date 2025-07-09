@@ -5,9 +5,13 @@ using Utils;
 public class Computer : MonoBehaviour, IInteractable
 {
     [SerializeField] bool _haveEvidence;
+    [SerializeField] bool _haveMemory;
 
     [ShowIf("_haveEvidence")]
     [SerializeField] EvidenceObject _evidenceObject;
+
+    [ShowIf("_haveMemory")]
+    [SerializeField] MemoryObject _memoryObject;
 
     void Start()
     {
@@ -31,6 +35,8 @@ public class Computer : MonoBehaviour, IInteractable
             return;
         if (_haveEvidence)
             _evidenceObject.AddEvidence();
+        if(_haveMemory)
+            _memoryObject.AddMemory();
     }
     #endregion
 }

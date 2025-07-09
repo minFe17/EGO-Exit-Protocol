@@ -5,6 +5,7 @@ using Utils;
 public class Stair : MonoBehaviour, IInteractable
 {
     [SerializeField] bool _isRooftopStair;
+    [SerializeField] MemoryObject _memoryObject;
 
     [ShowIf("IsNotRooftop")]
     [SerializeField] StairSetting _stairSetting;
@@ -33,10 +34,11 @@ public class Stair : MonoBehaviour, IInteractable
     #region Interface
     void IInteractable.Interact()
     {
-        if(_isRooftopStair)
+        if(_memoryObject != null)
+            _memoryObject.AddMemory();
+        if (_isRooftopStair)
         {
             // ด๋ป็
-            _mediatorManager.Notify(EMediatorEventType.AddMemory, EMemoryType.DontGo_Rooftop);
             _mediatorManager.Notify(EMediatorEventType.SpawnResearcher, _researcherSpawnPosition);
             return;
         }
