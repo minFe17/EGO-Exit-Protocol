@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Experimental.AI;
 using Utils;
 
 public class EvidenceBoardUI : BoardUI, IMediatorEvent
@@ -40,6 +41,8 @@ public class EvidenceBoardUI : BoardUI, IMediatorEvent
         {
             GameObject temp = Instantiate(_evidencePrefabLoad.GetPrefab(datas[i].EvidentceType), this.gameObject.transform);
             temp.GetComponent<EvidencePanel>().Init(datas[i], this, _yBoundary);
+            if (datas[i].EvidentceType == EEvidenceType.ResearchJournal)
+                temp.GetComponent<ResearchJournal>().Init(datas[i].JournalData);
         }
     }
 
@@ -52,9 +55,16 @@ public class EvidenceBoardUI : BoardUI, IMediatorEvent
         if (evidencePanelData.Position == null)
             evidencePanelData.Position = RandomPosition();
 
-        DataSingleton<CurrentEvidenceList>.Instance.CurrentEvidenceData.Add(evidencePanelData);
         GameObject temp = Instantiate(_evidencePrefabLoad.GetPrefab(evidencePanelData.EvidentceType), this.gameObject.transform);
         temp.GetComponent<EvidencePanel>().Init(evidencePanelData, this, _yBoundary);
+
+        if(evidencePanelData.EvidentceType == EEvidenceType.ResearchJournal)
+        {
+            evidencePanelData.JournalData = new ResearchJournalData();
+            temp.GetComponent<ResearchJournal>().Init(evidencePanelData.JournalData);
+        }
+
+        DataSingleton<CurrentEvidenceList>.Instance.CurrentEvidenceData.Add(evidencePanelData);
         GenericSingleton<JsonManager>.Instance.WriteData.WriteEvidenceData();
     }
     #endregion

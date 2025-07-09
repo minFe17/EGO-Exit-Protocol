@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4316229747629913405}
   - component: {fileID: 1717782234242523375}
   - component: {fileID: 400815181852955019}
+  - component: {fileID: 3030630784071275128}
   - component: {fileID: 7119479920114149295}
   m_Layer: 5
   m_Name: ResearchJournal
@@ -93,6 +94,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60631c6c27a828540919f850034920b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3030630784071275128
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 630934694883324676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4c3961073e50a444a46182ba5dbb771, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _textList:
+  - "\uC758\uBBF8 \uC788\uB294 \uACB0\uACFC \uC5C6\uC74C. \uC7AC\uC2E4\uD5D8 \uC608\uC815"
+  - "\uC2E4\uD5D8\uCCB4\uB294 \uC5EC\uC804\uD788 \uBD88\uC548\uC815\uD568"
+  - "\uAD00\uCE21 \uC885\uB8CC. \uB2E4\uC74C \uC2E4\uD5D8\uC5D0 \uAE30\uB85D \uC778\uACC4"
+  _experimentalNumberText: {fileID: 448370434692267207}
+  _recordText: {fileID: 6368843380706110215}
 --- !u!114 &7119479920114149295
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -166,7 +185,7 @@ GameObject:
   - component: {fileID: 4462055133236877284}
   - component: {fileID: 448370434692267207}
   m_Layer: 5
-  m_Name: Text (Legacy)
+  m_Name: ExperimentalNumberText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -245,7 +264,7 @@ GameObject:
   - component: {fileID: 1042878062325587244}
   - component: {fileID: 6368843380706110215}
   m_Layer: 5
-  m_Name: Text (Legacy) (1)
+  m_Name: RecordText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -346,7 +365,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.82636, y: -106.2}
+  m_AnchoredPosition: {x: 2.3, y: -106.2}
   m_SizeDelta: {x: 293.78, y: 47.8501}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8461641827499409419
@@ -390,7 +409,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: ~~~
+  m_Text: X
 --- !u!1 &8570716770278108346
 GameObject:
   m_ObjectHideFlags: 0
@@ -425,7 +444,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.82667, y: -172.19656}
+  m_AnchoredPosition: {x: 2.3, y: -172.19656}
   m_SizeDelta: {x: 293.78, y: 49.8432}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6541083103513682611
@@ -469,4 +488,5 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: ~~~
+  m_Text: "\uAE30\uB85D \uC774\uC0C1 \uC5C6\uC74C\n\uB4F1\uC77C \uC870\uAC74 \uD558
+    \uBC18\uBCF5 \uC2E4\uD5D8 \uC9C0\uC18D"

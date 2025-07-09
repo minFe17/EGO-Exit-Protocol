@@ -11,6 +11,8 @@ public class CurrentEvidenceList : MonoBehaviour
 
     public bool ContainsEvidenceData(EEvidenceType type)
     {
+        if (type != EEvidenceType.ResearchJournal)
+            return false;
         foreach(EvidencePanelData data in _currentEvidenceData)
         {
             if (data.EvidentceType == type)

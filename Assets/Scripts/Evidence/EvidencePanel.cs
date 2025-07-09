@@ -16,7 +16,6 @@ public class EvidencePanel : MonoBehaviour, IMemento
 
     Stack<EvidenceMemento> _mementoStack = new Stack<EvidenceMemento>();
 
-
     public void Init(EvidencePanelData evidencePanelData, BoardUI parent, float yBound)
     {
         _evidencePanelData = evidencePanelData;
