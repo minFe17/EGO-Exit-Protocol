@@ -6,6 +6,7 @@ using Utils;
 
 public class MemoryPanel : MonoBehaviour, IMemento
 {
+    [SerializeField] RectTransform _rectTransform;
     [SerializeField] Image _image;
     [SerializeField] Text _description;
 
@@ -14,7 +15,6 @@ public class MemoryPanel : MonoBehaviour, IMemento
     MemoryManager _memoryManager;
     MemoryData _memoryData;
     BoardUI _board;
-    RectTransform _rectTransform;
 
     Vector2 _lastMousePosition;
     Vector2 _halfSize;
@@ -26,7 +26,6 @@ public class MemoryPanel : MonoBehaviour, IMemento
     {
         _board = parent;
         _rect = _board.GetComponent<RectTransform>().rect;
-        _rectTransform = GetComponent<RectTransform>();
         _memoryPanelData = memoryPanelData;
         _memoryManager = GenericSingleton<MemoryManager>.Instance;
         _memoryData = _memoryManager.MemoryRepository.GetMemoryData(_memoryPanelData.MemoryType);

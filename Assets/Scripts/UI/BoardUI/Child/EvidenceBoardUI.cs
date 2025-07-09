@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Experimental.AI;
 using Utils;
 
 public class EvidenceBoardUI : BoardUI, IMediatorEvent
@@ -60,7 +61,6 @@ public class EvidenceBoardUI : BoardUI, IMediatorEvent
         if(evidencePanelData.EvidentceType == EEvidenceType.ResearchJournal)
         {
             evidencePanelData.JournalData = new ResearchJournalData();
-            evidencePanelData.JournalData.IsNewResearchJournal = true;
             temp.GetComponent<ResearchJournal>().Init(evidencePanelData.JournalData);
         }
 
