@@ -6,6 +6,7 @@ public class Assistant : MonoBehaviour, IMediatorEvent, ILoopObject
 {
     [SerializeField] Animator _animator;
     [SerializeField] GameObject _dagger;
+    [SerializeField] DialogUI _dialogUI;
 
     Dictionary<EAssistantStateType, IAssistantState> _assistantState;
     IAssistantState _currentState;
@@ -23,6 +24,7 @@ public class Assistant : MonoBehaviour, IMediatorEvent, ILoopObject
         SetMemento();
         SetState();
         OnLoopEvent();
+        _dialogUI.Init();
     }
 
     void Update()

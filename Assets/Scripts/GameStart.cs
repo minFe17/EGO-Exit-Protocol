@@ -38,5 +38,6 @@ public class GameStart : MonoBehaviour
     {
         GenericSingleton<MemoryManager>.Instance.MemoryRepository.CreateCurrentMemory();
         GenericSingleton<LoopManager>.Instance.Init();
+        GenericSingleton<DialogManager>.Instance.Init();
     }
 }

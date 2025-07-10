@@ -47,6 +47,7 @@ public class PlayerManager : MonoBehaviour, ILoopObject
     {
         SetPlayerPosition(_mementoManager.PlayerMemento.PlayerStartPos);
         _itemInventory.ClearItemDict();
+        _player.SetDialogState(true);
     }
     #endregion
 }

@@ -9,5 +9,6 @@ public enum EPrefabType
     Researcher,
     ItemIcon,
     Evidence,
+    Dialog,
     Max,
 }

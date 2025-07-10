@@ -17,4 +17,5 @@ public abstract class PrefabLoadBase
     public virtual GameObject GetPrefab() => null;
     public virtual T GetPrefab<T>() => default(T);
     public virtual GameObject GetPrefab<TEnum>(TEnum type) where TEnum : Enum => null;
+    public virtual TextAsset GetPrefabTextAsset<TEnum>(TEnum type) where TEnum : Enum => null;
 }

@@ -1,10 +1,21 @@
+using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using Utils;
 
 public class ReadData
 {
+    List<BaseDialogData> _dailogDatas = new List<BaseDialogData>();
+
     JsonManager _jsonManager;
+
+    void SetDialogList()
+    {
+        if(_dailogDatas.Count == 0)
+        {
+            _dailogDatas.Add(DataSingleton<LoopDialogData>.Instance);
+        }
+    }
 
     public void Init(JsonManager jsonManager)
     {
@@ -54,5 +65,18 @@ public class ReadData
             return;
         CurrentEvidenceList data = DataSingleton<CurrentEvidenceList>.Instance;
         ReadJsonData(_jsonManager.EvidenceDataPath, data);
+    }
+
+    public void ReadDialogData()
+    {
+        PrefabLoadBase dialogPrefabLoad = GenericSingleton<PrefabManager>.Instance.GetPrefabLoad(EPrefabType.Dialog);
+        if (_dailogDatas.Count == 0)
+            SetDialogList();
+        for (int i=0; i<(int)EDialogType.Max; i++)
+        {
+            TextAsset textAsset = dialogPrefabLoad.GetPrefabTextAsset((EDialogType)i);
+            string data = textAsset.text;
+            JsonUtility.FromJsonOverwrite(data, _dailogDatas[i]);
+        }
     }
 }

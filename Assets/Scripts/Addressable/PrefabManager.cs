@@ -18,7 +18,8 @@ public class PrefabManager : MonoBehaviour
             {EPrefabType.Data, new DataPrefabLoad() },
             {EPrefabType.Researcher, new ResearcherPrefabLoad() },
             {EPrefabType.ItemIcon, new ItemSpritePrefabLoad() },
-            {EPrefabType.Evidence, new EvidencePrefabLoad() }
+            {EPrefabType.Evidence, new EvidencePrefabLoad() },
+            {EPrefabType.Dialog, new DialogDataPrefabLoad() },
         };
     }
 

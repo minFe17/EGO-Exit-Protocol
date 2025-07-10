@@ -15,6 +15,11 @@ MonoBehaviour:
   m_GroupName: Data
   m_GUID: 524e5096cb7390b438415cedb952283a
   m_SerializeEntries:
+  - m_GUID: 9c421b4ef8da6254587b71b525a526a9
+    m_Address: LoopDialog
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: c66320ab2d008ed4288590b3d130bb15
     m_Address: MemoryData
     m_ReadOnly: 0
