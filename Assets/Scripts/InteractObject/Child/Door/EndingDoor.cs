@@ -35,7 +35,6 @@ public class EndingDoor : DoorBase
     #region Animation Event
     void EndOpen()
     {
-        // 열렸다는 대사 처리?
         _collider.isTrigger = true;
     }
     #endregion

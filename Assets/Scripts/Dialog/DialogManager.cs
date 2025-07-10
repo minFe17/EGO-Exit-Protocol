@@ -8,7 +8,7 @@ public class DialogManager : MonoBehaviour, IMediatorEvent
     // ╫л╠шео
     Dictionary<EDialogCharacterType, DialogUI> _characterDialogDict = new Dictionary<EDialogCharacterType, DialogUI>();
 
-    List<DialogData> _dialogList = new List<DialogData>();
+    BaseDialogData _dialogData;
 
     public void Init()
     {
@@ -31,7 +31,7 @@ public class DialogManager : MonoBehaviour, IMediatorEvent
     #region Interface
     void IMediatorEvent.HandleEvent(object data)
     {
-        _dialogList = (List<DialogData>)data;
+        _dialogData = (BaseDialogData)data;
         StartCoroutine(DialogRoutine());
     }
     #endregion
@@ -40,17 +40,16 @@ public class DialogManager : MonoBehaviour, IMediatorEvent
     IEnumerator DialogRoutine()
     {
         GenericSingleton<MediatorManager>.Instance.Notify(EMediatorEventType.TimePause);
-        for (int i = 0; i < _dialogList.Count; i++)
+        for (int i = 0; i < _dialogData.Lines.Count; i++)
         {
-            if (!_characterDialogDict[_dialogList[i].CharacterType].gameObject.activeSelf)
-                _characterDialogDict[_dialogList[i].CharacterType].gameObject.SetActive(true);
-            _characterDialogDict[_dialogList[i].CharacterType].ShowDialog(_dialogList[i].Text);
+            if (!_characterDialogDict[_dialogData.Lines[i].CharacterType].gameObject.activeSelf)
+                _characterDialogDict[_dialogData.Lines[i].CharacterType].gameObject.SetActive(true);
+            _characterDialogDict[_dialogData.Lines[i].CharacterType].ShowDialog(_dialogData.Lines[i].Text);
             yield return new WaitForSeconds(1f);
-            _characterDialogDict[_dialogList[i].CharacterType].gameObject.SetActive(false);
+            _characterDialogDict[_dialogData.Lines[i].CharacterType].gameObject.SetActive(false);
         }
         GenericSingleton<MediatorManager>.Instance.Notify(EMediatorEventType.TimeResume);
         GenericSingleton<MediatorManager>.Instance.Notify(EMediatorEventType.EndDialog);
-
     }
     #endregion
 }

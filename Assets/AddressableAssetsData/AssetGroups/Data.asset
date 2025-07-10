@@ -15,13 +15,43 @@ MonoBehaviour:
   m_GroupName: Data
   m_GUID: 524e5096cb7390b438415cedb952283a
   m_SerializeEntries:
+  - m_GUID: 0ee0dde7373f1994bbf1b7004349caa8
+    m_Address: DoorHasBoltCutterDialog
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 65dd98ae2b8e78749946a23609925118
+    m_Address: RooftopDialog
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8be8a337e7b98d640aee6a23f693bab6
+    m_Address: DoorHasKeyDialog
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 9c421b4ef8da6254587b71b525a526a9
     m_Address: LoopDialog
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ac4cb40838c1de84c988647d1ec07064
+    m_Address: DoorMainGateDialog
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: c66320ab2d008ed4288590b3d130bb15
     m_Address: MemoryData
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c66e84efbc9ed5d478d426f583f4043e
+    m_Address: DoorDialog
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ebc30647b998bdd4399675f2dec957d4
+    m_Address: DoorNoItemDialog
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

@@ -5,12 +5,16 @@ using Utils;
 public class ResearcherManager : MonoBehaviour, IMediatorEvent, ILoopObject
 {
     // ╫л╠шео
+    Queue<Vector3> _spawnPos = new Queue<Vector3>();
     List<GameObject> _researcherList = new List<GameObject>();
     GameObject _researcherPrefab;
     GameObject _bulletPrefab;
 
+    CanResearcherSpawn _canResearcherSpawn = new CanResearcherSpawn();
+
     public void Init()
     {
+        _canResearcherSpawn.Init(this);
         GenericSingleton<MediatorManager>.Instance.Register(EMediatorEventType.SpawnResearcher, this);
         if (_researcherPrefab != null)
             return;
@@ -26,12 +30,20 @@ public class ResearcherManager : MonoBehaviour, IMediatorEvent, ILoopObject
         bullet.GetComponent<ResearcherBullet>().Init(direction);
     }
 
+    public void Spawn()
+    {
+        if (_spawnPos.Count <= 0)
+            return;
+        Vector3 position = _spawnPos.Dequeue();
+        _researcherList.Add(Instantiate(_researcherPrefab, position, Quaternion.identity));
+    }
+
     void IMediatorEvent.HandleEvent(object data)
     {
-        Vector3 position = Vector3.zero;
         if (data != null)
-            position = (Vector3)(object)data;
-        _researcherList.Add(Instantiate(_researcherPrefab, position, Quaternion.identity));
+            _spawnPos.Enqueue((Vector3)data);
+        else
+            _spawnPos.Enqueue(Vector3.zero);
     }
 
     void ILoopObject.OnLoopEvent()

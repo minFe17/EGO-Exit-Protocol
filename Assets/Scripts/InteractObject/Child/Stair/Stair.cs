@@ -38,7 +38,7 @@ public class Stair : MonoBehaviour, IInteractable
             _memoryObject.AddMemory();
         if (_isRooftopStair)
         {
-            // ด๋ป็
+            _mediatorManager.Notify(EMediatorEventType.Dialog, DataSingleton<RooftopDialogData>.Instance);
             _mediatorManager.Notify(EMediatorEventType.SpawnResearcher, _researcherSpawnPosition);
             return;
         }

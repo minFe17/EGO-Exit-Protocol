@@ -17,6 +17,7 @@ public abstract class DoorBase : MonoBehaviour, IInteractable, ILoopObject
 
     ObserveManager _observerManager;
     InteractObjectManager _interactObjectManager;
+    MediatorManager _mediatorManager;
     ItemBase _item;
     bool _currentLock;
 
@@ -30,6 +31,7 @@ public abstract class DoorBase : MonoBehaviour, IInteractable, ILoopObject
 
     protected virtual void Init()
     {
+        _mediatorManager = GenericSingleton<MediatorManager>.Instance;
         _observerManager = GenericSingleton<ObserveManager>.Instance;
         _observerManager.LoopObserve.AddLoopEvent(this);
         _cameraManager = GenericSingleton<CameraManager>.Instance;
@@ -44,7 +46,7 @@ public abstract class DoorBase : MonoBehaviour, IInteractable, ILoopObject
 
     void TryUnlock()
     {
-        // 문이 잠겼다는 대사 처리
+        _mediatorManager.Notify(EMediatorEventType.Dialog, DataSingleton<DoorDialogData>.Instance);
         EItemType type = _doorMemento.NeedUnlockItem;
         if (type != EItemType.Max)
             _playerManager.ItemInventory.GetItem(out _item, type);
@@ -60,7 +62,15 @@ public abstract class DoorBase : MonoBehaviour, IInteractable, ILoopObject
 
     void OnUnlock()
     {
-        // 열 수 있는 아이템 있을 때 대사 처리
+        switch(_doorMemento.NeedUnlockItem)
+        {
+            case EItemType.Key:
+                _mediatorManager.Notify(EMediatorEventType.Dialog, DataSingleton<DoorHasKeyDialogData>.Instance);
+                break;
+            case EItemType.BoltCutter:
+                _mediatorManager.Notify(EMediatorEventType.Dialog, DataSingleton<DoorHasBoltCutterDialogData>.Instance);
+                break;
+        }
         _currentLock = false;
         _item.Use();
         InteractDoor();
@@ -68,12 +78,12 @@ public abstract class DoorBase : MonoBehaviour, IInteractable, ILoopObject
 
     void OnUnlockFail()
     {
-        // 열 수 있는 아이템 없을때 대사
+        _mediatorManager.Notify(EMediatorEventType.Dialog, DataSingleton<DoorNoItemDialogData>.Instance);
     }
 
     void TrapDoor()
     {
-        GenericSingleton<MediatorManager>.Instance.Notify(EMediatorEventType.SpawnResearcher, _researcherSpawnPos);
+        _mediatorManager.Notify(EMediatorEventType.SpawnResearcher, _researcherSpawnPos);
     }
 
     protected virtual void InteractDoor()

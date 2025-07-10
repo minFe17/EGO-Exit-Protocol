@@ -12,7 +12,13 @@ public class DialogDataPrefabLoad : PrefabLoadBase
         base.Init();
         _dialogDataPrefabNameDict = new Dictionary<EDialogType, string>
         {
-            {EDialogType.Loop, "LoopDialog" }
+            {EDialogType.Loop, "LoopDialog" },
+            {EDialogType.Door, "DoorDialog" },
+            {EDialogType.DoorHasKey, "DoorHasKeyDialog" },
+            {EDialogType.DoorHasBoltCutter, "DoorHasBoltCutterDialog" },
+            {EDialogType.DoorNoItem, "DoorNoItemDialog" },
+            {EDialogType.DoorMainGate, "DoorMainGateDialog" },
+            {EDialogType.Rooftop, "RooftopDialog" }
         };
     }
 
@@ -23,6 +29,12 @@ public class DialogDataPrefabLoad : PrefabLoadBase
         _dialogDataPrefabDict = new Dictionary<EDialogType, TextAsset>
         {
             {EDialogType.Loop, await _addressableManager.GetAddressableAsset<TextAsset>(_dialogDataPrefabNameDict[EDialogType.Loop])},
+            {EDialogType.Door, await _addressableManager.GetAddressableAsset<TextAsset>(_dialogDataPrefabNameDict[EDialogType.Door])},
+            {EDialogType.DoorHasKey, await _addressableManager.GetAddressableAsset<TextAsset>(_dialogDataPrefabNameDict[EDialogType.DoorHasKey])},
+            {EDialogType.DoorHasBoltCutter, await _addressableManager.GetAddressableAsset<TextAsset>(_dialogDataPrefabNameDict[EDialogType.DoorHasBoltCutter])},
+            {EDialogType.DoorNoItem, await _addressableManager.GetAddressableAsset<TextAsset>(_dialogDataPrefabNameDict[EDialogType.DoorNoItem])},
+            {EDialogType.DoorMainGate, await _addressableManager.GetAddressableAsset<TextAsset>(_dialogDataPrefabNameDict[EDialogType.DoorMainGate])},
+            {EDialogType.Rooftop, await _addressableManager.GetAddressableAsset<TextAsset>(_dialogDataPrefabNameDict[EDialogType.Rooftop])}
         };
     }
 

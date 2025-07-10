@@ -14,6 +14,11 @@ public class ReadData
         if(_dailogDatas.Count == 0)
         {
             _dailogDatas.Add(DataSingleton<LoopDialogData>.Instance);
+            _dailogDatas.Add(DataSingleton<DoorDialogData>.Instance);
+            _dailogDatas.Add(DataSingleton<DoorHasKeyDialogData>.Instance);
+            _dailogDatas.Add(DataSingleton<DoorHasBoltCutterDialogData>.Instance);
+            _dailogDatas.Add(DataSingleton<DoorNoItemDialogData>.Instance);
+            _dailogDatas.Add(DataSingleton<RooftopDialogData>.Instance);
         }
     }
 

@@ -37,14 +37,12 @@ public class RoomDoor : DoorBase
 
     public override void OnInteract()
     {
-        // 문 사용(들어감) 대사 처리
         _cameraManager.UpdateTileBound(_leftMap, _rightMap);
     }
 
     #region Animation Event
     void EndOpen()
     {
-        // 열렸다는 대사 처리?
         _collider.isTrigger = true;
     }
     #endregion
