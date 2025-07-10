@@ -16,12 +16,9 @@ public class ZoneDoor : DoorBase
     [ShowIf("_isMemory")]
     [SerializeField] EMemoryType _memoryType;
 
-    MediatorManager _mediatorManager;
-
     protected override void Init()
     {
         base.Init();
-        _mediatorManager = GenericSingleton<MediatorManager>.Instance;
     }
 
     public override void OnInteract()

@@ -4,43 +4,30 @@ using UnityEngine;
 
 public class DialogDataPrefabLoad : PrefabLoadBase
 {
-    Dictionary<EDialogType, string> _dialogDataPrefabNameDict;
-    Dictionary<EDialogType, TextAsset> _dialogDataPrefabDict;
+    Dictionary<EDialogType, TextAsset> _dialogDataDict = new Dictionary<EDialogType, TextAsset>();
 
-    public override void Init()
+    string GetAddressableKey(EDialogType type)
     {
-        base.Init();
-        _dialogDataPrefabNameDict = new Dictionary<EDialogType, string>
-        {
-            {EDialogType.Loop, "LoopDialog" },
-            {EDialogType.Door, "DoorDialog" },
-            {EDialogType.DoorHasKey, "DoorHasKeyDialog" },
-            {EDialogType.DoorHasBoltCutter, "DoorHasBoltCutterDialog" },
-            {EDialogType.DoorNoItem, "DoorNoItemDialog" },
-            {EDialogType.DoorMainGate, "DoorMainGateDialog" },
-            {EDialogType.Rooftop, "RooftopDialog" }
-        };
+        return $"{type}Dialog";
     }
 
     public override async Task LoadPrefab()
     {
         if (_addressableManager == null)
             Init();
-        _dialogDataPrefabDict = new Dictionary<EDialogType, TextAsset>
+
+        for(int i=0; i<(int)EDialogType.Max; i++)
         {
-            {EDialogType.Loop, await _addressableManager.GetAddressableAsset<TextAsset>(_dialogDataPrefabNameDict[EDialogType.Loop])},
-            {EDialogType.Door, await _addressableManager.GetAddressableAsset<TextAsset>(_dialogDataPrefabNameDict[EDialogType.Door])},
-            {EDialogType.DoorHasKey, await _addressableManager.GetAddressableAsset<TextAsset>(_dialogDataPrefabNameDict[EDialogType.DoorHasKey])},
-            {EDialogType.DoorHasBoltCutter, await _addressableManager.GetAddressableAsset<TextAsset>(_dialogDataPrefabNameDict[EDialogType.DoorHasBoltCutter])},
-            {EDialogType.DoorNoItem, await _addressableManager.GetAddressableAsset<TextAsset>(_dialogDataPrefabNameDict[EDialogType.DoorNoItem])},
-            {EDialogType.DoorMainGate, await _addressableManager.GetAddressableAsset<TextAsset>(_dialogDataPrefabNameDict[EDialogType.DoorMainGate])},
-            {EDialogType.Rooftop, await _addressableManager.GetAddressableAsset<TextAsset>(_dialogDataPrefabNameDict[EDialogType.Rooftop])}
-        };
+            string key = GetAddressableKey((EDialogType)i);
+            TextAsset textAsset = await _addressableManager.GetAddressableAsset<TextAsset>(key);
+            if (textAsset != null && !_dialogDataDict.ContainsKey((EDialogType)i))
+                _dialogDataDict.Add((EDialogType)i, textAsset);
+        }
     }
 
     public override TextAsset GetPrefabTextAsset<TEnum>(TEnum type)
     {
         EDialogType key = (EDialogType)(object)type;
-        return _dialogDataPrefabDict[key];
+        return _dialogDataDict[key];
     }
 }

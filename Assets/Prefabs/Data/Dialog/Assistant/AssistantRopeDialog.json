@@ -1,0 +1,14 @@
+{
+  "_lines": [
+    { "_text": "잠시만요 풀어드릴게요"},
+    { "_text": "같이 여기서 나가요"},
+    {
+        "_text": "감사합니다",
+        "_characterTypeText": "Assistant"
+    },
+    {
+        "_text": "여기서 나갈 수 있도록 도와드릴게요",
+        "_characterTypeText": "Assistant"
+    }
+  ]
+}

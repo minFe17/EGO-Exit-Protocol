@@ -111,6 +111,7 @@ public class Researcher : MonoBehaviour, IMediatorEvent, ILoopObject
         }
     }
 
+    #region Interface
     public void HandleEvent(object data)
     {
         _currentPath = _zoneManager.FindPath(_currentZone);
@@ -122,4 +123,5 @@ public class Researcher : MonoBehaviour, IMediatorEvent, ILoopObject
         GenericSingleton<ObserveManager>.Instance.LoopObserve.RemoveLoopEvent(this);
         Destroy(this.gameObject);
     }
+    #endregion
 }

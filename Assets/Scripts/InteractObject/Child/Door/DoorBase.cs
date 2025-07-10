@@ -7,17 +7,17 @@ public abstract class DoorBase : MonoBehaviour, IInteractable, ILoopObject
     [SerializeField] protected BoxCollider2D _collider;
     [SerializeField] DoorMemento _doorMemento;
     [SerializeField] MemoryObject _memory;
-    [SerializeField] bool _isTrap;
+    [SerializeField] bool _isMainGate;
 
-    [ShowIf("_isTrap")]
+    [ShowIf("_isMainGate")]
     [SerializeField] Vector3 _researcherSpawnPos;
 
     protected CameraManager _cameraManager;
     protected PlayerManager _playerManager;
+    protected MediatorManager _mediatorManager;
 
     ObserveManager _observerManager;
     InteractObjectManager _interactObjectManager;
-    MediatorManager _mediatorManager;
     ItemBase _item;
     bool _currentLock;
 
@@ -41,17 +41,17 @@ public abstract class DoorBase : MonoBehaviour, IInteractable, ILoopObject
     }
 
     #region NaughtyAttributes
-    protected bool IsNotTrapDoor() => !_isTrap;
+    protected bool IsNotTrapDoor() => !_isMainGate;
     #endregion
 
     void TryUnlock()
     {
-        _mediatorManager.Notify(EMediatorEventType.Dialog, DataSingleton<DoorDialogData>.Instance);
+        _mediatorManager.Notify(EMediatorEventType.Dialog, EDialogType.Door);
         EItemType type = _doorMemento.NeedUnlockItem;
         if (type != EItemType.Max)
             _playerManager.ItemInventory.GetItem(out _item, type);
 
-        if (_isTrap)
+        if (_isMainGate)
             TrapDoor();
 
         if (_item != null)
@@ -65,12 +65,14 @@ public abstract class DoorBase : MonoBehaviour, IInteractable, ILoopObject
         switch(_doorMemento.NeedUnlockItem)
         {
             case EItemType.Key:
-                _mediatorManager.Notify(EMediatorEventType.Dialog, DataSingleton<DoorHasKeyDialogData>.Instance);
+                _mediatorManager.Notify(EMediatorEventType.Dialog, EDialogType.DoorHasKey);
                 break;
             case EItemType.BoltCutter:
-                _mediatorManager.Notify(EMediatorEventType.Dialog, DataSingleton<DoorHasBoltCutterDialogData>.Instance);
+                _mediatorManager.Notify(EMediatorEventType.Dialog, EDialogType.DoorHasBoltCutter);
+
                 break;
         }
+
         _currentLock = false;
         _item.Use();
         InteractDoor();
@@ -78,11 +80,12 @@ public abstract class DoorBase : MonoBehaviour, IInteractable, ILoopObject
 
     void OnUnlockFail()
     {
-        _mediatorManager.Notify(EMediatorEventType.Dialog, DataSingleton<DoorNoItemDialogData>.Instance);
+        _mediatorManager.Notify(EMediatorEventType.Dialog, EDialogType.DoorNoItem);
     }
 
     void TrapDoor()
     {
+        _mediatorManager.Notify(EMediatorEventType.Dialog, EDialogType.DoorMainGate);
         _mediatorManager.Notify(EMediatorEventType.SpawnResearcher, _researcherSpawnPos);
     }
 

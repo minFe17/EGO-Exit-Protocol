@@ -35,8 +35,8 @@ public class Rope : MonoBehaviour, IInteractable, ILoopObject
 
     void IInteractable.Interact()
     {
-        // 줄 떨어지는 연출
         _mediatorManager.Notify(EMediatorEventType.NeedCapture, _memoryData);
+        _mediatorManager.Notify(EMediatorEventType.Dialog, EDialogType.AssistantRope);
         _mediatorManager.Notify(EMediatorEventType.RopeReleased);
     }
 

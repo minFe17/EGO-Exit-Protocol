@@ -4,28 +4,24 @@ using UnityEngine;
 
 public class ResearcherPrefabLoad : PrefabLoadBase
 {
-    Dictionary<EResearcherPrefabType, string> _researcherPrefabNameDict;
-    Dictionary<EResearcherPrefabType, GameObject> _researcherPrefabDict;
+    Dictionary<EResearcherPrefabType, GameObject> _researcherPrefabDict = new Dictionary<EResearcherPrefabType, GameObject>();
 
-    public override void Init()
+    string GetAddressableKey(EResearcherPrefabType type)
     {
-        base.Init();
-        _researcherPrefabNameDict = new Dictionary<EResearcherPrefabType, string>
-        {
-            {EResearcherPrefabType.Researcher, "Researcher" },
-            {EResearcherPrefabType.Bullet, "Bullet" }
-        };
+        return $"{type}";
     }
 
     public override async Task LoadPrefab()
     {
         if (_addressableManager == null)
             Init();
-        _researcherPrefabDict = new Dictionary<EResearcherPrefabType, GameObject>
+        for (int i = 0; i < (int)EResearcherPrefabType.Max; i++)
         {
-            {EResearcherPrefabType.Researcher, await _addressableManager.GetAddressableAsset<GameObject>(_researcherPrefabNameDict[EResearcherPrefabType.Researcher])},
-            {EResearcherPrefabType.Bullet, await _addressableManager.GetAddressableAsset<GameObject>(_researcherPrefabNameDict[EResearcherPrefabType.Bullet]) }
-        };
+            string key = GetAddressableKey((EResearcherPrefabType)i);
+            GameObject prefab = await _addressableManager.GetAddressableAsset<GameObject>(key);
+            if (prefab != null && !_researcherPrefabDict.ContainsKey((EResearcherPrefabType)i))
+                _researcherPrefabDict.Add((EResearcherPrefabType)i, prefab);
+        }
     }
 
     public override GameObject GetPrefab<TEnum>(TEnum type)

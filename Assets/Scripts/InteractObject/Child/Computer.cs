@@ -31,6 +31,7 @@ public class Computer : MonoBehaviour, IInteractable
 
     void IInteractable.Interact()
     {
+        GenericSingleton<MediatorManager>.Instance.Notify(EMediatorEventType.Dialog, EDialogType.Computer);
         if (DataSingleton<LoopData>.Instance.LoopCount < 2)
             return;
         if (_haveEvidence)

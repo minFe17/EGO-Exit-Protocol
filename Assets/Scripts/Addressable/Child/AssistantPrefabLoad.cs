@@ -4,28 +4,24 @@ using UnityEngine;
 
 public class AssistantPrefabLoad : PrefabLoadBase
 {
-    Dictionary<EAssistantPrefabType, string> _assistantPrefabNameDict;
-    Dictionary<EAssistantPrefabType, GameObject> _assistantPrefabDict;
+    Dictionary<EAssistantPrefabType, GameObject> _assistantPrefabDict = new Dictionary<EAssistantPrefabType, GameObject>();
 
-
-    public override void Init()
+    string GetAddressableKey(EAssistantPrefabType type)
     {
-        base.Init();
-        _assistantPrefabNameDict = new Dictionary<EAssistantPrefabType, string>
-        {
-            {EAssistantPrefabType.Assistant, "Assistant" },
-            {EAssistantPrefabType.Rope, "Rope" }
-        };
+        return $"{type}";
     }
+
     public override async Task LoadPrefab()
     {
         if (_addressableManager == null)
             Init();
-        _assistantPrefabDict = new Dictionary<EAssistantPrefabType, GameObject>
+        for (int i = 0; i < (int)EAssistantPrefabType.Max; i++)
         {
-            {EAssistantPrefabType.Assistant, await _addressableManager.GetAddressableAsset<GameObject>(_assistantPrefabNameDict[EAssistantPrefabType.Assistant])},
-            {EAssistantPrefabType.Rope, await _addressableManager.GetAddressableAsset<GameObject>(_assistantPrefabNameDict[EAssistantPrefabType.Rope]) }
-        };
+            string key = GetAddressableKey((EAssistantPrefabType)i);
+            GameObject prefab = await _addressableManager.GetAddressableAsset<GameObject>(key);
+            if (prefab != null && !_assistantPrefabDict.ContainsKey((EAssistantPrefabType)i))
+                _assistantPrefabDict.Add((EAssistantPrefabType)i, prefab);
+        }
     }
 
     public override GameObject GetPrefab<TEnum>(TEnum type)

@@ -71,7 +71,7 @@ public class Assistant : MonoBehaviour, IMediatorEvent, ILoopObject
 
     public void ChangeState(EAssistantStateType newType)
     {
-        if (_currentType == newType)
+        if (_currentState == _assistantState[newType])
             return;
         if (_currentState != null)
             _currentState.Exit();

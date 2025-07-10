@@ -82,7 +82,7 @@ public class TimeManager : MonoBehaviour, IMediatorEvent, ILoopObject
     #region Interface
     public void HandleEvent(object data = null)
     {
-        _mediatorManager.Notify(EMediatorEventType.Dialog, DataSingleton<LoopDialogData>.Instance);
+        _mediatorManager.Notify(EMediatorEventType.Dialog, EDialogType.Loop);
         Resume();
         _isLoop = false;
     }

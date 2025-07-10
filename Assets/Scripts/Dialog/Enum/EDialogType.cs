@@ -7,5 +7,9 @@ public enum EDialogType
     DoorNoItem,
     DoorMainGate,
     Rooftop,
+    Computer,
+    AssistantFirstMeet,
+    AssistantRevisitRoom,
+    AssistantRope,
     Max,
 }

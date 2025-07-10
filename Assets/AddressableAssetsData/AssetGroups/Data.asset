@@ -15,8 +15,23 @@ MonoBehaviour:
   m_GroupName: Data
   m_GUID: 524e5096cb7390b438415cedb952283a
   m_SerializeEntries:
+  - m_GUID: 09bc6d3834c046648b4336cc75dcafda
+    m_Address: AssistantRopeDialog
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 0ee0dde7373f1994bbf1b7004349caa8
     m_Address: DoorHasBoltCutterDialog
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1ebe2015bec96a1438c01b324a591179
+    m_Address: AssistantFirstMeetDialog
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5175e25cd25717f45be2c2765d56cbb6
+    m_Address: AssistantRevisitRoomDialog
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -37,6 +52,11 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: ac4cb40838c1de84c988647d1ec07064
     m_Address: DoorMainGateDialog
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: af079d662f7263844ae19bec52db8c09
+    m_Address: ComputerDialog
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

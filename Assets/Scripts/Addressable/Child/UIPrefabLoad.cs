@@ -4,28 +4,24 @@ using UnityEngine;
 
 public class UIPrefabLoad : PrefabLoadBase
 {
-    Dictionary<EUIPrefabType, string> _uiPrefabNameDict;
-    Dictionary<EUIPrefabType, GameObject> _uiPrefabDict;
+    Dictionary<EUIPrefabType, GameObject> _uiPrefabDict = new Dictionary<EUIPrefabType, GameObject>();
 
-    public override void Init()
+    string GetAddressableKey(EUIPrefabType type)
     {
-        base.Init();
-        _uiPrefabNameDict = new Dictionary<EUIPrefabType, string>
-        {
-            {EUIPrefabType.UI, "UI" },
-            {EUIPrefabType.MemoryPanel, "MemoryPanel" }
-        };
+        return $"{type}";
     }
 
     public override async Task LoadPrefab()
     {
         if (_addressableManager == null)
             Init();
-        _uiPrefabDict = new Dictionary<EUIPrefabType, GameObject>
+        for (int i = 0; i < (int)EUIPrefabType.Max; i++)
         {
-            {EUIPrefabType.UI, await _addressableManager.GetAddressableAsset<GameObject>(_uiPrefabNameDict[EUIPrefabType.UI])},
-            {EUIPrefabType.MemoryPanel, await _addressableManager.GetAddressableAsset<GameObject>(_uiPrefabNameDict[EUIPrefabType.MemoryPanel]) }
-        };
+            string key = GetAddressableKey((EUIPrefabType)i);
+            GameObject prefab = await _addressableManager.GetAddressableAsset<GameObject>(key);
+            if (prefab != null && !_uiPrefabDict.ContainsKey((EUIPrefabType)i))
+                _uiPrefabDict.Add((EUIPrefabType)i, prefab);
+        }
     }
 
     public override GameObject GetPrefab<TEnum>(TEnum type)

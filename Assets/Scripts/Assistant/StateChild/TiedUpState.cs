@@ -1,3 +1,4 @@
+using UnityEngine;
 using Utils;
 
 public class TiedUpState : IAssistantState, IMediatorEvent
@@ -17,19 +18,29 @@ public class TiedUpState : IAssistantState, IMediatorEvent
         _mediatorManager.Register(EMediatorEventType.RopeReleased, this);
     }
 
+    void Dialog()
+    {
+        Debug.Log(_enterCount);
+        if (_enterCount == 1)
+            _mediatorManager.Notify(EMediatorEventType.Dialog, EDialogType.AssistantFirstMeet);
+        else
+            _mediatorManager.Notify(EMediatorEventType.Dialog, EDialogType.AssistantRevisitRoom);
+    }
+
     public void EnterPlayer()
     {
         _enterCount++;
-        _inPlayer = true;
+        Dialog();
     }
 
     public void ExitPlayer()
     {
-        _inPlayer = false;
     }
 
+    #region Interface
     void IAssistantState.Enter()
     {
+        Debug.Log(1);
         if (_enterPlayer != null)
             return;
         _enterPlayer = new EnterPlayer();
@@ -41,21 +52,16 @@ public class TiedUpState : IAssistantState, IMediatorEvent
 
     void IAssistantState.Loop()
     {
-        if(_inPlayer)
-        {
-            // 대사 처리
-            // 줄 풀어주었는지 체크?
-            // enterCount에 따라 대사 다르게
-        }
+      
     }
 
     void IAssistantState.Exit()
     {
-
     }
 
     void IMediatorEvent.HandleEvent(object data)
     {
         _assistant.ChangeState(EAssistantStateType.Idle);
     }
+    #endregion
 }

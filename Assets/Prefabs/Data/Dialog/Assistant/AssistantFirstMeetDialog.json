@@ -1,0 +1,22 @@
+{
+  "_lines": [
+    {
+        "_text": "도와주세요",
+        "_characterTypeText": "Assistant"
+    },
+    { "_text": "누구세요?" },
+    { "_text": "여기가 어디인지 아세요?" },
+    {
+        "_text": "아뇨 모르겠어요",
+        "_characterTypeText": "Assistant"
+    },
+    {
+        "_text": "눈뜨고 보니 묶여있더라고요",
+        "_characterTypeText": "Assistant"
+    },
+    {
+        "_text": "밧줄 좀 풀어주시겠어요?",
+        "_characterTypeText": "Assistant"
+    }
+  ]
+}
