@@ -20,7 +20,6 @@ public class TiedUpState : IAssistantState, IMediatorEvent
 
     void Dialog()
     {
-        Debug.Log(_enterCount);
         if (_enterCount == 1)
             _mediatorManager.Notify(EMediatorEventType.Dialog, EDialogType.AssistantFirstMeet);
         else
@@ -40,7 +39,6 @@ public class TiedUpState : IAssistantState, IMediatorEvent
     #region Interface
     void IAssistantState.Enter()
     {
-        Debug.Log(1);
         if (_enterPlayer != null)
             return;
         _enterPlayer = new EnterPlayer();

@@ -8,8 +8,6 @@ public class EnterPlayer : MonoBehaviour, IMediatorEvent
 
     public void Init(TiedUpState tiedUpState)
     {
-        Debug.Log("EnterInit");
-
         _tiedUpState = tiedUpState;
         _mediatorManager = GenericSingleton<MediatorManager>.Instance;
         _mediatorManager.Register(EMediatorEventType.PlayerEnterAssistantRoom, this);
@@ -17,7 +15,6 @@ public class EnterPlayer : MonoBehaviour, IMediatorEvent
 
     void IMediatorEvent.HandleEvent(object data)
     {
-        Debug.Log("Enter");
         _tiedUpState.EnterPlayer();
     }
 }

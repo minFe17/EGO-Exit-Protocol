@@ -10,11 +10,13 @@ public class DialogData
     EDialogCharacterType _characterType;
 
     public string Text { get => _text; }
-    public EDialogCharacterType CharacterType { get => _characterType; }
-
-    public void Init()
-    {
-        if (!Enum.TryParse(_characterTypeText, out _characterType))
-            _characterType = EDialogCharacterType.Player;
+    public EDialogCharacterType CharacterType 
+    { 
+        get
+        {
+            if (!Enum.TryParse(_characterTypeText, out _characterType))
+                _characterType = EDialogCharacterType.Player;
+            return _characterType;
+        }
     }
 }

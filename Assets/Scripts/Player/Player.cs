@@ -64,6 +64,11 @@ public class Player : MonoBehaviour
     public void SetDialogState(bool value)
     {
         _isDialog = value;
+        if (_isDialog)
+        {
+            if(_animator != null)
+                _animator.SetBool("isMove", false);
+        }
     }
 
     #region Unity InputSystem
