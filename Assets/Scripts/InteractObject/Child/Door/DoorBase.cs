@@ -4,7 +4,6 @@ using Utils;
 
 public abstract class DoorBase : MonoBehaviour, IInteractable, ILoopObject
 {
-    [SerializeField] protected BoxCollider2D _collider;
     [SerializeField] DoorMemento _doorMemento;
     [SerializeField] MemoryObject _memory;
     [SerializeField] bool _isMainGate;
@@ -12,6 +11,7 @@ public abstract class DoorBase : MonoBehaviour, IInteractable, ILoopObject
     [ShowIf("_isMainGate")]
     [SerializeField] Vector3 _researcherSpawnPos;
 
+    protected BoxCollider2D _collider;
     protected CameraManager _cameraManager;
     protected PlayerManager _playerManager;
     protected MediatorManager _mediatorManager;
@@ -25,6 +25,7 @@ public abstract class DoorBase : MonoBehaviour, IInteractable, ILoopObject
 
     void Start()
     {
+        _collider = GetComponent<BoxCollider2D>();
         Init();
         OnLoopEvent();
     }

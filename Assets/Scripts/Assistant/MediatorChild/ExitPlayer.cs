@@ -1,7 +1,6 @@
-using UnityEngine;
 using Utils;
 
-public class ExitPlayer : MonoBehaviour, IMediatorEvent
+public class ExitPlayer : IMediatorEvent
 {
     TiedUpState _tiedUpState;
     MediatorManager _mediatorManager;

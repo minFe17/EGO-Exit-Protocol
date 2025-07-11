@@ -16,6 +16,7 @@ public class GiveBoltCutterCabinet : Cabinet, IItemHolder, IMediatorEvent
     public override void Interact()
     {
         GenericSingleton<MediatorManager>.Instance.Notify(EMediatorEventType.UseDial);
+        GenericSingleton<PlayerManager>.Instance.Player.SetMoveable(false);
     }
 
     void IItemHolder.SetItem(ItemBase item)

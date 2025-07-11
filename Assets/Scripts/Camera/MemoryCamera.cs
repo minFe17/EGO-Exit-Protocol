@@ -6,12 +6,12 @@ using Utils;
 
 public class MemoryCamera : MonoBehaviour, IMediatorEvent
 {
-    [SerializeField] Camera _captureCamera;
     [SerializeField] RenderTexture _captureTexture;
     [SerializeField] Vector3 _startPos;
 
     Queue<MemoryData> _memoryDataQueue = new Queue<MemoryData>();
     MemoryData _currentMemoryData;
+    Camera _captureCamera;
 
     Transform _target;
     Texture2D _texture;
@@ -26,6 +26,7 @@ public class MemoryCamera : MonoBehaviour, IMediatorEvent
 
     void Start()
     {
+        _captureCamera = GetComponent<Camera>();
         _texture = new Texture2D(_captureTexture.width, _captureTexture.height, TextureFormat.RGBA32, false);
         _mediatorManager = GenericSingleton<MediatorManager>.Instance;
         _mediatorManager.Register(EMediatorEventType.NeedCapture, this);

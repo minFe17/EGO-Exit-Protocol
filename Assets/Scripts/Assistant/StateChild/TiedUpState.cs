@@ -1,10 +1,8 @@
-using UnityEngine;
 using Utils;
 
 public class TiedUpState : IAssistantState, IMediatorEvent
 {
     int _enterCount;
-    bool _inPlayer;
 
     Assistant _assistant;
     EnterPlayer _enterPlayer;

@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class CurrentEvidenceList : MonoBehaviour
+public class CurrentEvidenceList
 {
     // 데이터 싱글턴
     [SerializeField] List<EvidencePanelData> _currentEvidenceData = new List<EvidencePanelData>();
@@ -11,7 +11,7 @@ public class CurrentEvidenceList : MonoBehaviour
 
     public bool ContainsEvidenceData(EEvidenceType type)
     {
-        if (type != EEvidenceType.ResearchJournal)
+        if (type == EEvidenceType.ResearchJournal)
             return false;
         foreach(EvidencePanelData data in _currentEvidenceData)
         {

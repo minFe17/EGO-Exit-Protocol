@@ -1,7 +1,6 @@
 using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.Tilemaps;
-using Utils;
 
 public class ZoneDoor : DoorBase
 {
@@ -23,7 +22,6 @@ public class ZoneDoor : DoorBase
 
     public override void OnInteract()
     {
-        // 문 사용(들어감) 대사 처리
         if (_isMemory)
             _mediatorManager.Notify(EMediatorEventType.AddMemory, _memoryType);
         _playerManager.SetPlayerPosition(_targetPos.position);

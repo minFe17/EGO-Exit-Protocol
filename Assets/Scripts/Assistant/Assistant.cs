@@ -4,22 +4,27 @@ using Utils;
 
 public class Assistant : MonoBehaviour, IMediatorEvent, ILoopObject
 {
-    [SerializeField] Animator _animator;
     [SerializeField] GameObject _dagger;
+    [SerializeField] RectTransform _assistantUI;
     [SerializeField] DialogUI _dialogUI;
 
     Dictionary<EAssistantStateType, IAssistantState> _assistantState;
     IAssistantState _currentState;
     EAssistantStateType _currentType;
 
+    Animator _animator;
+
     Player _player;
     MediatorManager _mediatorManager;
     MementoManager _mementoManager;
     ObserveManager _observeManager;
 
+    Quaternion _leftDirection = Quaternion.Euler(0, 180, 0);
+
     #region Unity LifeCycle
     void Start()
     {
+        _animator = GetComponent<Animator>();
         SetManager();
         SetMemento();
         SetState();
@@ -101,9 +106,15 @@ public class Assistant : MonoBehaviour, IMediatorEvent, ILoopObject
         Vector3 scale = transform.localScale;
 
         if (direction.x > 0)
+        {
             scale.x = -Mathf.Abs(scale.x);
+            _assistantUI.rotation = Quaternion.Euler(Vector3.zero);
+        }
         else if (direction.x < 0)
+        {
             scale.x = Mathf.Abs(scale.x);
+            _assistantUI.rotation = _leftDirection;
+        }
 
         transform.localScale = scale;
     }

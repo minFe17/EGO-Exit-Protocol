@@ -14,6 +14,8 @@ public class MemoryRepository
 
     public void Init()
     {
+        if (_allMemoryData.Count > 0)
+            ClearMemory();
         _currentMemoryList = DataSingleton<CurrentMemoryList>.Instance;
         GenericSingleton<JsonManager>.Instance.ReadData.ReadMemoryData(this);
         for (int i = 0; i < _readDataList.Count; i++)
@@ -44,5 +46,10 @@ public class MemoryRepository
                 return true;
         }
         return false;
+    }
+
+    public void ClearMemory()
+    {
+        _allMemoryData.Clear();
     }
 }

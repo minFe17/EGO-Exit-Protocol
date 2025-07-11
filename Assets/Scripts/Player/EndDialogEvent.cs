@@ -1,4 +1,3 @@
-using UnityEngine;
 using Utils;
 
 public class EndDialogEvent : IMediatorEvent

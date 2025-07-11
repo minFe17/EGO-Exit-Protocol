@@ -25,6 +25,7 @@ public class CameraManager : MonoBehaviour, ILoopObject
         GenericSingleton<ObserveManager>.Instance.LoopObserve.AddLoopEvent(this);
         CreateCamera();
         UpdateTileBound(_mementoManager.CameraMemento.LoopTilemap);
+        SetCameraPosition(0);
     }
 
     void CreateCamera()

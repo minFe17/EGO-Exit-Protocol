@@ -49,19 +49,8 @@ public class JsonManager : MonoBehaviour
         path = _stringBuilder.ToString();
     }
 
-    void DestroyDataFile(string path)
-    {
-        if (CheckDataFile(path))
-            File.Delete(path);
-    }
-
     public bool CheckDataFile(string path)
     {
         return File.Exists(path);
-    }
-
-    public void DestroyDataFiles()
-    {
-        //DestroyDataFile();
     }
 }

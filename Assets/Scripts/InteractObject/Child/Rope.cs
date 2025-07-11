@@ -35,6 +35,7 @@ public class Rope : MonoBehaviour, IInteractable, ILoopObject
 
     void IInteractable.Interact()
     {
+        gameObject.SetActive(false);
         _mediatorManager.Notify(EMediatorEventType.NeedCapture, _memoryData);
         _mediatorManager.Notify(EMediatorEventType.Dialog, EDialogType.AssistantRope);
         _mediatorManager.Notify(EMediatorEventType.RopeReleased);
@@ -42,6 +43,7 @@ public class Rope : MonoBehaviour, IInteractable, ILoopObject
 
     public void OnLoopEvent()
     {
+        gameObject.SetActive(true);
         transform.position = _mementoManager.RopeMemento.Position;
     }
 }

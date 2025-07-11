@@ -1,7 +1,6 @@
-using UnityEngine;
 using Utils;
 
-public class EnterPlayer : MonoBehaviour, IMediatorEvent
+public class EnterPlayer : IMediatorEvent
 {
     TiedUpState _tiedUpState;
     MediatorManager _mediatorManager;

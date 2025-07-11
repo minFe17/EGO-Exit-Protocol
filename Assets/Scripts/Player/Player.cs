@@ -17,6 +17,7 @@ public class Player : MonoBehaviour
 
     float _movePos;
     bool _isDialog;
+    bool _isMoveable = true;
     Quaternion _leftDirection = Quaternion.Euler(0, 180, 0);
 
     DialogEvent _dialogEvent;
@@ -61,6 +62,13 @@ public class Player : MonoBehaviour
         }
     }
 
+    public void SetMoveable(bool value)
+    {
+        _isMoveable = value;
+        if (!_isMoveable)
+            _animator.SetBool("isMove", false);
+    }
+
     public void SetDialogState(bool value)
     {
         _isDialog = value;
@@ -74,7 +82,7 @@ public class Player : MonoBehaviour
     #region Unity InputSystem
     void OnMove(InputValue value)
     {
-        if (_isDialog)
+        if (_isDialog || !_isMoveable)
             return;
         _movePos = value.Get<Vector2>().x;
         if (_movePos != 0)

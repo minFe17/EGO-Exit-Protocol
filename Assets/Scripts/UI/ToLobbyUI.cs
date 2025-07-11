@@ -7,13 +7,15 @@ public class ToLobbyUI : MonoBehaviour
     #region Button Event
     public void OnClickYesButton()
     {
+        GenericSingleton<DialogManager>.Instance.Clear();
+        GenericSingleton<MediatorManager>.Instance.ClearMediatorEvent();
         SceneManager.LoadScene("LobbyScene");
     }
 
     public void OnClickNobutton()
     {
         gameObject.SetActive(false);
-        GenericSingleton<MediatorManager>.Instance.Notify(EMediatorEventType.TimeResume);
+        Time.timeScale = 1f;
     }
     #endregion
 

@@ -1,7 +1,7 @@
 using UnityEngine;
 using Utils;
 
-public class MoveState : MonoBehaviour, IResearcherState
+public class MoveState : IResearcherState
 {
     Researcher _researcher;
     ZoneManager _zoneManager;

@@ -1,6 +1,4 @@
-using UnityEngine;
-
-public class AttackState : MonoBehaviour, IResearcherState
+public class AttackState : IResearcherState
 {
     Researcher _researcher;
 

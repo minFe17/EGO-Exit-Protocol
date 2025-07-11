@@ -1,5 +1,4 @@
 using UnityEngine;
-using Utils;
 
 public class UI : MonoBehaviour
 {
@@ -30,7 +29,7 @@ public class UI : MonoBehaviour
             return;
 
         _toLoobyPanel.SetActive(true);
-        GenericSingleton<MediatorManager>.Instance.Notify(EMediatorEventType.TimePause);
+        Time.timeScale = 0f;
     }
     #endregion
 }

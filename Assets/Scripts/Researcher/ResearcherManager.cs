@@ -36,6 +36,7 @@ public class ResearcherManager : MonoBehaviour, IMediatorEvent, ILoopObject
             return;
         Vector3 position = _spawnPos.Dequeue();
         _researcherList.Add(Instantiate(_researcherPrefab, position, Quaternion.identity));
+        
     }
 
     void IMediatorEvent.HandleEvent(object data)
@@ -44,6 +45,8 @@ public class ResearcherManager : MonoBehaviour, IMediatorEvent, ILoopObject
             _spawnPos.Enqueue((Vector3)data);
         else
             _spawnPos.Enqueue(Vector3.zero);
+        if (!GenericSingleton<DialogManager>.Instance.IsDialog)
+            Spawn();
     }
 
     void ILoopObject.OnLoopEvent()

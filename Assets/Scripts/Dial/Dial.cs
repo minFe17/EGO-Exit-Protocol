@@ -20,6 +20,7 @@ public class Dial : MonoBehaviour, ILoopObject
         }
         GenericSingleton<MediatorManager>.Instance.Notify(EMediatorEventType.TimeResume);
         GenericSingleton<MediatorManager>.Instance.Notify(EMediatorEventType.CompleteDial);
+        GenericSingleton<PlayerManager>.Instance.Player.SetMoveable(true);
         gameObject.SetActive(false);
     }
 
@@ -28,6 +29,7 @@ public class Dial : MonoBehaviour, ILoopObject
     {
         gameObject.SetActive(false);
         GenericSingleton<MediatorManager>.Instance.Notify(EMediatorEventType.TimeResume);
+        GenericSingleton<PlayerManager>.Instance.Player.SetMoveable(true);
     }
     #endregion
 
