@@ -9,6 +9,7 @@ public class ToLobbyUI : MonoBehaviour
     {
         GenericSingleton<DialogManager>.Instance.Clear();
         GenericSingleton<MediatorManager>.Instance.ClearMediatorEvent();
+        Time.timeScale = 1f;
         SceneManager.LoadScene("LobbyScene");
     }
 
