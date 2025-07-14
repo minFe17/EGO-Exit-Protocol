@@ -6956,7 +6956,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _borderBoundary: 500
   _xOffset: 100
-  _yBoundary: 90
+  _yBoundary: 170
 --- !u!114 &420974116272478065
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9141,7 +9141,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _borderBoundary: 500
   _xOffset: 100
-  _yBoundary: 90
+  _yBoundary: 170
 --- !u!114 &887652073877242544
 MonoBehaviour:
   m_ObjectHideFlags: 0

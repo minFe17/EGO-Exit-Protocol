@@ -27,23 +27,29 @@ public class MoveState : IResearcherState
     void Move()
     {
         Zone playerZone = _zoneManager.PlayerZone;
-        if (_researcher.CurrentZone == playerZone.ZoneID)
-            MoveToTarget(_player.position);
-        else
-        {
-            if (_researcher.CurrentPath == null || _researcher.CurrentPath.Count == 0 || _researcher.PathIndex >= _researcher.CurrentPath.Count)
-                _researcher.HandleEvent(null);
 
-            if (_researcher.CurrentPath != null && _researcher.PathIndex < _researcher.CurrentPath.Count)
-            {
-                EZoneType nextZone = _researcher.CurrentPath[_researcher.PathIndex];
-                ZoneLink link = _zoneManager.GetZoneLink(_researcher.CurrentZone, nextZone);
-                if (link != null)
-                {
-                    MoveToTarget(link.transform.position);
-                }
-            }
+        if (_researcher.CurrentZone == playerZone.ZoneID)
+        {
+            MoveToTarget(_player.position);
+            return;
         }
+
+        bool noPath = _researcher.CurrentPath == null;
+        bool emptyPath = !noPath && _researcher.CurrentPath.Count == 0;
+        bool indexInvalid = !noPath && _researcher.PathIndex >= _researcher.CurrentPath.Count;
+
+        if (noPath || emptyPath || indexInvalid)
+        {
+            _researcher.HandleEvent(null);
+            return;
+        }
+
+        EZoneType nextZone = _researcher.CurrentPath[_researcher.PathIndex];
+        ZoneLink link = _zoneManager.GetZoneLink(_researcher.CurrentZone, nextZone);
+        if (link == null)
+            return;
+
+        MoveToTarget(link.transform.position);
     }
 
     void MoveToTarget(Vector3 target)
@@ -65,7 +71,7 @@ public class MoveState : IResearcherState
     void IResearcherState.Loop()
     {
         Move();
-        if(_researcher.CheckAttackArea(_attackDistance))
+        if (_researcher.CheckAttackArea(_attackDistance))
             _researcher.ChangeState(EResearcherStateType.Attack);
     }
 

@@ -9,7 +9,6 @@ public class ItemBase : ILoopObject
     SpriteAtlas _itemIconAtlas;
     Sprite _sprite;
 
-
     protected EItemType _itemType;
 
     protected virtual void Init()

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class EvidenceMemento : MonoBehaviour
+public class EvidenceMemento
 {
     public Vector2 Position { get; }
 

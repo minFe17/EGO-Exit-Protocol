@@ -1,27 +1,27 @@
 {
   "_readDataList": [
     {
-      "_typeText": "Deadbody_Key",
+      "_typeText": "DeadbodyKey",
       "_description": "손을 유심히 봐"
     },
     {
-      "_typeText": "Assistant_Rope",
+      "_typeText": "AssistantRope",
       "_description": "풀어주지 마"
     },
     {
-      "_typeText": "DontGo_Rooftop",
+      "_typeText": "DontGoRooftop",
       "_description": "옥상은 못 가"
     },
     {
-      "_typeText": "DontGo_Room201",
+      "_typeText": "DontGoRoom201",
       "_description": "이 방은 가지 마"
     },
     {
-      "_typeText": "DontOpen_Cabinet",
+      "_typeText": "DontOpenCabinet",
       "_description": "이 캐비넷은 열지 마"
     },
     {
-      "_typeText": "Found_PhoneOnDesk",
+      "_typeText": "FoundPhoneOnDesk",
       "_description": "휴대폰?"
     },
     {
@@ -33,7 +33,7 @@
       "_description": "여긴 탈출구가 아니야"
     },
     {
-      "_typeText": "DontInteract_Deadbody",
+      "_typeText": "DontInteractDeadbody",
       "_description": "무시해"
     },
     {
@@ -45,11 +45,11 @@
       "_description": "이곳을 탈출할 열쇠는 없어"
     },
     {
-      "_typeText": "Obsession_Escape",
+      "_typeText": "ObsessionEscape",
       "_description": "박사의 집착으로 탈출할 수 있어"
     },
     {
-      "_typeText": "DontBring_Phone",
+      "_typeText": "DontBringPhone",
       "_description": "휴대폰을 가져오지 마"
     }
   ]

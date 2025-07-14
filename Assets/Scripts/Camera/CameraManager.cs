@@ -2,6 +2,9 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 using Utils;
 
+/// <summary>
+/// 타일맵을 기준으로 카메라 경계 및 위치를 설정
+/// </summary>
 public class CameraManager : MonoBehaviour, ILoopObject
 {
     // 싱글턴
@@ -62,16 +65,26 @@ public class CameraManager : MonoBehaviour, ILoopObject
         return maxX;
     }
 
+    /// <summary>
+    /// 타일맵의 좌/우 경계로부터 카메라 이동 범위 계산
+    /// </summary>
     public void UpdateTileBound(Tilemap tilemap)
     {
         _currentTilemap = tilemap;
+
+        // 타일이 있는 가장 왼쪽, 오른쪽 셀 위치를 찾음
         int min = GetLeftTilePos(_currentTilemap);
         int max = GetRightTilePos(_currentTilemap);
+
+        // 셀 중심 위치를 월드 좌표로 변환
         Vector3 currentMinWorld = _currentTilemap.GetCellCenterWorld(new Vector3Int(min, 0, 0));
         Vector3 currentMaxWorld = _currentTilemap.GetCellCenterWorld(new Vector3Int(max, 0, 0));
 
+        // 셀 크기 정보가 없을 경우 설정
         if (_cellSize == Vector3.zero)
             SetCellSize(_currentTilemap);
+
+        // 경계 보정 후 저장
         _minBounds = currentMinWorld - _cellSize;
         _maxBounds = currentMaxWorld + _cellSize;
     }

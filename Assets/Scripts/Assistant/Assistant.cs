@@ -2,6 +2,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using Utils;
 
+/// <summary>
+/// 배신자 캐릭터의 동작을 관리하는 클래스
+/// FSM, 애니메이션, 루프 처리 등을 담당
+/// </summary>
 public class Assistant : MonoBehaviour, IMediatorEvent, ILoopObject
 {
     [SerializeField] GameObject _dagger;
@@ -67,6 +71,10 @@ public class Assistant : MonoBehaviour, IMediatorEvent, ILoopObject
     }
 
     #region FSM
+    /// <summary>
+    /// FSM 루프 함수
+    /// 현재 상태가 존재할 경우 해당 상태의 Loop 실행
+    /// </summary>
     void Loop()
     {
         if (_currentState == null)
@@ -74,6 +82,11 @@ public class Assistant : MonoBehaviour, IMediatorEvent, ILoopObject
         _currentState.Loop();
     }
 
+    /// <summary>
+    /// 배신자의 현재 상태를 변경
+    /// 중복 방지 및 상태 전환 시 Enter/Exit 호출
+    /// </summary>
+    /// <param name="newType">변경할 상태타입</param>
     public void ChangeState(EAssistantStateType newType)
     {
         if (_currentState == _assistantState[newType])
@@ -86,11 +99,21 @@ public class Assistant : MonoBehaviour, IMediatorEvent, ILoopObject
     }
     #endregion
 
+    /// <summary>
+    /// 애니메이터의 특정 bool 파라미터 값을 변경
+    /// </summary>
+    /// <param name="name">파라미터의 이름</param>
+    /// <param name="value">설정할 bool 값</param>
     public void ChangeAnimation(string name, bool value)
     {
         _animator.SetBool(name, value);
     }
 
+    /// <summary>
+    /// 플레이어와 배신자 간의 거리를 비교
+    /// 기준 거리 이상 떨어졌는지 확인
+    /// </summary>
+    /// <param name="targetDistance">기준 거리</param>
     public bool CheckDistance(float targetDistance)
     {
         Vector2 temp = _player.transform.position - transform.position;
@@ -120,14 +143,21 @@ public class Assistant : MonoBehaviour, IMediatorEvent, ILoopObject
     }
 
     #region Animation Event
+    /// <summary>
+    /// 플레이어 Kill 애니메이션이 끝날 때 호출
+    /// </summary>
     public void KillPlayer()
     {
-        GenericSingleton<MediatorManager>.Instance.Notify(EMediatorEventType.AddMemory, EMemoryType.Assistant_Rope);
+        GenericSingleton<MediatorManager>.Instance.Notify(EMediatorEventType.AddMemory, EMemoryType.AssistantRope);
         GenericSingleton<MediatorManager>.Instance.Notify(EMediatorEventType.StartFade);
     }
     #endregion
 
     #region Interface
+    /// <summary>
+    /// 중재자 이벤트 수신 처리
+    /// 플레이어 위치 변경 시, 배신자 위치도 동기화
+    /// </summary>
     void IMediatorEvent.HandleEvent(object data)
     {
         if (_currentType == EAssistantStateType.TiedUp)
@@ -136,6 +166,10 @@ public class Assistant : MonoBehaviour, IMediatorEvent, ILoopObject
         transform.position = pos;
     }
 
+    /// <summary>
+    /// 루프 시 호출되는 함수
+    /// 상태, 위치, 대거 상태 처음 상태로 복원
+    /// </summary>
     public void OnLoopEvent()
     {
         ChangeState(_mementoManager.AssistantMemento.AssistantType);

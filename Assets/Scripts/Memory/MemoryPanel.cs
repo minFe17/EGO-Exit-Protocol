@@ -4,6 +4,9 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using Utils;
 
+/// <summary>
+/// 기억 조각 UI를 관리하는 클래스
+/// </summary>
 public class MemoryPanel : MonoBehaviour, IMemento
 {
     [SerializeField] Image _image;
@@ -41,6 +44,10 @@ public class MemoryPanel : MonoBehaviour, IMemento
         _description.text = _memoryData.Description;
     }
 
+    /// <summary>
+    /// 패널의 이동 제한 범의 계산
+    /// </summary>
+    /// <param name="yBound">y축 최대 이동 제한 값</param>
     void CalculateBound(float yBound)
     {
         _halfSize = _rectTransform.rect.size * _rectTransform.pivot;
@@ -49,6 +56,10 @@ public class MemoryPanel : MonoBehaviour, IMemento
     }
 
     #region Event Trigger
+    /// <summary>
+    /// 드래그 시작 시 호출
+    /// 현재 의치 저장(되돌리기 기능 의해)
+    /// </summary>
     public void BeginDrag(BaseEventData data)
     {
         Save();
@@ -56,6 +67,10 @@ public class MemoryPanel : MonoBehaviour, IMemento
         _lastMousePosition = eventData.position;
     }
 
+    /// <summary>
+    /// 드래그 중 호출
+    /// 마우스 이동에 따라 기억 조각 위치를 이동시키고, 이동 범위를 제한
+    /// </summary>
     public void Drag(BaseEventData data)
     {
         PointerEventData eventData = (PointerEventData)data;
@@ -72,6 +87,10 @@ public class MemoryPanel : MonoBehaviour, IMemento
         _lastMousePosition = eventData.position;
     }
 
+    /// <summary>
+    /// 드래그 종료 시 호출
+    /// 현재 상태를 Json 파일로 저장
+    /// </summary>
     public void EndDrag(BaseEventData data)
     {
         GenericSingleton<JsonManager>.Instance.WriteData.WriteCurrentMemoryData();
@@ -79,12 +98,18 @@ public class MemoryPanel : MonoBehaviour, IMemento
     #endregion
 
     #region Interface
+    /// <summary>
+    /// 현재 위치 상태를 저장
+    /// </summary>
     public void Save()
     {
         _mementoStack.Push(new MemoryMemento(_rectTransform.anchoredPosition));
         _board.Save(this);
     }
 
+    /// <summary>
+    /// 이전 상태로 위치 복원(되돌리기)
+    /// </summary>
     void IMemento.Restore()
     {
         if(_mementoStack.Count > 0 )
