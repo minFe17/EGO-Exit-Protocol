@@ -19,14 +19,11 @@ public class MediatorManager : MonoBehaviour
     {
         List<IMediatorEvent> list;
 
-        // Dictionary에 키에 맞는 리스트가 있는지 체크
         if (!_eventDict.TryGetValue(key, out list))
         {
-            // 새로운 리스트 생성 후 추가
             list = new List<IMediatorEvent> { value };
             _eventDict[key] = list;
         }
-        // 키에 맞는 리스트가 있으며, 리스트에 해당 값이 없으면
         else if (!list.Contains(value))
             list.Add(value);
     }
@@ -54,7 +51,6 @@ public class MediatorManager : MonoBehaviour
     /// <param name="data">이벤트와 함께 전달할 데이터</param>
     public void Notify(EMediatorEventType key, object data = null)
     {
-        // Dictionary에 키에 맞는 리스트가 있는지 체크
         if(_eventDict.TryGetValue(key, out List<IMediatorEvent> list))
         {
             for(int i=0; i<list.Count; i++)

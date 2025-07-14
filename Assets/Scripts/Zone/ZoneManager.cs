@@ -2,6 +2,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using Utils;
 
+/// <summary>
+/// 맵의 Zone 및 ZoneLink(Zone 간 연결)를 관리
+/// BBFS 기반 경로 탐색
+/// 플레이어 위치 변경 시 이벤트를 발생
+/// </summary>
 public class ZoneManager : MonoBehaviour
 {
     // 싱글턴
@@ -11,6 +16,11 @@ public class ZoneManager : MonoBehaviour
 
     public Zone PlayerZone { get => _playerZone; }
 
+    /// <summary>
+    /// BFS 알고리즘을 통해 시작 Zone에서 플레이어가 있는 Zone까지의 경로를 탐색
+    /// </summary>
+    /// <param name="start">탐색 시작 지점</param>
+    /// <returns>각 Zone에 도달하기 전 Zone을 저장한 딕셔너리</returns>
     Dictionary<EZoneType, EZoneType> BFS(EZoneType start)
     {
         Queue<EZoneType> queue = new Queue<EZoneType>();
@@ -25,6 +35,8 @@ public class ZoneManager : MonoBehaviour
             EZoneType currentZone = queue.Dequeue();
             if (currentZone == _playerZone.ZoneID)
                 break;
+
+            // 현재 Zone에서 연결된 Zone들을 순회
             if (_zoneLinkDict.TryGetValue(currentZone, out List<ZoneLink> link))
             {
                 foreach (ZoneLink zoneLink in link)
@@ -41,6 +53,12 @@ public class ZoneManager : MonoBehaviour
         return cameFrom;
     }
 
+    /// <summary>
+    /// BFS 결과를 바탕으로 경로를 재구성
+    /// </summary>
+    /// <param name="cameFrom">BFS 경로 딕셔너리</param>
+    /// <param name="start">출발 Zone</param>
+    /// <returns>플레이어가 위치한 Zone까지의 경로 리스트</returns>
     List<EZoneType> ReconstructPath(Dictionary<EZoneType, EZoneType> cameFrom, EZoneType start)
     {
         if (!cameFrom.ContainsKey(_playerZone.ZoneID))
@@ -65,6 +83,9 @@ public class ZoneManager : MonoBehaviour
         _zoneLinkDict[link.FromZone].Add(link);
     }
 
+    /// <summary>
+    /// 플레이어가 위치한 Zone을 갱신하고 알림
+    /// </summary>
     public void SetPlayerZone(Zone playerZone)
     {
         if (_playerZone == playerZone)
@@ -73,6 +94,9 @@ public class ZoneManager : MonoBehaviour
         GenericSingleton<MediatorManager>.Instance.Notify(EMediatorEventType.PlayeMoveOtherZone);
     }
 
+    /// <summary>
+    /// 두 Zone 간 연결(Link)을 가져옴
+    /// </summary>
     public ZoneLink GetZoneLink(EZoneType from, EZoneType to)
     {
         if(_zoneLinkDict.TryGetValue(from, out List<ZoneLink> link))
@@ -88,6 +112,9 @@ public class ZoneManager : MonoBehaviour
         return null;
     }
 
+    /// <summary>
+    /// 시작 Zone에서 플레이어 Zone까지의 경로를 반환
+    /// </summary>
     public List<EZoneType> FindPath(EZoneType start)
     {
         Dictionary<EZoneType, EZoneType> cameFrom = BFS(start);
