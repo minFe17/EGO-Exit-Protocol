@@ -90,6 +90,6 @@ public class MoveState : IResearcherState
             _researcher.ChangeState(EResearcherStateType.Attack);
     }
 
-    // 현재 이동 상태 종ㄹ 시 별도 처리가 필요 없어 비워둠
+    // 현재 이동 상태 종료 시 별도 처리가 필요 없어 비워둠
     void IResearcherState.Exit() { }
 }
