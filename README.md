@@ -6,7 +6,7 @@ Unity로 개발한 내러티브 어드벤처 게임입니다.
 - **플랫폼** : PC (Windows)
 - **Unity 버전** : 6000.0.50f1
 - **📄 노션 링크** : [Notion 링크](https://mincheolstudy.notion.site/EGO-Exit-Protocol-22fd4b6c965c800b945affb6c29f3cd8)
-
+- **📒 개발 일지** : [개발 일지 노션 링크](https://mincheolstudy.notion.site/EGO-Exit-Protocol-224d4b6c965c80c6bd51f4ea671da840)
 ---
 
 ## 🎯 기술 목표
