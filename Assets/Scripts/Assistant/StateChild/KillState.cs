@@ -1,4 +1,5 @@
 using UnityEngine;
+using Utils;
 
 public class KillState : IAssistantState
 {
@@ -23,7 +24,10 @@ public class KillState : IAssistantState
             _assistant.transform.Translate(movePos * _speed * Time.deltaTime);
         }
         else
+        {
             _assistant.ChangeAnimation("isAttack", true);
+            GenericSingleton<AchievementManager>.Instance.UnlockAchievement(EAchievementID.ACH_ASSISTANT_BETRAYED);
+        }
     }
 
     void IAssistantState.Enter()

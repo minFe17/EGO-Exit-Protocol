@@ -19,6 +19,7 @@ public class EvidenceObject : MonoBehaviour
         {
             EvidencePanelData data = new EvidencePanelData(_evidenceType[i]);
             _mediatorManager.Notify(EMediatorEventType.CreateEvidencePanel, data);
+            GenericSingleton<AchievementManager>.Instance.AddStatAndCheckAchievement(EStatID.EVIDENCE_COUNT, 1, EAchievementID.ACH_EVIDENCE_COLLECT, 5);
         }
     }
 }

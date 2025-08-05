@@ -1,0 +1,10 @@
+public enum EAchievementID
+{
+    ACH_GAME_START,
+    ACH_FIRST_LOOP,
+    ACH_CUTTER_ENDING,
+    ACH_PHONE_ENDING,
+    ACH_ASSISTANT_BETRAYED,
+    ACH_EVIDENCE_COLLECT,
+    Max
+}

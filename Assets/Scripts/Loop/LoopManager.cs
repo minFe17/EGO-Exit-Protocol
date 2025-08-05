@@ -22,5 +22,6 @@ public class LoopManager : MonoBehaviour, IMediatorEvent
         _observeManager.LoopObserve.OnLoopEvent();
         _mediatorManager.Notify(EMediatorEventType.ChangeLoopCount);
         GenericSingleton<JsonManager>.Instance.WriteData.WriteLoopData();
+        GenericSingleton<AchievementManager>.Instance.UnlockAchievement(EAchievementID.ACH_FIRST_LOOP);
     }
 }

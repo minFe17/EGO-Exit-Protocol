@@ -16,6 +16,7 @@ public class GameStart : MonoBehaviour
         GenericSingleton<EndingManager>.Instance.Init();
         CreatePrefab();
         ReadData();
+        GenericSingleton<AchievementManager>.Instance.UnlockAchievement(EAchievementID.ACH_GAME_START);
     }
 
     void CreatePrefab()
