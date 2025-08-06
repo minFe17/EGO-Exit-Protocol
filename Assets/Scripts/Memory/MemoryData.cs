@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using UnityEngine;
+using Utils;
 
 /// <summary>
 /// 기억 조각 정보를 담는 데이터 클래스
@@ -37,18 +38,13 @@ public class MemoryData
         // 저장된 이미지 파일 경로 생성
         _spritePath = Path.Combine(Application.persistentDataPath, $"{_typeText}.png");
 
-        // 해당 경로에 이미지 파일이 없으면 return
-        if (!File.Exists(_spritePath))
+        byte[] imageData = GenericSingleton<SteamCloudManager>.Instance.ReadFileFromSteamCloud($"{_typeText}.png");
+        if (imageData == null || imageData.Length == 0)
             return;
 
-        // 임시 텍스처 생성(크기는 LoadImage로 자동 조정됨)
+        // 임시 텍스처 생성 (크기는 LoadImage로 자동 조정됨)
         _texture = new Texture2D(2, 2);
-
-        // 파일에서 이미지 데이터를 읽어와 텍스처에 적용
-        byte[] imageData = File.ReadAllBytes(_spritePath);
         _texture.LoadImage(imageData);
-
-        // 픽셀 선명도를 위해 필터 모드 설정
         _texture.filterMode = FilterMode.Point;
 
         // 텍스처로부터 Sprite 생성

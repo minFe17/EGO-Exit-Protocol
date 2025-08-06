@@ -17,5 +17,6 @@ public class MemoryObject : MonoBehaviour
     {
         for (int i = 0; i < _memoryType.Count; i++)
             _mediatorManager.Notify(EMediatorEventType.AddMemory, _memoryType[i]);
+        Debug.Log(1);
     }
 }

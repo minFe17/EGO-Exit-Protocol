@@ -124,6 +124,9 @@ public class MemoryCamera : MonoBehaviour, IMediatorEvent
 
         // Sprite로 변환해 메모리 데이터에 저장
         File.WriteAllBytes(_currentMemoryData.SpritePath, pngData);
+
+        GenericSingleton<SteamCloudManager>.Instance.UploadFileToSteamCloud(_currentMemoryData.SpritePath, $"{_currentMemoryData.Type.ToString()}.png");
+
         Sprite capturedSprite = Sprite.Create(_texture, _rect, _pivot);
         _currentMemoryData.Sprite = capturedSprite;
 

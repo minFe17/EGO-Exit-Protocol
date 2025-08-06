@@ -8,8 +8,6 @@ public class JsonManager : MonoBehaviour
     ReadData _readData = new ReadData();
     WriteData _writeData = new WriteData();
 
-    StringBuilder _stringBuilder;
-
     string _memoryDataPath;
     string _loopDataPath;
     string _evidenceDataPath;
@@ -20,10 +18,9 @@ public class JsonManager : MonoBehaviour
     public string LoopDataPath { get => _loopDataPath; }
     public string EvidenceDataPath { get => _evidenceDataPath; }
 
-    void Awake()
-    {
-        Init();
-    }
+    public string MemoryDataName { get => "SaveMemoryData.json"; }
+    public string LoopDataName { get => "SaveLoopData.json"; }
+    public string EvidenceDataName { get => "SaveEvidenceData.json"; }
 
     public void Init()
     {
@@ -34,19 +31,15 @@ public class JsonManager : MonoBehaviour
 
     void CreateDataPath()
     {
-        if (_stringBuilder == null)
-            _stringBuilder = new StringBuilder();
-        CreateDataPath(out _memoryDataPath, "SaveMemoryData.json");
-        CreateDataPath(out _loopDataPath, "SaveLoopData.json");
-        CreateDataPath(out _evidenceDataPath, "SaveEvidenceData.json");
+        CreateDataPath(out _memoryDataPath, MemoryDataName);
+        CreateDataPath(out _loopDataPath, LoopDataName);
+        CreateDataPath(out _evidenceDataPath, EvidenceDataName);
     }
 
     void CreateDataPath(out string path, string dataName)
     {
-        _stringBuilder.Clear();
-        _stringBuilder.Append(Application.persistentDataPath);
-        _stringBuilder.Append(dataName);
-        path = _stringBuilder.ToString();
+        Debug.Log("Application.persistentDataPath: " + Application.persistentDataPath);
+        path = Path.Combine(Application.persistentDataPath, dataName);
     }
 
     public bool CheckDataFile(string path)

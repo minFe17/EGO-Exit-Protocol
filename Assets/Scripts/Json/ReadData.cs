@@ -19,11 +19,17 @@ public class ReadData
 
     void ReadCurrentMemoryData()
     {
-        if (!_jsonManager.CheckDataFile(_jsonManager.MemoryDataPath))
-            return;
+        byte[] temp = GenericSingleton<SteamCloudManager>.Instance.ReadFileFromSteamCloud(_jsonManager.MemoryDataName);
+
         CurrentMemoryList data = DataSingleton<CurrentMemoryList>.Instance;
-        ReadJsonData(_jsonManager.MemoryDataPath, data);
+
+        if (temp == null || temp.Length == 0)
+            return;
+
+        string json = System.Text.Encoding.UTF8.GetString(temp);
+        JsonUtility.FromJsonOverwrite(json, data);
     }
+
 
     void ReadAllMemoryData(MemoryRepository memoryRepository)
     {
@@ -42,18 +48,22 @@ public class ReadData
 
     public void ReadLoopData()
     {
-        if (!_jsonManager.CheckDataFile(_jsonManager.LoopDataPath))
+        byte[] temp = GenericSingleton<SteamCloudManager>.Instance.ReadFileFromSteamCloud(_jsonManager.LoopDataName);
+        if (temp == null)
             return;
+        string json = System.Text.Encoding.UTF8.GetString(temp);
         LoopData data = DataSingleton<LoopData>.Instance;
-        ReadJsonData(_jsonManager.LoopDataPath, data);
+        JsonUtility.FromJsonOverwrite(json, data);
     }
 
     public void ReadEvidenceData()
     {
-        if(!_jsonManager.CheckDataFile(_jsonManager.EvidenceDataPath))
+        byte[] temp = GenericSingleton<SteamCloudManager>.Instance.ReadFileFromSteamCloud(_jsonManager.EvidenceDataName);
+        if (temp == null)
             return;
+        string json = System.Text.Encoding.UTF8.GetString(temp);
         CurrentEvidenceList data = DataSingleton<CurrentEvidenceList>.Instance;
-        ReadJsonData(_jsonManager.EvidenceDataPath, data);
+        JsonUtility.FromJsonOverwrite(json, data);
     }
 
     public void ReadDialogData(DialogManager dialogManager)

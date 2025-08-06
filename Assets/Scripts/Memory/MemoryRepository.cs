@@ -40,7 +40,7 @@ public class MemoryRepository
 
     public bool ContainsMemoryType(EMemoryType type)
     {
-        foreach(MemoryPanelData data in _currentMemoryList.CurrtenMemoryData)
+        foreach (MemoryPanelData data in _currentMemoryList.CurrtenMemoryData)
         {
             if (data.MemoryType == type)
                 return true;

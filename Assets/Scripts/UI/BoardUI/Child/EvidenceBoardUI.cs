@@ -66,6 +66,7 @@ public class EvidenceBoardUI : BoardUI, IMediatorEvent
 
         DataSingleton<CurrentEvidenceList>.Instance.CurrentEvidenceData.Add(evidencePanelData);
         GenericSingleton<JsonManager>.Instance.WriteData.WriteEvidenceData();
+        GenericSingleton<AchievementManager>.Instance.AddStatAndCheckAchievement(EStatID.EVIDENCE_COUNT, 1, EAchievementID.ACH_EVIDENCE_COLLECT, 5);
     }
     #endregion
 }
