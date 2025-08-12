@@ -27,7 +27,7 @@ public class WriteData
     public void WriteLoopData()
     {
         LoopData data = DataSingleton<LoopData>.Instance;
-        WriteJsonDataBase(data, _jsonManager.LoopDataPath, _jsonManager.LoopDataPath);
+        WriteJsonDataBase(data, _jsonManager.LoopDataPath, _jsonManager.LoopDataName);
     }
 
     public void WriteEvidenceData()

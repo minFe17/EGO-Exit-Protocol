@@ -125,7 +125,7 @@ public class MemoryCamera : MonoBehaviour, IMediatorEvent
         // Sprite로 변환해 메모리 데이터에 저장
         File.WriteAllBytes(_currentMemoryData.SpritePath, pngData);
 
-        GenericSingleton<SteamCloudManager>.Instance.UploadFileToSteamCloud(_currentMemoryData.SpritePath, $"{_currentMemoryData.Type.ToString()}.png");
+        GenericSingleton<SteamCloudManager>.Instance.UploadFileToSteamCloud(_currentMemoryData.SpritePath, $"{_currentMemoryData.Type}.png");
 
         Sprite capturedSprite = Sprite.Create(_texture, _rect, _pivot);
         _currentMemoryData.Sprite = capturedSprite;
@@ -148,12 +148,13 @@ public class MemoryCamera : MonoBehaviour, IMediatorEvent
     {
         MemoryData memoryData = (MemoryData)data;
 
-        // 이미 해당 이미지가 파일로 존재하면 return
-        if (File.Exists(memoryData.SpritePath))
+        // 클라우드에서 이미지 데이터 가져오기 시도
+        byte[] cloudData = GenericSingleton<SteamCloudManager>.Instance.ReadFileFromSteamCloud($"{memoryData.Type}.png");
+        if (cloudData != null && cloudData.Length > 0)
             return;
 
-        // Queue에 등록 후, 현재 캡처 중이 아니라면 즉시 캡처 시작
-        _memoryDataQueue.Enqueue((MemoryData)data);
+        // 클라우드에도 없으면 캡처 진행
+        _memoryDataQueue.Enqueue(memoryData);
         if (_endCapture)
             Capture();
     }
