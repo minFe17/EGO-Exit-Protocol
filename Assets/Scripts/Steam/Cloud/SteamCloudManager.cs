@@ -19,17 +19,20 @@ public class SteamCloudManager : MonoBehaviour
 
     public byte[] ReadFileFromSteamCloud(string cloudFileName)
     {
-        if (!SteamManager.Initialized) 
+        if (!SteamManager.Initialized)
             return null;
-        if (!SteamRemoteStorage.FileExists(cloudFileName)) 
+        if (!SteamRemoteStorage.FileExists(cloudFileName))
             return null;
 
         int size = SteamRemoteStorage.GetFileSize(cloudFileName);
+        if (size == 0) 
+            return null;
+
         byte[] buffer = new byte[size];
         int read = SteamRemoteStorage.FileRead(cloudFileName, buffer, size);
-        if (read != size) 
+        if (read != size)
             return null;
 
         return buffer;
-    }
+    
 }
