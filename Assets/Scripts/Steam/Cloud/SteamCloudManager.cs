@@ -1,5 +1,5 @@
-using System.IO;
 using Steamworks;
+using System.IO;
 using UnityEngine;
 
 public class SteamCloudManager : MonoBehaviour
@@ -7,10 +7,10 @@ public class SteamCloudManager : MonoBehaviour
     // ╫л╠шео
     public bool UploadFileToSteamCloud(string localFilePath, string cloudFileName)
     {
-        if (!SteamManager.Initialized) 
+        if (!SteamManager.Initialized)
             return false;
 
-        if (!File.Exists(localFilePath)) 
+        if (!File.Exists(localFilePath))
             return false;
 
         byte[] data = File.ReadAllBytes(localFilePath);
@@ -25,7 +25,7 @@ public class SteamCloudManager : MonoBehaviour
             return null;
 
         int size = SteamRemoteStorage.GetFileSize(cloudFileName);
-        if (size == 0) 
+        if (size == 0)
             return null;
 
         byte[] buffer = new byte[size];
@@ -34,5 +34,5 @@ public class SteamCloudManager : MonoBehaviour
             return null;
 
         return buffer;
-    
+    }
 }
