@@ -7,7 +7,7 @@ Unity로 개발한 **내러티브 어드벤처** 게임입니다.
 - **Unity 버전** : 6000.0.50f1
 - **📄 기술문서 링크** : [기술문서 링크](https://drive.google.com/drive/folders/1gcQ5xP3MlVEgDHBIyB4wQR_PSS4JhcN1?hl=ko)
 - **📒 개발 일지** : [개발 일지 노션 링크](https://mincheolstudy.notion.site/EGO-Exit-Protocol-224d4b6c965c80c6bd51f4ea671da840)
-- **🎬 영상 링크** : [영상 링크] (https://youtu.be/B5tc3fQqB9g)
+- **🎬 영상 링크** : [영상 링크](https://youtu.be/B5tc3fQqB9g)
 ---
 
 ## 🎯 기술 목표
